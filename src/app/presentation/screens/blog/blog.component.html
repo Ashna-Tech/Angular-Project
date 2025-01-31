@@ -40,7 +40,7 @@
                       (change)="onCategorySelect()">
                       <option value="">Select Categories</option>
                       @for (category of categoryDropdown$ | async ; track $index) {
-                        <option [value]="category.id">{{ category.name }}</option>
+                      <option [value]="category.id">{{ category.name }}</option>
                       }
                     </select>
                   </div>
@@ -50,12 +50,13 @@
                   <label for="subcatId" class="col-sm-2 col-form-label">Sub Category
                   </label>
                   <div class="col-sm-10">
-                    <select name="subcatid" id="subcatid" class="form-control" (change)="onSubCategorySelect()" formControlName="subcatId">
+                    <select name="subcatid" id="subcatid" class="form-control" (change)="onSubCategorySelect()"
+                      formControlName="subcatId">
                       <option value="">Select SubCategories</option>
                       @for (subcategory of SubcategoryDropdown$ | async ; track $index) {
-                        <option [value]="subcategory.id">
-                          {{ subcategory.name }}
-                        </option>
+                      <option [value]="subcategory.id">
+                        {{ subcategory.name }}
+                      </option>
                       }
                     </select>
                   </div>
@@ -97,9 +98,10 @@
                 <div class="form-group row">
                   <label for="thumbNail" class="col-sm-2 col-form-label">Thumbnail</label>
                   <div class="col-sm-10">
-                    <input id="thumbNail" class="form-control" (change)="onThumbnail($event)" formControlName="thumbNail" type="file" accept="image/*" />
+                    <input id="thumbNail" class="form-control" (change)="onThumbnail($event)"
+                      formControlName="thumbNail" type="file" accept="image/*" />
                     @if (previewThumbnailImg) {
-                      <img [src]="previewThumbnailImg" width="150" />
+                    <img [src]="previewThumbnailImg" width="150" />
                     }
                   </div>
                 </div>
@@ -107,9 +109,10 @@
                 <div class="form-group row">
                   <label for="bannerImg" class="col-sm-2 col-form-label">Banner Image</label>
                   <div class="col-sm-10">
-                    <input id="bannerImg" class="form-control" (change)="onBannerImg($event)" formControlName="bannerImg" type="file" accept="image/*" />
+                    <input id="bannerImg" class="form-control" (change)="onBannerImg($event)"
+                      formControlName="bannerImg" type="file" accept="image/*" />
                     @if (previewBannerImg) {
-                      <img [src]="previewBannerImg" width="150" />
+                    <img [src]="previewBannerImg" width="150" />
                     }
                   </div>
                 </div>

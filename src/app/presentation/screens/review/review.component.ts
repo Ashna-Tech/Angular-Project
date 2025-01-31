@@ -224,5 +224,6 @@ export class ReviewComponent implements OnInit {
     this.editReviewId = '';
     this.isUpdateMode = false;
     this.ReviewForm.reset();
+    
   }
 }
