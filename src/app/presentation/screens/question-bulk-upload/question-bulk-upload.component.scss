@@ -1,0 +1,30 @@
+.chapter-list{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    button{
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+.ligh-color{
+    color: #ccc;
+}
+
+.alert{
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.card-header{
+    display: grid;
+    grid-template-columns: 1fr 100px;
+
+    h3{
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+}

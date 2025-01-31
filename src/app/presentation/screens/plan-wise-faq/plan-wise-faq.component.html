@@ -1,0 +1,187 @@
+<p>coupon-affiliate-detail works!</p>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active"> Plan Wise FAQ </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title"> Plan Wise FAQ </h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="PlanwisefaQForm">
+              <div class="card-body">
+
+                <div class="form-group row">
+                    <label for="faqId" class="col-sm-2 col-form-label">
+                      FAQ 
+                    </label>
+                    <div class="col-sm-10">
+                      <select
+                        name="faqId"
+                        id="faqId"
+                        type="text"
+                        class="form-control"
+                        
+                        formControlName="faqId"
+                      >
+                        <option value="">Select FAQ </option>
+                        <option value="76b1c66dc84a8c0283e14281"> FAQ list demo </option>
+                       <option value="45b1c66dc84a8c0283e14277"> Demo FAQ  </option>
+                        @for (faq of faQListDropdown$ | async ; track $index) {
+                        <option [value]="faq.id">{{ faq.name }}</option>
+                       
+                        }
+                      </select>
+                    </div>
+                  </div>
+
+
+                  <div class="form-group row">
+                    <label for="planId" class="col-sm-2 col-form-label">
+                      Plan
+                    </label>
+                    <div class="col-sm-10">
+                      <select
+                        name="planId"
+                        id="planId"
+                        type="text"
+                        class="form-control"
+                        
+                        formControlName="planId"
+                      >
+                        <option value="">Select Plan </option>
+                        <option value="76b1c66dc84a8c0283e14281"> Demop Plan </option>
+                       <option value="45b1c66dc84a8c0283e14277"> plan </option>
+                  
+                        @for (plan of planListDropdown$ | async ; track $index) {
+                        <option [value]="plan.id">{{ plan.name }}</option>
+                        }
+                      </select>
+                    </div>
+                  </div>
+
+
+                <div class="form-group row">
+                  <label for="question" class="col-sm-2 col-form-label">
+                    Question 
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="question"
+                      type="text"
+                      class="form-control"
+                      placeholder=" Enter Question..."
+                      formControlName="question"
+                    />
+                  </div>
+                </div>
+
+
+
+                <div class="form-group row">
+                  <label for="answer" class="col-sm-2 col-form-label">
+                   Answer                   
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="answer"
+                      type="text"
+                      class="form-control"
+                      placeholder=" Enter Answer ..."
+                      formControlName="answer"
+                    />
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="orderNo" class="col-sm-2 col-form-label">
+                    Order Number                     
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="orderNo"
+                      type="text"
+                      class="form-control"
+                      placeholder=" Enter Order Number..."
+                      formControlName="orderNo"
+                    />
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createPlanwisefaQ()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updatePlanwisefaQ(editPlanwisefaQId)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editPlanwisefaQ($event)"
+        (Remove)="deletePlanwisefaQ($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

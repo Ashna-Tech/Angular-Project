@@ -1,0 +1,132 @@
+<p>coupon-affiliate-detail works!</p>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Coupon Plan Detail</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Coupon Plan Detail</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="couponPlanDetailForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="couponId" class="col-sm-2 col-form-label">
+                    Coupon
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="couponId"
+                      id="couponId"
+                      type="text"
+                      class="form-control"
+                      formControlName="couponId"
+                    >
+                      <option value="">Select Coupon</option>
+
+                      @for (coupon of CouponListDropdown$ | async ; track
+                      $index) {
+                      <option [value]="coupon.id">
+                        {{ coupon.couponCode }}
+                      </option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="planId" class="col-sm-2 col-form-label">
+                    Plan
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="planId"
+                      id="planId"
+                      type="text"
+                      class="form-control"
+                      formControlName="planId"
+                    >
+                      <option value="">Select Plan </option>
+                       <option value="66b1ef32be7e682d4418a558">66b1ef32be7e682d4418a558</option>   
+                      @for (plan of planListDropdown$ | async ; track $index) {
+                      <option [value]="plan.id">{{ plan.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createCouponPlanDtl()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updateCouponPlanDtl(editCouponPlanDtlId)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editCouponPlanDtl($event)"
+        (Remove)="deleteCouponPlanDtl($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

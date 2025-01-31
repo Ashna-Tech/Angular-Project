@@ -1,0 +1,38 @@
+.wrapper-container{
+    width: 250px;
+    height: auto;
+
+    img{
+        width: 100%;
+    }
+
+    &.active{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100dvw;
+        height: 100dvh;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+
+        img{
+            height: 80%;
+            width: auto;
+        }
+    }
+}
+
+
+@media screen and (max-width:780px) {
+    .wrapper-container{
+        &.active{
+            img{
+                width: 90%;
+                height: auto;
+            }
+        }
+    }
+}

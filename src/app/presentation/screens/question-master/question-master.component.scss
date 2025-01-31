@@ -1,0 +1,50 @@
+// mat-list-option{
+//     margin-right: 10px;
+// }
+
+:host{
+    ::ng-deep{
+        .mat-mdc-list-base{
+            display: flex !important;
+        }
+
+        .mdc-list-item--with-trailing-checkbox.mdc-list-item{
+            display: flex;
+            flex-direction: row-reverse !important;
+            width: fit-content !important;
+        }
+
+        .mdc-list-item--with-trailing-checkbox .mdc-list-item__end{
+            margin-left: -20px !important;
+            margin-right: 4px !important;
+        }
+
+        .mdc-list-item{
+            padding-left: 25px !important;
+            padding-right: 10px !important;
+        }
+    }
+}
+
+hr{
+    border-top: 1px solid #ccc;
+}
+
+.selected-exam-btn{
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button{
+        width: 22px;
+        height: 22px;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        line-height: 22px;
+        margin-left: 5px;
+    }
+}

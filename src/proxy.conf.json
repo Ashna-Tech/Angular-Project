@@ -1,0 +1,11 @@
+{
+    "/proxy": {
+      "target": "http://192.168.29.100:8080",
+      "secure": true,
+      "pathRewrite": {
+        "^/proxy": ""
+      }
+      , "changeOrigin": true
+    }
+  }
+

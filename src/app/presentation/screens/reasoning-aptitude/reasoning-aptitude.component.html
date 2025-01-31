@@ -1,0 +1,80 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      @if (sectionQuestionData$ | async; as sectionData) {
+        <div class="row">
+          <div class="col-md-12">
+            <div class="header">
+              <div class="upper-section">
+                <select class="selectBox">
+                  <option>English</option>
+                  <option>Hindi</option>
+                </select>
+                <h2 class="main-heading">{{sectionData.category}}</h2>  
+                <div></div>
+              </div>
+              <div class="lower-section">
+                <div class="stats-container">
+                  <div class="order-container">
+                    <div class="row">
+                      <div class="col-md-1">Computer ...</div>
+                      <div class="col-md-9">161, 162, 163, 164, 165, 166, 168, 169, 170, 171</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-1">Computer ...</div>
+                      <div class="col-md-9">161, 162, 163, 164, 165, 166, 168, 169, 170, 171</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-1">Computer ...</div>
+                      <div class="col-md-9">161, 162, 163, 164, 165, 166, 168, 169, 170, 171</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-1">Computer ...</div>
+                      <div class="col-md-9">161, 162, 163, 164, 165, 166, 168, 169, 170, 171</div>
+                    </div>
+                  </div>
+                  <div class="stats">
+                    <p>Total Time:  00:47:11 </p>
+                    <p>T Sec. Time: 00:24:54 | 30 mins</p>
+                    <p>(250) Marks Added: 90 | 90</p>
+                    <p>Gained Marks: 171.00</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            @for (question of sectionData.question; track $index) {
+              <div class="card mt-3">
+                <div class="card-header">
+                  <div class="card-title">{{question.quesOldId}}</div>
+                </div>
+                <div class="card-body">
+                  <div class="col-sm-12 d-flex justify-content-end mb-2">
+                    <button class="btn btn-outline-danger btn-sm" (click)="removeQuestionFromTest(sectionData.id, question.quesId)"><i class="fa-solid fa-trash-can"></i></button>
+                    <a class="btn btn-outline-success btn-sm ml-2" href="/dashboard/Question-Master?QuestionId={{question.quesOldId}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a class="btn btn-outline-primary btn-sm ml-2" href="/dashboard/question-detail?QuestionId={{question.quesOldId}}"><i class="fa-solid fa-question"></i></a>
+
+                </div>
+        
+                  <div class="row">
+                    <div class="col-md-6">
+                      <app-question-card [question]="question"></app-question-card>
+                    </div>
+                    <div class="col-md-6">
+                      <app-question-card [question]="question"></app-question-card>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <app-question-action-footer (updateQuestionEmt)="updateQuestion(question, sectionData.id, $event.marks, $event.topperTime, $event.order, $event.status)" [question]="question"></app-question-action-footer>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+</div>
+

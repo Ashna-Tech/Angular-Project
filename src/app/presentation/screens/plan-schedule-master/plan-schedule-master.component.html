@@ -1,0 +1,133 @@
+<p>coupon-affiliate-detail works!</p>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active"> Plan Schedule Master </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Plan Schedule Master </h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="PlanScheduleMasterForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="categoryname" class="col-sm-2 col-form-label">
+                    Category Name
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="categoryname"
+                      type="text"
+                      class="form-control"
+                      placeholder=" Enter Category Name..."
+                      formControlName="categoryname"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="schedulename" class="col-sm-2 col-form-label">
+                    Schedule Name
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="schedulename"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Schedule Name"
+                      formControlName="schedulename"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="schedule" class="col-sm-2 col-form-label">
+                    Schedule
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="schedule"
+                      type="text"
+                      class="form-control"
+                      placeholder="Schedule..."
+                      formControlName="schedule"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createPlanScheduleMaster()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updatePlanScheduleMaster(editPlanScheduleMasterId)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editPlanScheduleMaster($event)"
+        (Remove)="deletePlanScheduleMaster($event)"
+        (ToggleActive)="toggleIsActive($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

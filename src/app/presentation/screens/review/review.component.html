@@ -1,0 +1,171 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active"> Add App Reviews </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Review</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="ReviewForm">
+              <div class="card-body">
+
+                
+                <div class="form-group row">
+                  <label for="name" class="col-sm-2 col-form-label">
+                    Name
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="name" type="text" class="form-control" placeholder="Enter Name..."
+                      formControlName="name" />
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="image" class="col-sm-2 col-form-label">
+                    Image
+                  </label>
+                  <div class="col-sm-10">
+                    <div class="custom-file">
+                      <input id="image" (change)="onReviewImageUpload($event)" type="file" class="custom-file-input"
+                        accept="image/*" multiple required />
+                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      <!-- <br /> -->
+                      <br />
+                    </div>
+                    @if (previewImageUrl) {
+                    <img [src]="previewImageUrl" width="200" />
+                    }
+                  </div>
+                </div>
+
+
+                
+                <div class="form-group row">
+                  <label for="exam" class="col-sm-2 col-form-label">
+                    Exam
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="exam" type="text" class="form-control" placeholder="Enter Exam Name.."
+                      formControlName="exam" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="rollNumber" class="col-sm-2 col-form-label">
+                    Roll Number
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="rollNumber" type="text" class="form-control" placeholder="Enter Roll Number.."
+                      formControlName="rollNumber" />
+                  </div>
+                </div>
+
+
+
+                <div class="form-group row">
+                  <label for="review" class="col-sm-2 col-form-label">
+                    Review
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="review" type="text" class="form-control" placeholder="Review.."
+                      formControlName="review" />
+                  </div>
+                </div>
+
+ 
+                <div class="form-group row">
+                  <label for="examGroup" class="col-sm-2 col-form-label">
+                    Exam Group
+                  </label>
+                  <div class="col-sm-10">
+                    <mat-form-field>
+                      <mat-select placeholder="Select Exam Group" name="examGroup" id="examGroup" formControlName="examGroup" multiple>
+                        <!-- <mat-option [value]="''" disabled>Select Exam Group</mat-option> -->
+                        @for (examgroup of examgroupList$ | async ; track $index) {
+                        <mat-option [value]="examgroup.id">{{examgroup.name}}</mat-option>
+                        }
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="rank" class="col-sm-2 col-form-label">
+                    Rank
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="rank" type="text" class="form-control" placeholder="Enter Ranking.."
+                      formControlName="rank" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="isActive" class="col-sm-2 col-form-label">
+                    IS Active
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="isActive" type="checkbox" formControlName="isActive" /> Active
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button type="submit" class="btn btn-primary" (click)="createReview()">
+                  Submit
+                </button>
+                }@else{
+                <button type="submit" class="btn btn-primary" (click)="updateReview(editReviewId)">
+                  Update
+                </button>
+                }
+
+                <button type="submit" class="btn btn-default float-right" (click)="clearForm()">
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table (Edit)="editReview($event)" (Remove)="deleteReview($event)" [dataObs]="dataObs"
+        [tableCols]="tableCols" #dttable></app-data-table>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,63 @@
+/*
+Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.html or http://ckeditor.com/license
+*/
+@font-face {
+  font-family: 'kruti';
+  src: url('../fonts/KrutiDev010.eot?#iefix') format('embedded-opentype'),  url('../fonts/KrutiDev010.woff') format('woff'), url('../fonts/KrutiDev010.ttf')  format('truetype'), url('../fonts/KrutiDev010.svg#KrutiDev010') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-size:13px;
+}
+@font-face {
+	font-family: 'calibri';
+	src: url('fonts/calibri.eot');
+	src: local(''), url('fonts/calibri.woff') format('woff'), url('fonts/calibri.ttf') format('truetype'), url('fonts/calibri.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+    font-size:13px;
+}
+
+
+body
+{
+	/* Font */
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 13px;
+	/* Text color */
+	color: #222;
+
+	/* Remove the background color to make it transparent */
+	background-color: #fff;
+}
+.root {
+    background: url(images/root.gif) top left no-repeat;
+    padding-left: 10px;
+}
+.root, .root3, .rootn, .large_root, .large_root3, .large_rootn {
+    padding-top: 3px;
+}
+/*--------------------------math---------------------------------*/
+.divide{border-bottom:1px solid #000;}
+.large{font-size:40px!important; font-weight:normal;}
+.root, .root3, .rootn, .large_root, .large_root3, .large_rootn{padding-top:3px;}
+.root{background:url(images/root.gif) top left no-repeat; padding-left:10px;}
+.root3{background:url(images/root3.gif) top left no-repeat; padding-left:10px;}
+.rootn{background:url(images/rootn.gif) top left no-repeat; padding-left:10px;}
+.large_root{background:url(images/large-root.gif) top left no-repeat; padding-left:20px;}
+.large_root3{background:url(images/large-root-3.gif) top left no-repeat; padding-left:20px;}
+.large_rootn{background:url(images/large-root-n.gif) top left no-repeat; padding-left:20px;}
+.bar{border-top:1px solid #000;}
+
+ol,ul,dl
+{
+	/* IE7: reset rtl list margin. (#7334) */
+	*margin-right:0px;
+	/* preserved spaces for rtl list item bullets. (#6249)*/
+    padding-right:40px;
+}
+.hindi {
+    font-family:"KrutiDev010"!important;font-size:18px!important;
+}
+span[style*="kruti"] {
+font-size:18px;}

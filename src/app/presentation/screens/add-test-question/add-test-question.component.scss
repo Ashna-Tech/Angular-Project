@@ -1,0 +1,85 @@
+.mini-card {
+  text-align: center;
+  padding: 10px;
+  border-radius:0;
+  gap: 0;
+  width: fit-content;
+  position: relative;
+}
+
+.card-heading {
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+
+.inline-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.add-count{
+  color: green;
+  }
+  
+  .view-count{
+    color: red;
+  }  
+  
+
+
+  .d-flex {
+    // Initially Hide the Content
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  
+  
+.shadow-container {
+  width: 90%;
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 6px;
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translate(-50%,50%);
+}
+
+.card {
+  flex: 1;
+  border: 1px solid #ccc;
+  margin: 5px;
+}
+
+// Show Content When the Card is hovered
+.mini-card:hover .shadow-container {
+  opacity: 1;
+  display: flex;
+}
+
+.btn-save {
+  margin-top: 2px;
+  width: 60px;
+  height: 32px;
+  border-radius: 0;
+  padding: 1px;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}

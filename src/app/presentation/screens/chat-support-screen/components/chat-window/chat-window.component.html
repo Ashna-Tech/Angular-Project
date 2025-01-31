@@ -1,0 +1,62 @@
+<div class="window-container">
+    <div class="head">
+        <div class="back-btn-container">
+            <button class="back-btn" (click)="onBack.emit()"><i class="fa-solid fa-chevron-left"></i></button>
+        </div>
+        <div class="profile">
+            <div class="text">
+                R
+            </div>
+        <!-- <div class="img">
+            <img src="/assets/img/profile.jpeg" alt="profile image">
+        </div> -->
+        </div>
+        <div class="text-details">
+            <h3 class="name">Rajeev</h3>
+            <p class="note">rajeev&#64;gmail.com</p>
+            <p class="note">7658248910</p>
+        </div>
+    </div>
+    <div class="body">
+        <app-message-area (onEditMessage)="onEditMessage($event)"></app-message-area>
+    </div>
+    <div class="footer">
+        @if (isEditMode()) {
+            <div class="label">  
+                <button class="icon-btn" (click)="cancelEdit()"><i class="fa-solid fa-xmark"></i></button>
+                 Edit Message
+            </div>
+            <div class="actions edit-actions">
+                <div class="input-cotainer">
+                    <mat-form-field [style.fontSize]="'14px'" appearance="fill" >
+                        <textarea 
+                            matInput
+                            [value]="message()"
+                            cdkTextareaAutosize
+                            #autosize="cdkTextareaAutosize"
+                            cdkAutosizeMinRows="1"
+                            cdkAutosizeMaxRows="5" placeholder="Type a message"
+                        ></textarea>
+                    </mat-form-field>
+                </div>
+                <button mat-icon-button><i class="fa-regular fa-paper-plane"></i></button>
+            </div>
+        }@else {
+            <div class="actions">
+                <button mat-icon-button><i class="fa-regular fa-image"></i></button>
+                <div class="input-cotainer">
+                    <mat-form-field [style.fontSize]="'14px'" appearance="fill" >
+                        <textarea 
+                            matInput
+                            cdkTextareaAutosize
+                            #autosize="cdkTextareaAutosize"
+                            cdkAutosizeMinRows="1"
+                            cdkAutosizeMaxRows="5" placeholder="Type a message"
+                        ></textarea>
+                    </mat-form-field>
+                </div>
+                <button mat-icon-button><i class="fa-regular fa-paper-plane"></i></button>
+            </div>
+        }
+    </div>
+</div>

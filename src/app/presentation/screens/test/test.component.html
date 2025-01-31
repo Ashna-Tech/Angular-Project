@@ -1,0 +1,568 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Test Master </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Test Master</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="testForm">
+              <div class="card-body">
+
+                <div class="form-group row">
+                  <label for="mainCategory" class="col-sm-3 col-form-label">
+                    Main Category
+                  </label>
+                  <div class="col-sm-9">
+                    <select name="mainCategory" id="mainCategory" class="form-control" formControlName="mainCategory"
+                      (change)="onSelectMainCategory()">
+                      <option value="">Select MainCategory</option>
+
+                      @for (maincat of MainCatListDropdown$ | async; track $index) {
+                        <option [value]="maincat.id">{{ maincat.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="examCat" class="col-sm-3 col-form-label">
+                    Exam Category
+                  </label>
+                  <div class="col-sm-9">
+                    <select name="examCategory" id="examCategory" class="form-control" formControlName="examCategory"
+                      (change)="onSelectExamCategory()">
+                      <option value="">Select Exam Category</option>
+
+                      @for (examCat of ExamCatListDropdown$ | async; track $index) {
+                        <option [value]="examCat.id">{{ examCat.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="examid" class="col-sm-3 col-form-label">
+                    Choose Exam
+                  </label>
+                  <div class="col-sm-9">
+                    <select name="examid" id="examid" class="form-control" formControlName="examid">
+                      <option value=""> Choose Exams</option>
+
+                      @for (examtype of ChooseExamListDropdown$ | async; track $index) {
+                        <option [value]="examtype.id">{{examtype.name}}</option>
+                      }
+                    </select>
+
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <label for="allowNav" class="col-sm-3 col-form-label">
+                    Test Type
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="radio" id="fullLengthTest" formControlName="testType" value="fullLengthTest" /> <label
+                      for="fullLengthTest"> Full Length Test</label>
+                    <input type="radio" id="sectionalTest" formControlName="testType" value="sectionalTest" /> <label
+                      for="sectionalTest"> Sectional Test</label>
+                    <input type="radio" id="topicTest" formControlName="testType" value="topicTest" /> <label
+                      for="topicTest"> Topic Test</label>
+                    <input type="radio" id="cuetQuiz" formControlName="testType" value="cuetQuiz" /> <label
+                      for="cuetQuiz"> CUET Quiz</label>
+                    <input type="radio" id="pdf" formControlName="testType" value="pdf" /> <label for="pdf"> PDF</label>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="testType" class="col-sm-3 col-form-label">
+                    Test Heading
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="radio" id="Single" formControlName="allowNav" [value]="'Single'" /> <label
+                      for="Single">Single</label>
+                    <input type="radio" id="MWithN" formControlName="allowNav" [value]="'Yes'" /> <label for="MWithN">M
+                      With N</label>
+                    <input type="radio" id="MWithoutN" formControlName="allowNav" [value]="'No'" /> <label
+                      for="MWithoutN">M Without N</label>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="isComingSoon" class="col-sm-3 col-form-label">
+                    Show Coming Soon
+                  </label>
+                  <div class="col-sm-9 d-flex justify-content-start">
+                    <div class="custom-control custom-radio mr-3">
+                      <input id="comingSoonRadio1" type="radio" value="Yes" class="custom-control-input"
+                        formControlName="isComingSoon" />
+                      <label for="comingSoonRadio1" class="custom-control-label">Yes</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="comingSoonRadio2"
+                        formControlName="isComingSoon" value="No" />
+                      <label for="comingSoonRadio2" class="custom-control-label">No</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="isLiveTest" class="col-sm-3 col-form-label">
+                    IsLive Test ?
+                  </label>
+                  <div class="col-sm-9 d-flex justify-content-start">
+                    <div class="custom-control custom-radio mr-3">
+                      <input id="isliveTestRadio1" type="radio" value="Yes" class="custom-control-input"
+                        formControlName="isLiveTest" />
+                      <label for="isliveTestRadio1" class="custom-control-label">Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="isliveTestRadio2"
+                        formControlName="isLiveTest" checked="" value="No" />
+                      <label for="isliveTestRadio2" class="custom-control-label">No</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="highlighted" class="col-sm-3 col-form-label">
+                    Highlighted ?
+                  </label>
+                  <div class="col-sm-9 d-flex justify-content-start">
+                    <div class="custom-control custom-radio mr-3">
+                      <input id="highlightedRadio1" type="radio" value="Yes" class="custom-control-input"
+                        formControlName="highlighted" />
+                      <label for="highlightedRadio1" class="custom-control-label">Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="highlightedRadio2"
+                        formControlName="highlighted" checked="" value="No" />
+                      <label for="highlightedRadio2" class="custom-control-label">No</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="isSplittedSection" class="col-sm-3 col-form-label">
+                    Has Sub Section <br> (Like IBPS PO Mains) ?
+                  </label>
+                  <div class="col-sm-9 d-flex justify-content-start">
+                    <div class="custom-control custom-radio mr-3">
+                      <input id="splittedSectionRadio1" type="radio" value="Yes" class="custom-control-input"
+                        formControlName="isSplittedSection" />
+                      <label for="splittedSectionRadio1" class="custom-control-label">Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="splittedSectionRadio2"
+                        formControlName="isSplittedSection" checked="" value="No" />
+                      <label for="splittedSectionRadio2" class="custom-control-label">No</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="assumestDate" class="col-sm-3 col-form-label">
+                    Start Date
+                  </label>
+                  <div class="mt-2 ml-2">Starts On :</div>
+                  <div>
+                    <input id="assumestDate" type="date" class="form-control ml-2" formControlName="assumestDate" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="expireDate" class="col-sm-3 col-form-label">
+                    Test Validity
+                  </label>
+                  <div class="mt-2 ml-2">Expires On</div>
+                  <div>
+                    <input id="expireDate" type="date" class="form-control ml-2" formControlName="expireDate" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="testTitle" class="col-sm-3 col-form-label">
+                    Test Title
+                  </label>
+                  <div class="col-sm-9">
+                    <select name="testTitle" id="testTitle" class="form-control" formControlName="testTitle">
+                      <option [value]="''" disabled>Select Test Title</option>
+                      <option [value]="TestTitleEnum.Surprise">Surprise</option>
+                      <option [value]="TestTitleEnum.Regular">Regular</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="questionMarkType" class="col-sm-3 col-form-label">
+                    Question Mark Type
+                  </label>
+                  <div class="col-sm-9">
+                    <select name="questionMarkType" id="questionMarkType" class="form-control" formControlName="questionMarkType">
+                      <option [value]="''" disabled>Select Question Mark Type</option>
+                      <option [value]="qMartTypeEnum.Regular">Regular</option>
+                      <option [value]="qMartTypeEnum.Individual">Individual</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="testLevel" class="col-sm-3 col-form-label">
+                    Test Level
+                  </label>
+                  <div class="col-sm-9">
+                    <select name="testLevel" id="testLevel" class="form-control" formControlName="testLevel">
+                      <option [value]="''" disabled>Select Test Level</option>
+                      <option [value]="TestLevelEnum.Surprise">Surprise</option>
+                      <option [value]="TestLevelEnum.Easy">Easy</option>
+                      <option [value]="TestLevelEnum.Moderate">moderate </option>
+                      <option [value]="TestLevelEnum.Difficult">Difficult</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="testpatternType" class="col-sm-3 col-form-label">
+                    Test Pattern Type
+                  </label>
+                  <div class="col-sm-9">
+                    <input id="testpatternType" type="text" class="form-control" formControlName="testpatternType"
+                      placeholder="test Patter Type" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="sections" class="col-sm-3 col-form-label">
+                    No. of Sections
+                  </label>
+                  <div class="col-sm-8">
+                    <input id="sections" class="form-control" formControlName="noOfSections"
+                      placeholder="Enter Number of Sections" type="number" />
+                  </div>
+                  @if (!isUpdateMode) {
+                    <button type="button" (click)="UpdateNumberOfSections()" class="btn-sm mt-1" style="height: 30px">
+                      Add
+                    </button>
+                  }
+                </div>
+
+                @if (!isUpdateMode) {
+                  <div class="form-group row">
+                    <label for="NoOfTest" class="col-sm-3 col-form-label">
+                      No. of Test
+                    </label>
+                    <div class="col-sm-9">
+                      <input id="NoOfTest" class="form-control" formControlName="NoOfTest"
+                        placeholder="Enter Number of test" type="number" />
+                    </div>
+                  </div>
+                }
+                
+                <table class="table col-sm-12">
+                  <thead class="header">
+                    <tr>
+                      <th scope="col">Main Section</th>
+                      <th scope="col">Conn Section</th>
+                      <th width="60">Time<br> (in mins)</th>
+                      <th width="60">No of Question</th>
+                      <th width="60">Max Attempt</th>
+                      <th width="50">Cutt off</th>
+                      <th width="60">Section Marks</th>
+                      <th width="50">Order</th>
+                      <th width="50">Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody formArrayName="sections">
+                    <tr *ngFor="
+                     let section of SectionsArray.controls;
+                     let i = index
+                   " [formGroupName]="i">
+                      <td>
+                        <!--  -->
+                        <select formControlName="categoryId" class="form-control">
+                          <option value="">Select Main Section </option>
+                          @for (category of MainSectionListDropdown$ | async;track $index) {
+                          <option [value]="category.id">
+                            {{ category.name }}
+                          </option>
+                          }
+                        </select>
+                      </td>
+
+                      <td>
+                        <select formControlName="connectedCatId" class="form-control">
+                          <option [value]="null">select category</option>
+                          @for (category of MainSectionListDropdown$ | async ;
+                          track $index) {
+                          <option [value]="category.id">
+                            {{ category.name }}
+                          </option>
+                          }
+                        </select>
+                      </td>
+                      <td>
+
+                        <input name="timeLimit" type="number" id="timeLimit" min="0" step="1"
+                          placeholder="Enter time in minutes" class="form-control" formControlName="timeLimit" />
+                      </td>
+                      <td>
+                        <input class="form-control" type="number" placeholder="Enter number of Questions"
+                          formControlName="noofQuestions" />
+                      </td>
+                      <td>
+                        <input type="number" placeholder="Max attempts" min="1" max="10" class="form-control"
+                          formControlName="maxAttempt">
+                      </td>
+                      <td>
+                        <input type="number" class="form-control" placeholder="Enter Cutoff Values" formControlName="cutOff" />
+                      </td>
+                      <td>
+                        <input type="number" class="form-control" placeholder="Enter Section Marks"
+                          formControlName="totalSectionMarks" />
+                      </td>
+                      <td>
+                        <input type="number" class="form-control" placeholder="Enter Order"
+                          formControlName="categoryOrderNo" />
+                      </td>
+                      <td>
+                        <button class="btn btn-sm btn-default ml-2" (click)="removeSection(i)"><i class="fa-solid fa-trash-can"></i></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="form-group row mt-4">
+                  <label for="totalMaxAttempt" class="col-sm-3 col-form-label">
+                    Total Max.Attempt Ques.
+                  </label>
+                  <div class="col-sm-9">
+                    <input id="totalMaxAttempt" class="form-control" formControlName="totalMaxAttempt" type="number" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="maxMarks" class="col-sm-3 col-form-label">
+                    Total Marks
+                  </label>
+                  <div class="col-sm-9">
+                    <input id="maxMarks" class="form-control" formControlName="maxMarks" type="number" />
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="isFree" class="col-sm-3 col-form-label">
+                    Is Free ?
+                  </label>
+                  <div class="col-sm-9 d-flex justify-content-start">
+                    <div class="custom-control custom-radio mr-3">
+                      <input id="isFreeRadio1" type="radio" value="Yes" class="custom-control-input"
+                        formControlName="isFree" />
+                      <label for="isFreeRadio1" class="custom-control-label">Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="isFreeRadio2" formControlName="isFree"
+                        checked="" value="No" />
+                      <label for="isFreeRadio2" class="custom-control-label">No</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="negativeMarks" class="col-sm-3 col-form-label">
+                    Negative Mark Percentage(%)
+                  </label>
+                  <div class="col-sm-9">
+                    <input id="negativeMarks" class="form-control" formControlName="negativeMarks" type="number" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="totalCutoff" class="col-sm-3 col-form-label">
+                    Total Cutoff
+                  </label>
+                  <div class="col-sm-9">
+                    <input id="totalCutoff" class="form-control" formControlName="totalCutoff" type="number" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="englishPdfUrl" class="col-sm-3 col-form-label">
+                    English PDF Url
+                  </label>
+                  <div class="col-sm-9">
+                    <input id="englishPdfUrl" class="form-control" formControlName="englishPdfUrl"
+                      placeholder="Link Url" type="text" />
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="HindiPdfUrl" class="col-sm-3 col-form-label">
+                    Hindi PDF Url
+                  </label>
+                  <div class="col-sm-9">
+                    <input id="HindiPdfUrl" class="form-control" formControlName="HindiPdfUrl" placeholder="Link Url"
+                      type="text" />
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="englishPDF" class="col-sm-3 col-form-label"> English PDF File
+                  </label>
+                  <div class="col-sm-9">
+                    <div class="custom-file">
+                      <input id="englishPDF" (change)="onEnglishPdfFileUpload($event)" type="file"
+                        class="custom-file-input" placeholder="English PDF File..." formControlName="englishPDF"
+                        accept="application/pdf" required />
+                      <label class="custom-file-label" for="testfile">
+                        Choose File
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="hindiPDF" class="col-sm-3 col-form-label"> Hindi PDF File
+                  </label>
+                  <div class="col-sm-9">
+                    <div class="custom-file">
+                      <input id="hindiPDF" (change)="onHindiPdfFileUpload($event)" type="file" class="custom-file-input"
+                        placeholder="Hindi PDF File..." formControlName="hindiPDF" accept="application/pdf" required />
+                      <label class="custom-file-label" for="testfile">
+                        Choose File
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button type="submit" class="btn btn-primary" (click)="createTest()">
+                  Submit
+                </button>
+                }@else{
+                <button type="submit" class="btn btn-primary" (click)="updateTest(editTestId)">
+                  Update
+                </button>
+                }
+
+                <button type="submit" class="btn btn-default float-right" (click)="clearForm()">
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+
+        <div class="col-md-6">
+<!-- Row to hold the cards -->
+<div class="row justify-content-center">
+  <!-- First Card -->
+
+  <div class="col-md-12">
+    <button class="btn btn-danger" style="border-radius: 0">
+      Main Test
+    </button>
+    <button class="btn btn-danger" style="border-radius: 0">
+      CUET Quiz
+    </button>
+ </div>
+
+  <div class="col-md-12 mb-4">
+    <div class="row">
+      @for (test of testList$ | async; track $index) {
+        <div class="col-md-6">
+          <div class="card">
+            <div class="srno">{{test.oldTestId}}</div>
+            <div class="card-body">
+              <div class="text-detail-row"><strong>{{test.examName}}</strong></div>
+              <div class="text-detail-row"><strong>{{test.testType}}</strong></div>
+              <div class="text-detail-row">Launched on: {{test.launchedDate | date}}</div>
+              <div class="text-detail-row">Expires on: {{test.expireDate | date}}</div>
+              <div class="text-detail-row"> <b>Test Title: {{test.testTitle}}</b> </div>
+              <div class="text-detail-row"> <b>Test Level: {{test.testLevel}}</b> </div>
+              <div class="text-detail-row"> <b>Exam Group: @for (exam of test.examGroup; track $index) { {{exam}} }</b></div>
+  
+              @for (section of test.testSection; track $index) {
+                <div class="section-detail-row">
+                  <div class="name">{{section.categoryName}}</div>
+                  <div class="number-button">{{section.cutOff}}</div>
+                  <div class="number-button">{{section.noofQuestions}}</div>
+                  <a class="number-button" [routerLink]="['/dashboard', 'view-edit-question']" [queryParams]="{'CategoryId':section.oldId,'TestId':test.oldTestId}">{{section.addedQues}}</a>
+                </div>
+              }
+            </div>
+
+            <div class="card-footer" style="padding-bottom: 0;padding-top: 0;">
+              <button class="btn btn-danger" style="width: 50%; height: 35px;border-radius: 5px;" (click)="deleteTest(test.id)"> Delete </button>
+            </div>
+            
+            <div class="card-footer">
+              <button class="btn btn-success" style="width: 50%; height: 35px; border-radius: 0" (click)="onEditTest(test.id)">
+                Edit
+              </button>
+              <a  class="btn btn-primary" style="height: 35px; width: 50%; border-radius: 0" [routerLink]="['/dashboard', 'add-test-question']" [queryParams]="{'ExamId':test.examId, 'Exam':test.examName, 'TestId':test.oldTestId}">Add Qs</a>
+              
+              <button class="btn btn-success" style="height: 35px; width: 50%; border-radius: 0" (click)="addToList(test.id)">
+                Add to List
+              </button>
+              <button class="btn btn-warning" style="height: 35px; width: 50%; border-radius: 0" (click)="toggleActive(test.id, test.isActive)">
+                {{test.isActive ? 'Disable' : 'Enable'}}
+              </button>
+              <div class="d-flex justify-content-between mb-2">
+                <button class="btn btn-primary" style="height: 40px; width: 50%; border-radius: 0">
+                  CheckPR(Q)
+                </button>
+                <button class="btn btn-primary" style="height: 40px; width: 50%; border-radius: 0">
+                  CheckPR(S)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>

@@ -1,0 +1,224 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Landing Page Master</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Landing Page Master</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="LandingPageMasterForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="examgroupId" class="col-sm-2 col-form-label">
+                    ExamGroup
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="examgroupId"
+                      id="examgroupId"
+                      type="text"
+                      class="form-control"
+                      formControlName="examgroupId"
+                    >
+                      <option value="">Select ExamGroup</option>
+                      <option [value]="ExamGroup.Bank_And_Insurance">
+                        Bank And Insurance
+                      </option>
+                      <option [value]="ExamGroup.Law_Exams">Law Exams</option>
+                      <option [value]="ExamGroup.Other_Exams">
+                        Other Exams
+                      </option>
+                      <option [value]="ExamGroup.SSC_And_Railways">
+                        SSC And Railways
+                      </option>
+                      <option [value]="ExamGroup.State_Exams">
+                        State Exams
+                      </option>
+                      <option [value]="ExamGroup.Teaching_Exams">
+                        Teaching Exams
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="name" class="col-sm-2 col-form-label">
+                    Name
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="name"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Name..."
+                      formControlName="name"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="description" class="col-sm-2 col-form-label">
+                    Description
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="description"
+                      type="text"
+                      class="form-control"
+                      placeholder="Description..."
+                      formControlName="description"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="seotitle" class="col-sm-2 col-form-label">
+                    SEO Title
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="seotitle"
+                      type="text"
+                      class="form-control"
+                      placeholder=" Enter SEO Title..."
+                      formControlName="seotitle"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="seokeywords" class="col-sm-2 col-form-label">
+                    SEO Keywords
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="seokeywords"
+                      type="text"
+                      class="form-control"
+                      placeholder="SEO Keywords..."
+                      formControlName="seokeywords"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="seodescription" class="col-sm-2 col-form-label">
+                    SEO Description
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="seodescription"
+                      type="text"
+                      class="form-control"
+                      placeholder="SEO Description..."
+                      formControlName="seodescription"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="otherdetail" class="col-sm-2 col-form-label">
+                    Other Detail
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="otherdetail"
+                      type="text"
+                      class="form-control"
+                      placeholder="Other Detail..."
+                      formControlName="otherdetail"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="jsonschema" class="col-sm-2 col-form-label">
+                    Json Schema
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="jsonschema"
+                      type="text"
+                      class="form-control"
+                      placeholder="Json Schema..."
+                      formControlName="jsonschema"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createLandingPageMaster()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updateLandingPageMaster(editLandingPageMasterId)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editLandingPageMaster($event)"
+        (Remove)="deleteLandingPageMaster($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

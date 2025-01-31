@@ -1,0 +1,240 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Total Chapter Question</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Total Chapter Question</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="totalChapterQuesForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="mainCatid" class="col-sm-2 col-form-label">
+                    Main Category
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="mainCatid"
+                      id="mainCatid"
+                      class="form-control"
+                      formControlName="mainCatid"
+                    >
+                      <option value="">Select Main Category</option>
+                      @for ( maincat of MainCategoryListDropdown$ | async ;
+                      track $index) {
+                      <option [value]="maincat.id">{{ maincat.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="examCatid" class="col-sm-2 col-form-label">
+                      Exam Category
+                    </label>
+                    <div class="col-sm-10">
+                      <select
+                        name="examCatid"
+                        id="examCatid"
+                        class="form-control"
+                        formControlName="examCatid"
+                      >
+                        <option value="">Select Exam Category</option>
+                        @for ( examCat of ExamCategoryListDropdown$ | async ;
+                        track $index) {
+                        <option [value]="examCat.id">{{ examCat.name }}</option>
+                        }
+                      </select>
+                    </div>
+                  </div>
+
+                <div class="form-group row">
+                  <label for="examid" class="col-sm-2 col-form-label">
+                    Choose Exam
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="examid"
+                      id="mainCategory"
+                      class="form-control"
+                      formControlName="examid"
+                    >
+                      <option value="">Select Exam </option>
+                      @for ( exam of ExamListDropdown$ | async ;
+                      track $index) {
+                      <option [value]="exam .id">{{ exam .name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="categoryid" class="col-sm-2 col-form-label">
+                       Category 
+                    </label>
+                    <div class="col-sm-10">
+                      <select
+                        name="categoryid"
+                        id="categoryid"
+                        class="form-control"
+                        formControlName="categoryid"
+                      >
+                        <option value="">Select Category </option>
+                        @for (category of CategoryListDropdown$ | async ;
+                        track $index) {
+                        <option [value]="category .id">{{category.name}}</option>
+                        }
+                      </select>
+                    </div>
+                  </div>
+  
+                  <div class="form-group row">
+                    <label for="subCategoryid" class="col-sm-2 col-form-label">
+                         Sub-Category 
+                    </label>
+                    <div class="col-sm-10">
+                      <select
+                        name="subCategoryid"
+                        id="subCategoryid"
+                        class="form-control"
+                        formControlName="subCategoryid"
+                      >
+                        <option value="">Select Sub Category </option>
+                        @for (SubCat of SubCategoryListDropdown$ | async; track $index) {
+                        <option [value]="SubCat .id">{{SubCat.name}}</option>
+                        }
+                      </select>
+                    </div>
+                  </div>
+
+
+                  
+                  <div class="form-group row">
+                    <label for="chapterid" class="col-sm-2 col-form-label">
+                        Chapter 
+                    </label>
+                    <div class="col-sm-10">
+                      <select
+                        name="chapterid"
+                        id="chapterid"
+                        class="form-control"
+                        formControlName="chapterid"
+                      >
+                        <option value="">Select Chapter </option>
+                        @for (chapter of ChapterListDropdown$ | async ;
+                        track $index) {
+                        <option [value]="chapter .id">{{chapter.name}}</option>
+                        }
+                      </select>
+                    </div>
+                  </div>
+
+                <div class="form-group row">
+                  <label for="noOfQuestion" class="col-sm-2 col-form-label">
+                    No of Question
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="noOfQuestion"
+                      type="number"
+                      class="form-control"
+                      placeholder="Enter Number of Question..."
+                      formControlName="noOfQuestion"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="trending" class="col-sm-2 col-form-label">
+                    Trending
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="trending"
+                      type="number"
+                      class="form-control"
+                      placeholder="Enter Trending Number..."
+                      formControlName="trending"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createTotalChapterQuestion()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="
+                    updateTotalChapterQuestion(editTotalChapterQuestionId)
+                  "
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editTotalChapterQuestion($event)"
+        (Remove)="deleteTotalChapterQuestion($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

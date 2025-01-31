@@ -1,0 +1,40 @@
+<ng-template #edit let-data="adtData" let-emitter="captureEvents">
+  <app-dt-edit-button
+    [data]="data"
+    (emitter)="emitter($event)"
+  ></app-dt-edit-button>
+</ng-template>
+
+<ng-template #removeNg let-data="adtData" let-emitter="captureEvents">
+  <app-dt-delete-button
+    [data]="data"
+    (emitter)="emitter($event)"
+  ></app-dt-delete-button>
+</ng-template>
+
+
+<ng-template #viewNg let-data="adtData" let-emitter="captureEvents">
+  <app-dt-view-button
+    [data]="data"
+    (emitter)="emitter($event)"
+  ></app-dt-view-button>
+</ng-template>
+
+
+<ng-template #activeToinactiveNg let-data="adtData" let-emitter="captureEvents" let-fieldName="fieldName">
+  <app-dt-active-inactive-button
+    [data]="data"
+    (emitter)="emitter($event)"
+    [fieldName]="fieldName"
+  ></app-dt-active-inactive-button>
+</ng-template>
+
+
+
+<div class="card">
+    <div class="card-body">
+        @if (hasData) {
+            <table datatable [dtOptions]="dtOptions" class="row-border hover"></table>
+        }
+    </div>
+</div>

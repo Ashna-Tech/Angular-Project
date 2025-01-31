@@ -1,0 +1,181 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Manage keyword</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Manage Keyword</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="KeywordForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="catid" class="col-sm-2 col-form-label">
+                    Category
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="catid"
+                      class="form-control"
+                      id="catid"
+                      (change)="onCategorySelect()"
+                      formControlName="catid"
+                    >
+                      <option value="">Select Category</option>
+                      @for (category of categoryListDropdown$ | async; track
+                      $index) {
+                      <option [value]="category.id">{{ category.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="subCatid" class="col-sm-2 col-form-label">
+                    Sub-Category
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="subCatid"
+                      class="form-control"
+                      id="subCatid"
+                      (change)="onSubCategorySelect()"
+                      formControlName="subCatid"
+                    >
+                      <option value="">Select Sub-Category</option>
+                      @for (subcategory of SubcategoryListDropdown$ | async;
+                      track $index) {
+                      <option [value]="subcategory.id">
+                        {{ subcategory.name }}
+                      </option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="chapterid" class="col-sm-2 col-form-label">
+                    Chapter
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="chapterid"
+                      class="form-control"
+                      id="chapterid"
+                      (change)="onChapterSelect()"
+                      formControlName="chapterid"
+                    >
+                      <option value="">Select Sub-Category</option>
+                      @for (chapter of ChapterListDropdown$ | async; track
+                      $index) {
+                      <option [value]="chapter.id">{{ chapter.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="name" class="col-sm-2 col-form-label">
+                    Keyword
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="name"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter keyword..."
+                      formControlName="name"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="description" class="col-sm-2 col-form-label">
+                    Keyword Description
+                  </label>
+                  <div class="col-sm-10">
+                    <textarea
+                      id="description"
+                      type="text"
+                      class="form-control"
+                      placeholder="Keyword Description..."
+                      formControlName="description"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createKeyword()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updateKeyword(editKeywordId)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editKeyword($event)"
+        (Remove)="deleteKeyword($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

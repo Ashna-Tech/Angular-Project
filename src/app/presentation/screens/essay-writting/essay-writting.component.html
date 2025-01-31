@@ -1,0 +1,294 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Essay Writting</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Essay Writting</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="essayWrittingForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="plainId" class="col-sm-2 col-form-label">
+                    Plain
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="plainId"
+                      id="plainId"
+                      type="text"
+                      class="form-control"
+                      formControlName="plainId"
+                    >
+                      <option value="">Select Plain</option>
+                      <option value="76b1c66dc84a8c0283e14281">demo data 1</option>
+                      <option value="76b1c66dc84a8c0283e14281">demo data 2</option>
+                      <option value="87b1c66dc84a8c0283e14209">demo data 3</option>
+                      <option value="88b1c66dc84a8c0283e14245">demo data 4</option>
+
+                      @for (plain of plainListDropdown$ | async ; track $index)
+                      {
+                      <option [value]="plain.id">{{ plain.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="examtypeId" class="col-sm-2 col-form-label">
+                    Exam Type
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="examtypeId"
+                      id="examtypeId"
+                      type="text"
+                      class="form-control"
+                      formControlName="examtypeId"
+                    >
+                      <option value="">Select Exam Type</option>
+                
+
+                      @for (exam of examListDropdown$ | async ; track $index) {
+                      <option [value]="exam.id">{{ exam.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label
+                    for="maxattemptPerQuestionid"
+                    class="col-sm-2 col-form-label"
+                  >
+                    Max Attempt per Question
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="maxattemptPerQuestionid"
+                      id="maxattemptPerQuestionid"
+                      type="text"
+                      class="form-control"
+                      formControlName="maxattemptPerQuestionid"
+                    >
+                      <option value="">Select Question</option>
+                      <option value="76b1c66dc84a8c0283e14281">
+                        Graphic design
+                      </option>
+                      <option value="76b1c66dc84a8c0283e14281">
+                        Web designing
+                      </option>
+                      <option value="87b1c66dc84a8c0283e14209">
+                        Cloud computing
+                      </option>
+                      <option value="88b1c66dc84a8c0283e14245">
+                        Programming
+                      </option>
+
+                      @for (Question of questionListDropdown$ | async ; track
+                      $index) {
+                      <option [value]="Question.id">{{ Question.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="createdate" class="col-sm-2 col-form-label">
+                    Create Date
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="createdate"
+                      type="datetime-local"
+                      class="form-control"
+                      placeholder=" Date Create..."
+                      formControlName="createdate"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="expirydate" class="col-sm-2 col-form-label">
+                    Expiry Date
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="expirydate"
+                      type="datetime-local"
+                      class="form-control"
+                      placeholder=" Enter Expiry Date..."
+                      formControlName="expirydate"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="title" class="col-sm-2 col-form-label">
+                    Title
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="title"
+                      type="text"
+                      class="form-control"
+                      placeholder=" Enter Title..."
+                      formControlName="title"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="essaynumber" class="col-sm-2 col-form-label">
+                    Essay Number
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="essaynumber"
+                      type="text"
+                      class="form-control"
+                      placeholder=" Enter Essay Number..."
+                      formControlName="essaynumber"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="noOfessay" class="col-sm-2 col-form-label">
+                    Number of Essay
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="noOfessay"
+                      type="text"
+                      class="form-control"
+                      placeholder=" Number of Essay..."
+                      formControlName="noOfessay"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="added" class="col-sm-2 col-form-label">
+                    Added
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="added"
+                      type="text"
+                      class="form-control"
+                      placeholder=" Added..."
+                      formControlName="added"
+                    />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="isActiveRadio1" class="col-sm-2 col-form-label">
+                    Is Active
+                  </label>
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="isActiveRadio1"
+                        value="Yes"
+                        formControlName="isActive"
+                      />
+
+                      <label for="isActiveRadio1" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="isActiveRadio2"
+                        formControlName="isActive"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="isActiveRadio2" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createEssayWritting()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updateEssayWritting(editEssayWrittingId)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editEssayWritting($event)"
+        (Remove)="deleteEssayWritting($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,38 @@
+.content-wrapper {
+    margin-left: 100px;
+  }
+  
+  hr {
+    border-top: 1px solid #ccc;
+  }
+  
+  :host {
+    position: relative;
+  }
+  
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    width: 60px;
+    height: 50px;
+    color: #fff;
+  }
+  
+  .btn-grid{
+    width: 110px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 2px;
+  }
+  
+  app-data-table{
+    width: calc(100% - 30px);
+    margin-left: 15px;
+  }
+
+  h5{
+    font-weight: 500;
+  }

@@ -1,0 +1,136 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Test Message </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Test Message </h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+
+            <form [formGroup]="TestMessageForm">
+              <div class="card-body">
+
+                <div class="form-group row">
+                  <label for="examtypeid" class="col-sm-2 col-form-label">
+                    Exam Type
+                  </label>
+                  <div class="col-sm-10">
+                    <select name="examtypeid" id="examtypeid" type="text" class="form-control"
+                      formControlName="examtypeid">
+                      <option value="">Select Examtype </option>
+                      @for (examtype of ExamtypeListDropdown$ | async ; track
+                      $index) {
+                      <option [value]="examtype.id">{{ examtype.name}}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="title" class="col-sm-2 col-form-label">
+                    Title
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="title" type="text" class="form-control" placeholder="Title..." formControlName="title" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="message" class="col-sm-2 col-form-label">
+                    Message
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="message" type="text" class="form-control" placeholder="Write Message..."
+                      formControlName="message" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="link" class="col-sm-2 col-form-label">
+                    Link
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="link" type="text" class="form-control" placeholder="Link ..." formControlName="link" />
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="loginRequired" class="col-sm-2 col-form-label">
+                    Is Login Required
+                  </label>
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input id="loginRequiredRadio1" type="radio" value="Yes" class="custom-control-input"
+                        formControlName="loginRequired" />
+                      <label for="loginRequiredRadio1" class="custom-control-label">Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="loginRequiredRadio2"
+                        formControlName="loginRequired" checked="" value="No" />
+                      <label for="loginRequiredRadio2" class="custom-control-label">No</label>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button type="submit" class="btn btn-primary" (click)="createTestMessage()">
+                  Submit
+                </button>
+                }@else{
+                <button type="submit" class="btn btn-primary" (click)="updateTestMessage(editTestMessageId)">
+                  Update
+                </button>
+                }
+
+                <button type="submit" class="btn btn-default float-right" (click)="clearForm()">
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table (Edit)="editTestMessage($event)" (Remove)="deleteTestMessage($event)" [dataObs]="dataObs"
+        [tableCols]="tableCols" #dttable></app-data-table>
+    </div>
+  </section>
+</div>

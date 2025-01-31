@@ -1,0 +1,11 @@
+.question, .answer{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 70px 1fr;
+}
+
+.card-body{
+  .border-bottom:last-child{
+    border-bottom: none !important;
+  }
+}

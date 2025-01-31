@@ -1,0 +1,43 @@
+@if (question(); as question) {
+    <form [formGroup]="form">
+        <div class="container1">
+            <div class="row">
+                <div class="col-md-3">Chapter: {{question.chapterName}}</div>
+                <div class="col-md-3">Keywords: {{question.keywords.join(', ')}}</div>
+                <div class="col-md-3">Exam Type: {{question.exams.join(', ')}}</div>
+                <div class="col-md-3 d-flex">Question&nbsp;Marks:&nbsp; <input type="number" formControlName="marks"></div>
+                <div class="col-md-3">Summary Level: </div>
+                <div class="col-md-3">Layer: </div>
+                <div class="col-md-3">Avg Time: {{question.avgTime}} Sec</div>
+                <div class="col-md-3">Minimum solution Time: {{question.minTime}} Sec</div>
+                <div class="col-md-3">Question Level: {{question.quesMasterLevel}}</div>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="row">
+                <div class="col-md-3">Topper Time: <input type="number" formControlName="topperTime"></div>
+                <div class="col-md-3"> Order <input type="number" formControlName="order"></div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <input type="radio" formControlName="status" [id]="'direct'+question.quesId" class="mr-1" value="C"/>
+                            <label [for]="'direct'+question.quesId">Correct</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="radio" formControlName="status"  [id]="'Incorrect'+question.quesId" class="mr-1"  value="I"/>
+                            <label [for]="'Incorrect'+question.quesId">Incorrect</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="radio" formControlName="status"  [id]="'Skipped'+question.quesId" class="mr-1"  value="S"/>
+                            <label [for]="'Skipped'+question.quesId">Skipped</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="radio" formControlName="status"  [id]="'Unseen'+question.quesId" class="mr-1"  value="U"/>
+                            <label [for]="'Unseen'+question.quesId">Unseen</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+}

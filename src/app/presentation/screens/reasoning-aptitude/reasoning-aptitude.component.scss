@@ -1,0 +1,45 @@
+.container {
+  width: 100%;
+  font-family: Arial, sans-serif;
+  margin-top: 0;
+  justify-content: center;
+}
+
+.header {
+  background-color: rgb(106, 102, 102);
+  color: #fff;
+  padding: 1rem 1rem;
+
+  .upper-section{
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.selectBox {
+  width: 100px;
+  height: 3vh;
+  padding-left: 7px;
+  border-radius: 3px;
+}
+
+.main-heading {
+  text-decoration: underline;
+}
+
+.stats {
+  font-size: small;
+  font-weight: 550;
+  line-height: 1;
+  display: grid;
+  justify-items: end;
+
+  p:last-child{
+    margin-bottom: 0;
+  }
+}
+
+.stats-container{
+  display: grid;
+  grid-template-columns: 1fr 300px;
+}

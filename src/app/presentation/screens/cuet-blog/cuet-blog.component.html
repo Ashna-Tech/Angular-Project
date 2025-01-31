@@ -1,0 +1,256 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Cuet Blog</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Cuet Blog</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+
+            <form [formGroup]="cuetBlogForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="blogheading" class="col-sm-2 col-form-label"
+                    >Blog Heading</label
+                  >
+                  <div class="col-sm-10">
+                    <input
+                      id="blogheading"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Heading"
+                      formControlName="blogheading"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="blogtitle" class="col-sm-2 col-form-label"
+                    >Blog Title</label
+                  >
+                  <div class="col-sm-10">
+                    <input
+                      id="blogtitle"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Title ..."
+                      formControlName="blogtitle"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="thumbnail" class="col-sm-2 col-form-label">
+                    Thumbnail
+                  </label>
+                  <div class="col-sm-10">
+                    <div class="custom-file">
+                      <input
+                        id="thumbnail"
+                        (change)="onThumbnailimg($event)"
+                        type="file"
+                        class="custom-file-input"
+                        formControlName="thumbnail"
+                        accept="image/*"
+                      />
+                      <label class="custom-file-label" for="exampleInputFile">
+                        Choose Thumbnail
+                      </label>
+                    </div>
+                    @if (previewThumbnailImg) {
+                    <img [src]="previewThumbnailImg" width="200" />
+                    }
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="bannerimg" class="col-sm-2 col-form-label"
+                    >Banner Image
+                  </label>
+                  <div class="col-sm-10">
+                    <div class="custom-file">
+                      <input
+                        id="bannerimg"
+                        (change)="onBannerImg($event)"
+                        type="file"
+                        class="custom-file-input"
+                        formControlName="bannerimg"
+                        accept="image/*"
+                      />
+                      <label class="custom-file-label" for="exampleInputFile">
+                        Choose Banner
+                      </label>
+                    </div>
+                    @if (previewBannerImg) {
+                    <img [src]="previewBannerImg" width="200" />
+                    }
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="seotitle" class="col-sm-2 col-form-label"
+                    >Seo Title</label
+                  >
+                  <div class="col-sm-10">
+                    <input
+                      id="seotitle"
+                      type="text"
+                      class="form-control"
+                      placeholder="Seo Title ..."
+                      formControlName="seotitle"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="seoKeywords" class="col-sm-2 col-form-label"
+                    >Seo Keywords</label
+                  >
+                  <div class="col-sm-10">
+                    <input
+                      id="seoKeywords"
+                      type="text"
+                      class="form-control"
+                      placeholder="Seo Keywords ..."
+                      formControlName="seoKeywords"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="seodescription" class="col-sm-2 col-form-label"
+                    >Seo Description
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="seodescription"
+                      type="text"
+                      class="form-control"
+                      placeholder="Seo Description ..."
+                      formControlName="seodescription"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="alttext" class="col-sm-2 col-form-label"
+                    >Alt Text
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="alttext"
+                      type="text"
+                      class="form-control"
+                      placeholder=" Enter Alt Text ..."
+                      formControlName="alttext"
+                    />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 form-group">
+                    <label for="blogcontent1" class="col-form-label">
+                      Blog Content 1
+                    </label>
+                    <div>
+                      <app-ckeditor
+                        #blogcontent1
+                        id="blogcontent1"
+                        elementId="blogcontent1"
+                        formControlName="blogcontent1"
+                      >
+                      </app-ckeditor>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6 form-group">
+                    <label for="blogcontent2" class="col-sm-2 col-form-label"
+                      >Blog Content 2
+                    </label>
+                    <div>
+                      <app-ckeditor
+                        #blogcontent2
+                        id="blogcontent2"
+                        elementId="blogcontent2"
+                        formControlName="blogcontent2"
+                      ></app-ckeditor>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createCuetBlog()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updateCuetBlog(editCuetBlogId)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editCuetBlog($event)"
+        (Remove)="deleteCuetBlog($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

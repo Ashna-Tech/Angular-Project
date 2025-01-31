@@ -1,0 +1,1190 @@
+<p>coupon-affiliate-detail works!</p>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Plans</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Plans</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="PlansForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="examTypeid" class="col-sm-2 col-form-label">
+                    Exam Type
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      id="examTypeid"
+                      class="form-control"
+                      formControlName="examTypeid"
+                      (change)="onSelectExamtype()"
+                    >
+                      <option value="">Select Exam Type</option>
+
+                      @for (exam of examTypeidListDropdown$ | async ; track
+                      $index) {
+                      <option [value]="exam.id">{{ exam.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="examTypeIds" class="col-sm-2 col-form-label">
+                    Exam Type Ids
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="examTypeIds"
+                      id="examTypeIds"
+                      class="form-control"
+                      formControlName="examTypeIds"
+                      (change)="onSelectExamTypeIds()"
+                    >
+                      <option value="">Select Exam Type IDs </option>
+                      <option value="66b1c66dc84a8c0283e14281">Demo exam type</option>
+                      <option value="66b1c66dc84a8c0283e14281">Demo exam type data </option>
+                      
+                      @for (examtype of ExamtypeIdsListDropDown$ | async ; track
+                      $index) {
+                      <option [value]="examtype.id">{{ examtype.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="examCatid" class="col-sm-2 col-form-label">
+                    Exam Category
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="examCatid"
+                      id="examCatid"
+                      class="form-control"
+                      formControlName="examCatid"
+                      (change)="onSelecteExamCategory()"
+                    >
+                      <option value="">Select Exam Category </option>
+
+
+                      @for (examCat of ExamCategoryListDropdown$ | async ; track
+                      $index) {
+                      <option [value]="examCat.id">{{ examCat.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="withPlanId" class="col-sm-2 col-form-label">
+                    With Plan
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="withPlanId"
+                      id="withPlanId"
+                      class="form-control"
+                      formControlName="withPlanId"
+                  
+                    >
+                      <option value="">Select With Plan</option>
+                      <option value="66b1c66dc84a8c0283e14281">demo data </option>
+                      <option value="66b1c66dc84a8c0283e14282">demo data with plan</option>
+                      @for (withplan of withPlanListDropdown$ | async ; track
+                      $index) {
+                      <option [value]="withplan.id">{{ withplan.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="planPrice" class="col-sm-2 col-form-label">
+                    Plan Price
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="planPrice"
+                      type="number"
+                      class="form-control"
+                      formControlName="planPrice"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="pricePerMonth" class="col-sm-2 col-form-label">
+                    Price per Month
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="pricePerMonth"
+                      type="number"
+                      class="form-control"
+                      formControlName="pricePerMonth"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="tax" class="col-sm-2 col-form-label"> Tax </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="tax"
+                      type="number"
+                      class="form-control"
+                      formControlName="tax"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="AppOrderNo" class="col-sm-2 col-form-label">
+                    App Order Number
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="AppOrderNo"
+                      type="number"
+                      class="form-control"
+                      formControlName="AppOrderNo"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="porderNo" class="col-sm-2 col-form-label">
+                    Plan Order Number
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="porderNo"
+                      type="number"
+                      class="form-control"
+                      formControlName="porderNo"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="name" class="col-sm-2 col-form-label">
+                    Name
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="name"
+                      type="text"
+                      class="form-control"
+                      placeholder=" Enter Name..."
+                      formControlName="name"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="planNameAdmin" class="col-sm-2 col-form-label">
+                    Plan Name Admin
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="planNameAdmin"
+                      type="text"
+                      class="form-control"
+                      placeholder="Plan Name Admin"
+                      formControlName="planNameAdmin"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="addPlanName" class="col-sm-2 col-form-label">
+                    Add Plan Name
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="addPlanName"
+                      type="text"
+                      class="form-control"
+                      placeholder="Add Plan Name..."
+                      formControlName="addPlanName"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="planType" class="col-sm-2 col-form-label">
+                    Plan Type
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="planType"
+                      type="text"
+                      class="form-control"
+                      placeholder="Plan Type..."
+                      formControlName="planType"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="noOfTest" class="col-sm-2 col-form-label">
+                    Number of Test
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="noOfTest"
+                      type="text"
+                      class="form-control"
+                      placeholder=" No of Test..."
+                      formControlName="noOfTest"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="durationMonth" class="col-sm-2 col-form-label">
+                    Duration Month
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="durationMonth"
+                      type="text"
+                      class="form-control"
+                      placeholder="Duration Month..."
+                      formControlName="durationMonth"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="savePercent" class="col-sm-2 col-form-label">
+                    Save Percent
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="savePercent"
+                      type="text"
+                      class="form-control"
+                      placeholder="Save percent..."
+                      formControlName="savePercent"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="H_examType" class="col-sm-2 col-form-label">
+                    H_ Exam Type
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="H_examType"
+                      type="text"
+                      class="form-control"
+                      placeholder="Exam Type..."
+                      formControlName="H_examType"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="Ibl-noOfTest" class="col-sm-2 col-form-label">
+                    Label Number of Test
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="Ibl-noOfTest"
+                      type="text"
+                      class="form-control"
+                      placeholder="Number of Test..."
+                      formControlName="IblNoOfTest"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="Ibl-strkPrice" class="col-sm-2 col-form-label">
+                    Label Strk Price
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="Ibl-strkPrice"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Strk Price..."
+                      formControlName="IblstrkPrice"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="Ibl-avail" class="col-sm-2 col-form-label">
+                    Ibl Available
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="Ibl-avail"
+                      type="text"
+                      class="form-control"
+                      placeholder="Ibl Available..."
+                      formControlName="IblAvail"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="packagetype" class="col-sm-2 col-form-label">
+                    Package Type
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="packagetype"
+                      type="text"
+                      class="form-control"
+                      placeholder="Package Type..."
+                      formControlName="packagetype"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="tagLabel" class="col-sm-2 col-form-label">
+                    Tag Label
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="tagLabel"
+                      type="text"
+                      class="form-control"
+                      placeholder="Tag Label..."
+                      formControlName="tagLabel"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="discountable" class="col-sm-2 col-form-label">
+                    Discountable
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="discountable"
+                      type="text"
+                      class="form-control"
+                      placeholder="Discountable..."
+                      formControlName="discountable"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label
+                    for="durationPlanLabel"
+                    class="col-sm-2 col-form-label"
+                  >
+                    Duration Plan Label
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="durationPlanLabel"
+                      type="text"
+                      class="form-control"
+                      placeholder="Duration Plan Label..."
+                      formControlName="durationPlanLabel"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="planExtraInfo" class="col-sm-2 col-form-label">
+                    Plan Extra Information
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="planExtraInfo"
+                      type="text"
+                      class="form-control"
+                      placeholder="Plan Extra Information..."
+                      formControlName="planExtraInfo"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="planInfoUrl" class="col-sm-2 col-form-label">
+                    Plan Information URL
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="planInfoUrl"
+                      type="text"
+                      class="form-control"
+                      placeholder="Plan Information URL..."
+                      formControlName="planInfoUrl"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="facultyHeading" class="col-sm-2 col-form-label">
+                    Faculty Heading
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="facultyHeading"
+                      type="text"
+                      class="form-control"
+                      placeholder="Faculty Heading..."
+                      formControlName="facultyHeading"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="scheduleHeading" class="col-sm-2 col-form-label">
+                    Schedule Heading
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="scheduleHeading"
+                      type="text"
+                      class="form-control"
+                      placeholder="Schedule Heading..."
+                      formControlName="scheduleHeading"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="validityPlanTag" class="col-sm-2 col-form-label">
+                    Validity Plan Tag
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="validityPlanTag"
+                      type="text"
+                      class="form-control"
+                      placeholder="Validity Plan Tag..."
+                      formControlName="validityPlanTag"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="isShowListRadio1" class="col-sm-2 col-form-label">
+                    Is Show In List Format
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="isShowListRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isShowinListFormat"
+                      />
+                      <label for="isShowListRadio1" class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="isShowListRadio2"
+                        formControlName="isShowinListFormat"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="isShowListRadio2" class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label
+                    for="isSectionalPlanRadio1"
+                    class="col-sm-2 col-form-label"
+                  >
+                    Is Sectional Plan
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="isSectionalPlanRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isSectionalPlan"
+                      />
+                      <label
+                        for="isSectionalPlanRadio1"
+                        class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="isSectionalPlanRadio2"
+                        formControlName="isSectionalPlan"
+                        checked=""
+                        value="No"
+                      />
+                      <label
+                        for="isSectionalPlanRadio2"
+                        class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="isPlanURLRadio1" class="col-sm-2 col-form-label">
+                    Is Plan URL
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="isPlanURLRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isPlanURL"
+                      />
+                      <label for="isPlanURLRadio1" class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="isPlanURLRadio2"
+                        formControlName="isPlanURL"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="isPlanURLRadio2" class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label
+                    for="CuetReattempyAllowRadio1"
+                    class="col-sm-2 col-form-label"
+                  >
+                    Is Cuet Reattempt Allow
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="CuetReattempyAllowRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isCuetReattempyAllow"
+                      />
+                      <label
+                        for="CuetReattempyAllowRadio1"
+                        class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="CuetReattempyAllowRadio2"
+                        formControlName="isCuetReattempyAllow"
+                        checked=""
+                        value="No"
+                      />
+                      <label
+                        for="CuetReattempyAllowRadio2"
+                        class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label
+                    for="CuetdoubtsDiscAllowRadio1"
+                    class="col-sm-2 col-form-label"
+                  >
+                    Is Cuet Doubts Discussion Allow
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="CuetdoubtsDiscAllowRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isCuetDoubtsDiscussionAllow"
+                      />
+                      <label
+                        for="CuetdoubtsDiscAllowRadio1"
+                        class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="CuetdoubtsDiscAllowRadio2"
+                        formControlName="isCuetDoubtsDiscussionAllow"
+                        checked=""
+                        value="No"
+                      />
+                      <label
+                        for="CuetdoubtsDiscAllowRadio2"
+                        class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="CuetPlanRadio1" class="col-sm-2 col-form-label">
+                    Is Cuet Plan
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="isCuetPlanRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isCuetPlan"
+                      />
+                      <label for="isCuetPlanRadio1" class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="isCuetPlanRadio2"
+                        formControlName="isCuetPlan"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="isCuetPlanRadio2" class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label
+                    for="CuetBasePlanRadio1"
+                    class="col-sm-2 col-form-label"
+                  >
+                    Is Cuet Base Plan
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="CuetBasePlanRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isCuetBasePlan"
+                      />
+                      <label
+                        for="CuetBasePlanRadio1"
+                        class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="CuetBasePlanRadio2"
+                        formControlName="isCuetBasePlan"
+                        checked=""
+                        value="No"
+                      />
+                      <label
+                        for="CuetBasePlanRadio2"
+                        class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="topicPlanRadio1" class="col-sm-2 col-form-label">
+                    Is Topic Plan
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="topicPlanRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isTopicPlan"
+                      />
+                      <label for="topicPlanRadio1" class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="topicPlanRadio2"
+                        formControlName="isTopicPlan"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="topicPlanRadio2" class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="activePlanRadio1" class="col-sm-2 col-form-label">
+                    Is Active Plan
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="activePlanRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isActivePlan"
+                      />
+                      <label for="activePlanRadio1" class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="activePlanRadio2"
+                        formControlName="isActivePlan"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="activePlanRadio2" class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label
+                    for="activePlanAppRadio1"
+                    class="col-sm-2 col-form-label"
+                  >
+                    Is Active Plan App
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="activePlanAppRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isActivePlanApp"
+                      />
+                      <label
+                        for="activePlanAppRadio1"
+                        class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="activePlanAppRadio2"
+                        formControlName="isActivePlanApp"
+                        checked=""
+                        value="No"
+                      />
+                      <label
+                        for="activePlanAppRadio2"
+                        class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label
+                    for="ShowinAdminRadio1"
+                    class="col-sm-2 col-form-label"
+                  >
+                    Is Show in Admin
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="ShowinAdminRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isShowInAdmin"
+                      />
+                      <label
+                        for="ShowinAdminRadio1"
+                        class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="ShowinAdminRadio2"
+                        formControlName="isShowInAdmin"
+                        checked=""
+                        value="No"
+                      />
+                      <label
+                        for="ShowinAdminRadio2"
+                        class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label
+                    for="ApplycouponRadio1"
+                    class="col-sm-2 col-form-label"
+                  >
+                    Is Apply Coupon
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="ApplycouponRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isApplyCoupon"
+                      />
+                      <label
+                        for="ApplycouponRadio1"
+                        class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="ApplycouponRadio2"
+                        formControlName="isApplyCoupon"
+                        checked=""
+                        value="No"
+                      />
+                      <label
+                        for="ApplycouponRadio2"
+                        class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="pdfAvailRadio1" class="col-sm-2 col-form-label">
+                    Is PDF Available
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="pdfAvailRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="ispdfAvail"
+                      />
+                      <label for="pdfAvailRadio1" class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="pdfAvailRadio2"
+                        formControlName="ispdfAvail"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="pdfAvailRadio2" class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="offerApplyRadio1" class="col-sm-2 col-form-label">
+                    Is Offer Apply
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="offerApplyRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="IsOfferApply"
+                      />
+                      <label for="offerApplyRadio1" class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="offerApplyRadio2"
+                        formControlName="IsOfferApply"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="offerApplyRadio2" class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label
+                    for="CanAddExtraPlanRadio1"
+                    class="col-sm-2 col-form-label"
+                  >
+                    Can Add Extra Plan
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="CanAddExtraPlanRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="CanAddExtraPlan"
+                      />
+                      <label
+                        for="CanAddExtraPlanRadio1"
+                        class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="CanAddExtraPlanRadio2"
+                        formControlName="CanAddExtraPlan"
+                        checked=""
+                        value="No"
+                      />
+                      <label
+                        for="CanAddExtraPlanRadio2"
+                        class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="trendingRadio1" class="col-sm-2 col-form-label">
+                    Is Trending
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="trendingRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isTrending"
+                      />
+                      <label for="trendingRadio1" class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="trendingRadio2"
+                        formControlName="isTrending"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="trendingRadio2" class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label
+                    for="validityAddedRadio1"
+                    class="col-sm-2 col-form-label"
+                  >
+                    Is Validity Added
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="validityAddedRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isValidityAdded"
+                      />
+                      <label
+                        for="validityAddedRadio1"
+                        class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="validityAddedRadio2"
+                        formControlName="isValidityAdded"
+                        checked=""
+                        value="No"
+                      />
+                      <label
+                        for="validityAddedRadio2"
+                        class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createPlans()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updatePlans(editPlansId)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editPlans($event)"
+        (Remove)="deletePlans($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

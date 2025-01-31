@@ -1,0 +1,146 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Blog Detail</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Blog Detail</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="blogDtlForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="blogId" class="col-sm-2 col-form-label">
+                    Blog
+                  </label>
+
+                  <div class="col-sm-10">
+                    <select
+                      name="blog"
+                      id="blog"
+                      class="form-control"
+                      formControlName="blogId"
+                    >
+                      <option value="">Select Blog</option>
+                      <option value="669f9bf1e8533535a9ebadb2">
+                        669f9bf1e8533535a9ebadb2
+                      </option>
+                      @for (blog of blogListDropDown$ | async ; track $index) {
+                      <option [value]="blog.id">{{ blog.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="pdfName" class="col-sm-2 col-form-label"
+                    >PDF Name</label
+                  >
+                  <div class="col-sm-10">
+                    <div class="custom-file">
+                      <input
+                        id="pdfName"
+                        (change)="onPdfNameFileUpload($event)"
+                        type="file"
+                        class="custom-file-input"
+                        placeholder="PDF Name..."
+                        formControlName="pdfName"
+                        accept="application/pdf"
+                      />
+                      <label class="custom-file-label" for="pdfName">
+                        Choose File</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="pdfTitle" class="col-sm-2 col-form-label"
+                    >PDF Title
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="pdfTitle"
+                      type="text"
+                      class="form-control"
+                      placeholder="PDF Title ....."
+                      formControlName="pdfTitle"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createBlogDtl()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updateBlogDtl(editBlogDtlID)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editBlogDtl($event)"
+        (Remove)="deleteBlogDtl($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

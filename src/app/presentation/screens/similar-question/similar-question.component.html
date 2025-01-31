@@ -1,0 +1,198 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active"> Similar Question </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title"> Similar Question </h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="SimilarQuestionForm">
+              <div class="card-body">
+
+                <div class="form-group row">
+                  <label for="testid" class="col-sm-2 col-form-label"> Test </label>
+                  <div class="col-sm-10">
+                    <select name="testid" id="testid" class="form-control" formControlName="testid">
+                      <option value=""> Select Test </option>
+                      <option value="76b1c66dc84a8c0283e14281"> Test Demo </option>
+                      @for (test of TestListDropdown$ | async ; track $index) {
+                      <option [value]="test.id">{{test.name}}</option>
+                      }
+                    </select>
+
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="similarid" class="col-sm-2 col-form-label"> Similar </label>
+                  <div class="col-sm-10">
+                    <select name="similarid" id="similarid" class="form-control" formControlName="similarid">
+                      <option value=""> Select Similar </option>
+                      <option value="76b1c66dc84a8c0283e14281"> Test Similar Demo </option>
+                      @for (similar of SimilarListDropdown$ | async ; track $index) {
+                      <option [value]="similar.id">{{similar.name}}</option>
+                      }
+                    </select>
+
+                  </div>
+                </div>
+
+
+
+                <div class="form-group row">
+                  <label for="flag" class="col-sm-2 col-form-label">
+                    Flag
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="flag" type="text" class="form-control" placeholder="Write Question..."
+                      formControlName="flag" />
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="question" class="col-sm-2 col-form-label">
+                    Question
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="question" type="text" class="form-control" placeholder="Write Question..."
+                      formControlName="question" />
+                  </div>
+                </div>
+
+
+
+                <div class="row">
+                  <div class="col-sm-6 form-group">
+                    <label for="optionA" class="col-form-label"> Option A </label>
+
+                    <div>
+                      <app-ckeditor #optionA id="optionA" elementId="optionA" formControlName="optionA">
+                      </app-ckeditor>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6 form-group">
+                    <label for="optionB" class="col-sm-2 col-form-label">Option B </label>
+                    <div>
+                      <app-ckeditor #optionB id="optionB" elementId="optionB" formControlName="optionB"></app-ckeditor>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 form-group">
+                    <label for="optionC" class="col-form-label"> Option C </label>
+
+                    <div>
+                      <app-ckeditor #optionC id="optionC" elementId="optionC" formControlName="optionC">
+                      </app-ckeditor>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6 form-group">
+                    <label for="optionD" class="col-sm-2 col-form-label">Option D </label>
+                    <div>
+                      <app-ckeditor #optionD id="optionD" elementId="optionD" formControlName="optionD"></app-ckeditor>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 form-group">
+                    <label for="optionE" class="col-form-label"> Option E </label>
+
+                    <div>
+                      <app-ckeditor #optionE id="optionE" elementId="optionE" formControlName="optionE">
+                      </app-ckeditor>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6 form-group">
+                    <label for="optionF" class="col-sm-2 col-form-label">Option F </label>
+                    <div>
+                      <app-ckeditor #optionF id="optionF" elementId="optionF" formControlName="optionF"></app-ckeditor>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 form-group">
+                    <label for="explanation" class="col-form-label"> Explanation </label>
+
+                    <div>
+                      <app-ckeditor #explanation id="explanation" elementId="explanation" formControlName="explanation">
+                      </app-ckeditor>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6 form-group">
+                    <label for="correct" class="col-sm-2 col-form-label"> Correct </label>
+                    <div>
+                      <app-ckeditor #correct id="correct" elementId="correct" formControlName="correct"></app-ckeditor>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button type="submit" class="btn btn-primary" (click)="createSimilarQuestion()">
+                  Submit
+                </button>
+                }@else{
+                <button type="submit" class="btn btn-primary" (click)="updateSimilarQuestion(editSimilarQuestionId)">
+                  Update
+                </button>
+                }
+
+                <button type="submit" class="btn btn-default float-right" (click)="clearForm()">
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table (Edit)="editSimilarQuestion($event)" (Remove)="deleteSimilarQuestion($event)" [dataObs]="dataObs"
+        [tableCols]="tableCols" #dttable></app-data-table>
+    </div>
+  </section>
+</div>

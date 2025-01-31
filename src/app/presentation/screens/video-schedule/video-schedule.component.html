@@ -1,0 +1,267 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Video Schedule</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Video Schedule</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="VideoScheduleForm">
+
+              <div class="card-body" style="min-height: 90vh;">
+
+                <div class="form-group row">
+                  <label for="categoryid" class="col-sm-2 col-form-label">
+                    Category
+                  </label>
+                  <div class="col-sm-10">
+                    <select (change)="onSelectCategory()" name="categoryid" id="categoryid" type="text"
+                      class="form-control" formControlName="categoryid">
+                      <option value="" disabled>Select Category</option>
+
+                      @for (category of CategoryListDropdown$ | async ; track
+                      $index) {
+                      <option [value]="category.id">{{ category.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="subcategoryid" class="col-sm-2 col-form-label">
+                    Subcategory
+                  </label>
+                  <div class="col-sm-10">
+                    <select (change)="onSelectSubCategory()" name="subcategoryid" id="subcategoryid" type="text"
+                      class="form-control" formControlName="subcategoryid">
+                      <option value="" disabled>Select Subcategory</option>
+                      @for (subcat of SubcategoryListDropdown$ | async ; track
+                      $index) {
+                      <option [value]="subcat.id">{{ subcat.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="chapterid" class="col-sm-2 col-form-label">
+                    Chapter
+                  </label>
+                  <div class="col-sm-10">
+                    <select (change)="onSelectChapter()" name="chapterid" id="chapterid" type="text"
+                      class="form-control" formControlName="chapterid">
+                      <option value="" disabled>Select Chapter</option>
+                      @for (chapter of ChapterListDropdown$ | async ; track
+                      $index) {
+                      <option [value]="chapter.id">{{ chapter.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="videotype" class="col-sm-2 col-form-label">
+                    Class via
+                  </label>
+                  <div class="col-sm-10">
+                    <select name="videotype" id="videotype" type="text" class="form-control"
+                      formControlName="videotype">
+                      <option [value]="''" disabled>Select Video Type </option>
+                      <option [value]="'zoom'"> Zoom</option>
+                      <option [value]="'youtube'"> Youtube</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="videoid" class="col-sm-2 col-form-label">
+                    Video Id
+                  </label>
+                  <div class="col-sm-10">
+                    <select name="videoid" id="videoid" type="text" class="form-control" formControlName="videoid">
+                      <option value="" disabled>Select Video </option>
+                      @for (video of VideoListDropdown$ | async ; track
+                      $index) {
+                      <option [value]="video.id">{{video.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="scheduletime" class="col-sm-2 col-form-label">Schedule Time
+                  </label>
+                  <div class="col-sm-2">
+                    <!-- date time is not update -->
+                    <input id="scheduletime" type="datetime-local" class="form-control" placeholder=" Schedule Time..."
+                      formControlName="scheduletime" />
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="title" class="col-sm-2 col-form-label"> Video Title
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="title" type="text" class="form-control" placeholder="Title..." formControlName="title" />
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="videoDuration" class="col-sm-2 col-form-label"> Video Duration (Seconds)
+                  </label>
+                  <div class="col-sm-2">
+                    <input type="number" id="videoDuration" min="0" class="form-control"
+                      placeholder="Duration (Seconds)..." formControlName="videoDuration" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="description" class="col-sm-2 col-form-label"> Video Description
+                  </label>
+                  <div class="col-sm-10">
+                    <textarea id="description" type="text" class="form-control" placeholder="Description..."
+                      formControlName="description"></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="isActive" class="col-sm-2 col-form-label">
+                    Status ?
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input type="radio" id="isActiveRadio1" value="Yes" class="custom-control-input"
+                        formControlName="isActive" />
+                      <label for="isActiveRadio1" class="custom-control-label">Active
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="isActiveRadio2" formControlName="isActive"
+                        checked="" value="No" />
+                      <label for="isActiveRadio2" class="custom-control-label">InActive</label>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="isfreeclass" class="col-sm-2 col-form-label">
+                    Free Class ?
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input type="radio" id="freeclassRadio1" value="Yes" class="custom-control-input"
+                        formControlName="isfreeclass" />
+                      <label for="freeclassRadio1" class="custom-control-label">Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="freeclassRadio2"
+                        formControlName="isfreeclass" checked="" value="No" />
+                      <label for="freeclassRadio2" class="custom-control-label">No</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="isdemoclass" class="col-sm-2 col-form-label">
+                    Demo Class ?
+                  </label>
+
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input type="radio" id="democlassRadio1" value="Yes" class="custom-control-input"
+                        formControlName="isdemoclass" />
+                      <label for="democlassRadio1" class="custom-control-label">Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="democlassRadio2"
+                        formControlName="isdemoclass" checked="" value="No" />
+                      <label for="democlassRadio2" class="custom-control-label">No</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="thumbfile" class="col-sm-2 col-form-label">
+                    Thumb File ?
+                  </label>
+                  <div class="col-sm-3">
+                    <label class="custom-file-label large-input" for="thumbfile">
+                      Choose File
+                    </label>
+
+                    <div class="custom-file">
+                      <input id="thumbfile" (change)="onThumbFileUpload($event)" type="file" class="custom-file-input"
+                        formControlName="thumbfile" accept="image/*" />
+                    </div>
+
+                    <img *ngIf="previewThumbfile" [src]="previewThumbfile" class="img-thumbnail mt-2" alt="Preview" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button type="submit" class="btn btn-primary" (click)="createVideoSchedule()">
+                  Submit
+                </button>
+                }@else{
+                <button type="submit" class="btn btn-primary" (click)="updateVideoSchedule(editVideoScheduleId)">
+                  Update
+                </button>
+                }
+
+                <button type="submit" class="btn btn-default float-right" (click)="clearForm()">
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom:15px;">
+    <div class="container-fluid">
+      <app-data-table (Edit)="editVideoSchedule($event)" (Remove)="deleteVideoSchedule($event)" [dataObs]="dataObs"
+        [tableCols]="tableCols" #dttable></app-data-table>
+    </div>
+  </section>
+</div>

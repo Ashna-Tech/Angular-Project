@@ -1,0 +1,222 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a routerLink="/dashboard">Dashboard</a>
+              </li>
+              <li class="breadcrumb-item active">Test Paper Files </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Test Paper Files </h3>
+              </div>
+              <!-- /.card-header -->
+  
+              <!-- form start -->
+  
+              <form [formGroup]="TestPaperFilesForm">
+                <div class="card-body">
+                 
+                  <div class="form-group row">
+                    <label for="categoryid" class="col-sm-2 col-form-label">
+                      Category  
+                    </label>
+                    <div class="col-sm-10">
+                      <select
+                        name="categoryid"
+                        id="categoryid"
+                        type="text"
+                        class="form-control"
+                        formControlName="categoryid"
+                        
+                      >
+                        <option value="">Select Category </option>
+                        @for (category of CategoryListDropdown$ | async ; track
+                        $index) {
+                        <option [value]="category.id">{{ category.name }}</option>
+                        }
+                      </select>
+                    </div>
+                  </div>  
+                 
+                  <div class="form-group row">
+                    <label for="subCategoryid" class="col-sm-2 col-form-label">
+                       Sub Category  
+                    </label>
+                    <div class="col-sm-10">
+                      <select
+                        name="subCategoryid"
+                        id="subCategoryid"
+                        type="text"
+                        class="form-control"
+                        formControlName="subCategoryid"
+                        
+                      >
+                        <option value="">Select Subcategory </option>
+                        @for (subcat of SubcategoryListDropdown$ | async ; track
+                        $index) {
+                        <option [value]="subcat.id">{{ subcat.name }}</option>
+                        }
+                      </select>
+                    </div>
+                  </div>  
+
+                  
+                  <div class="form-group row">
+                    <label for="testfile" class="col-sm-2 col-form-label"
+                      >Test File 
+                    </label>
+                    <div class="col-sm-10">
+                      <div class="custom-file">
+                        <input
+                          id="pdf"
+                          (change)="onTestFileUpload($event)"
+                          type="file"
+                          class="custom-file-input"
+                          placeholder="Test File..."
+                          formControlName="testfile"
+                          accept="application/pdf"
+                          required
+                        />
+                        <label class="custom-file-label" for="testfile">
+                          Choose File
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group row">
+                    <label for="name" class="col-sm-2 col-form-label">
+                      Name
+                    </label>
+                    <div class="col-sm-10">
+                      <input
+                        id="name"
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Name..."
+                        formControlName="name"
+                      />
+                    </div>
+                  </div>
+
+  
+                  <div class="form-group row">
+                    <label for="flag" class="col-sm-2 col-form-label">
+                      Flag
+                    </label>
+                    <div class="col-sm-10">
+                      <input
+                        id="flag"
+                        type="text"
+                        class="form-control"
+                        placeholder="Flag..."
+                        formControlName="flag"
+                      />
+                    </div>
+                  </div>
+  
+  
+                  <div class="form-group row">
+                    <label for="typename" class="col-sm-2 col-form-label">
+                      Type Name
+                    </label>
+                    <div class="col-sm-10">
+                      <input
+                        id="typename"
+                        type="text"
+                        class="form-control"
+                        placeholder="Type Name..."
+                        formControlName="typename"
+                      />
+                    </div>
+                  </div>
+  
+                  
+                  <div class="form-group row">
+                    <label for="answerSheet" class="col-sm-2 col-form-label">
+                      Answer Sheet
+                    </label>
+                    <div class="col-sm-10">
+                      <input
+                        id="answerSheet"
+                        type="text"
+                        class="form-control"
+                        placeholder="Answer..."
+                        formControlName="answerSheet"
+                      />
+                    </div>
+                  </div>
+  
+
+
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  @if (!isUpdateMode) {
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    (click)="createTestPaperFiles()"
+                  >
+                    Submit
+                  </button>
+                  }@else{
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    (click)="updateTestPaperFiles(editTestPaperFilesId)"
+                  >
+                    Update
+                  </button>
+                  }
+  
+                  <button
+                    type="submit"
+                    class="btn btn-default float-right"
+                    (click)="clearForm()"
+                  >
+                    Clear Form
+                  </button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  
+    <section class="content" style="padding-bottom: 15px">
+      <div class="container-fluid">
+        <app-data-table
+          (Edit)="editTestPaperFiles($event)"
+          (Remove)="deleteTestPaperFiles($event)"
+          [dataObs]="dataObs"
+          [tableCols]="tableCols"
+          #dttable
+        ></app-data-table>
+      </div>
+    </section>
+  </div>
+  

@@ -1,0 +1,212 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Youtube Feed</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Youtube Feed</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="youTubeFeedForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="catid" class="col-sm-2 col-form-label">
+                    Category
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="catid"
+                      id="catid"
+                      class="form-control"
+                      formControlName="catid"
+                      (change)="onSelectcatId()"
+                    >
+                      <option value="">Select Category</option>
+                      @for (category of youtubeCategoryDropDown$ | async ; track
+                      $index) {
+                      <option [value]="category.id">{{ category.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="sCatId" class="col-sm-2 col-form-label">
+                    Sub Category
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="subCatId"
+                      id="subCatId"
+                      class="form-control"
+                      formControlName="sCatId"
+                      (change)="onSelectSubcategory()"
+                    >
+                      <option value="">Select sub Category</option>
+                      @for (subcategory of youtubeSubCatDropDown$ | async ;
+                      track $index) {
+                      <option [value]="subcategory.id">
+                        {{ subcategory.name }}
+                      </option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="videoUrl" class="col-sm-2 col-form-label">
+                    video URL
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="videoUrl"
+                      type="text"
+                      class="form-control"
+                      placeholder="Link Video Url..."
+                      formControlName="videoUrl"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="videoTitle" class="col-sm-2 col-form-label">
+                    Video Title
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="videoTitle"
+                      type="text"
+                      class="form-control"
+                      placeholder="Video Title..."
+                      formControlName="videoTitle"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="thumbNail" class="col-sm-2 col-form-label">
+                    Thumbnail
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="thumbNail"
+                      type="text"
+                      class="form-control"
+                      placeholder="Thumbnail Url..."
+                      formControlName="thumbNail"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="homeorderNo" class="col-sm-2 col-form-label">
+                    Home Order Number
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="homeorderNo"
+                      type="text"
+                      class="form-control"
+                      placeholder="Home order No..."
+                      formControlName="homeorderNo"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="isHomeVideo" class="col-sm-2 col-form-label">
+                    Is Home Video</label
+                  >
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="customRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isHomeVideo"
+                      />
+                      <label for="customRadio1" class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="customRadio2"
+                        formControlName="isHomeVideo"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="customRadio2" class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createCategoryYoutubeFeed()"
+                >
+                  Submit
+                </button>
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

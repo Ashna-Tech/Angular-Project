@@ -1,0 +1,181 @@
+<p>coupon-affiliate-detail works!</p>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">App Slider</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">App Slider</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="AppSliderForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="showinPlace" class="col-sm-2 col-form-label">
+                    Show in Place
+                  </label>
+                  <div class="col-sm-10">
+                    <select id="showinPlace" class="form-control" formControlName="showinPlace">
+                      <option value="">Select Showing Place</option>
+                      <option [value]="ShowingPlace.Home">Home</option>
+                      <option [value]="ShowingPlace.Home_Second">
+                        Home Second
+                      </option>
+                      <option [value]="ShowingPlace.Home_Third">
+                        Home Third
+                      </option>
+                      <option [value]="ShowingPlace.Home_Fourth">
+                        Home Fourth
+                      </option>
+                      <option [value]="ShowingPlace.Exam_Category">
+                        Exam Category
+                      </option>
+                      <option [value]="ShowingPlace.App_PopUp">
+                        App PopUp
+                      </option>
+                      <option [value]="ShowingPlace.Common">Common</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="examGroup" class="col-sm-2 col-form-label">
+                    Exam Group
+                  </label>
+                  <div class="col-sm-10">
+                    <select id="examGroup" class="form-control" formControlName="examGroup">
+                      <option value="">Select ExamGroup</option>
+                      <option [value]="examGroup.Bank_And_Insurance">
+                        Bank And Insurance
+                      </option>
+                      <option [value]="examGroup.Law_Exams">Law Exams</option>
+                      <option [value]="examGroup.Other_Exams">
+                        Other Exams
+                      </option>
+                      <option [value]="examGroup.SSC_And_Railways">
+                        SSC And Railways
+                      </option>
+                      <option [value]="examGroup.State_Exams">
+                        State Exams
+                      </option>
+                      <option [value]="examGroup.Teaching_Exams">
+                        Teaching Exams
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="actionType" class="col-sm-2 col-form-label">
+                    Action Type
+                  </label>
+                  <div class="col-sm-10">
+                    <select id="actionType" class="form-control" formControlName="actionType">
+                      <option value="">Select Action Type</option>
+                      <option [value]="actionType.Book_A_Call">
+                        Book a Call
+                      </option>
+                      <option [value]="actionType.BuyPlan">BuyPlan</option>
+                      <option [value]="actionType.Link">Link</option>
+                      <option [value]="actionType.Plan">Plan</option>
+                      <option [value]="actionType.Quiz">Quiz</option>
+                      <option [value]="actionType.Refer">Refer</option>
+                      <option [value]="actionType.Simple">Simple</option>
+                      <option [value]="actionType.TestSeries">
+                        TestSeries
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="image" class="col-sm-2 col-form-label">Image</label>
+                  <div class="col-sm-10">
+                    <div class="custom-file">
+                      <input id="image" (change)="onUploadImg($event)" type="file" class="custom-file-input"
+                        formControlName="image" accept="image/*" />
+                      <label class="custom-file-label" for="profileImage">Choose Image</label>
+                    </div>
+                    @if (previewImage) {
+                    <img [src]="previewImage" width="200" />
+                    }
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="isActive" class="col-sm-2 col-form-label">
+                    Status ?
+                  </label>
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input id="isActiveRadio1" type="radio" value="Yes" class="custom-control-input"
+                        formControlName="isActive" />
+                      <label for="isActiveRadio1" class="custom-control-label">Active
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="isActiveRadio2" formControlName="isActive"
+                        checked="" value="No" />
+                      <label for="isActiveRadio2" class="custom-control-label">Inactive</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button type="submit" class="btn btn-primary" (click)="createAppSlider()">
+                  Submit
+                </button>
+                }@else{
+                <button type="submit" class="btn btn-primary" (click)="updateAppSlider(editAppSliderId)">
+                  Update
+                </button>
+                }
+
+                <button type="submit" class="btn btn-default float-right" (click)="clearForm()">
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table (Edit)="editAppSlider($event)" (Remove)="deleteApp($event)" [dataObs]="dataObs"
+        [tableCols]="tableCols" #dttable></app-data-table>
+    </div>
+  </section>
+</div>

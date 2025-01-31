@@ -1,0 +1,565 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Dashboard Slider</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Slider Image</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="sliderImgForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="showExamCat" class="col-sm-2 col-form-label">
+                    Show Exam Category
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="showexamCat"
+                      id="showexamCat"
+                      class="form-control"
+                      formControlName="showExamCat"
+                      (change)="onSelectShowExamCategory()"
+                    >
+                      <option value="">Select Show Exam Category</option>
+                       <option value="669b655dd95942f610874695"> show exams demo </option>
+                       <option value="669b655dd95942f610874695"> show exam category demo </option>
+                      @for (ShowExam of ShowExamListDropDown$ | async ; track
+                      $index) {
+                      <option [value]="ShowExam.id">{{ ShowExam.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="showMaincat" class="col-sm-2 col-form-label">
+                    Show Main Category
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="ShowmainCat"
+                      id="ShowmainCat"
+                      class="form-control"
+                      formControlName="showMaincat"
+                      (change)="onSelectShowmainCategory()"
+                    >
+                      <option value="">Select Show Main Category</option>
+                      <option value="669b655dd95942f610872975"> Show Main Category </option>
+                      <option value="669b655dd95942f610872975"> show Main demo category </option>
+                      @for (ShowMaincat of showMainCatIdListDropDown$ | async ;
+                      track $index) {
+                      <option [value]="ShowMaincat.id">
+                        {{ ShowMaincat.name }}
+                      </option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="planId" class="col-sm-2 col-form-label">
+                    Plan
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="planId"
+                      id="planId"
+                      class="form-control"
+                      formControlName="planId"
+                      (change)="onSelectPlanId()"
+                    >
+                      <option value="">Select Plan</option>
+                      <option value="669b655dd95942f610872975"> Plans for demo </option>
+                      <option value="669b655dd95942f610872975"> demo Plans  </option>
+                      @for (plan of planIdListDropDown$ | async ; track $index)
+                      {
+                      <option [value]="plan.id">{{ plan.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="buyPlanid" class="col-sm-2 col-form-label">
+                    Buy PlanIds
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="BuyPlan"
+                      id="BuyPlan"
+                      class="form-control"
+                      formControlName="buyPlanid"
+                      (change)="onSelectBuyPlanids()"
+                    >
+                      <option value="">Select Buy Plan</option>
+                      <option value="669b655dd95942f610872975"> But Plans </option>
+                      <option value="669b655dd95942f610872975"> Demo Plans </option>
+                      @for (BuyPlan of buyPlanListDropDown$ | async ; track
+                      $index) {
+                      <option [value]="BuyPlan.id">{{ BuyPlan.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="mainCat" class="col-sm-2 col-form-label">
+                    Main Category
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="mainCat"
+                      id="mainCat"
+                      class="form-control"
+                      formControlName="mainCat"
+                      (change)="onSelectMainCategory()"
+                    >
+                      <option value="">Main Category</option>
+                      <option> 669b655dd95942f610872975</option>
+                      <option> 669b655dd95942f610872788</option>
+                      <option> 669b655dd95942f610872909</option>
+                      <option> 669b655dd95942f610872934</option>
+                      @for (mainCat of mainCategoryListDropDown$ | async ; track
+                      $index) {
+                      <option [value]="mainCat.id">{{ mainCat.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="examCat" class="col-sm-2 col-form-label">
+                    Exam Category
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="examCat"
+                      id="examCat"
+                      class="form-control"
+                      formControlName="examCat"
+                      (change)="onSelectExamCategory()"
+                    >
+                      <option value="">Select Exam Category</option>
+                      <option> 669b655dd95942f610872975</option>
+                      <option> 669b655dd95942f610872788</option>
+                      <option> 669b655dd95942f610872909</option>
+                      <option> 669b655dd95942f610872934</option>
+                      @for (Examcat of examCategoryListDropDown$ | async ; track
+                      $index) {
+                      <option [value]="Examcat">{{ Examcat.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="examId" class="col-sm-2 col-form-label">
+                    Exam
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="examId"
+                      id="examId"
+                      class="form-control"
+                      formControlName="examId"
+                      (change)="onSelectExam()"
+                    >
+                      <option value="">Select Exam</option>
+                      <option> 669b655dd95942f610872975</option>
+                      <option> 669b655dd95942f610872788</option>
+                      <option> 669b655dd95942f610872909</option>
+                      <option> 669b655dd95942f610872934</option>
+                      @for (Exam of examIdListDropDown$ | async ; track $index)
+                      {
+                      <option [value]="Exam.id">{{ Exam.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="testId" class="col-sm-2 col-form-label">
+                    Test
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="testId"
+                      id="testId"
+                      class="form-control"
+                      formControlName="testId"
+                      (change)="onSelectTest()"
+                    >
+                      <option value="">Select Test</option>
+                      <option> 669b655dd95942f610872975</option>
+                      <option> 669b655dd95942f610872788</option>
+                      <option> 669b655dd95942f610872909</option>
+                      <option> 669b655dd95942f610872934</option>
+                      @for (Test of testIdListDropDown$ | async ; track $index)
+                      {
+                      <option value="Test.id">{{ Test.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="quizCatId" class="col-sm-2 col-form-label">
+                    Quiz Category
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="quizcat"
+                      id="quizcat"
+                      class="form-control"
+                      formControlName="quizCatId"
+                      (change)="onSelectQuizCategory()"
+                    >
+                      <option value="">Select Quiz Category</option>
+                      <option> 669b655dd95942f610872975</option>
+                      <option> 669b655dd95942f610872788</option>
+                      <option> 669b655dd95942f610872909</option>
+                      <option> 669b655dd95942f610872934</option>
+                      @for (Quiz of quizCategoryListDropDown$ | async ; track
+                      $index) {
+                      <option {value}="Quiz.id">{{ Quiz.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+<!--  -->
+                <div class="form-group row">
+                    <label for="quizSubCat" class="col-sm-2 col-form-label">
+                        Quiz Subcategory
+                    </label>
+                    <div class="col-sm-10">
+                      <select
+                        name="quizSubCat"
+                        id="quizSubCat"
+                        class="form-control"
+                        formControlName="quizSubCatId"
+                        (change)="onSelectQuizSubCategory()"
+                      >
+                        <option value=""> Select Quiz Sub Category </option>
+                        <option> 669b655dd95942f610872975</option>
+                        <option> 669b655dd95942f610872788</option>
+                        <option> 669b655dd95942f610872909</option>
+                        <option> 669b655dd95942f610872934</option>
+                        @for (QuizSubcat of quizSubCatListDropDown$ | async ; track
+                        $index) {
+                        <option {value}="QuizSubcat.id">{{ QuizSubcat.name }}</option>
+                        }
+                      </select>
+                    </div>
+                  </div>
+<!--  -->
+
+
+
+                <div class="form-group row">
+                  <label for="quizTestId" class="col-sm-2 col-form-label">
+                    Quiz Test
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="quizCat"
+                      id="quizCat"
+                      class="form-control"
+                      formControlName="quizTestId"
+                      (change)="onSelectQuizTest()"
+                    >
+                      <option value="">Select Test</option>
+                      <option> 669b655dd95942f610872975</option>
+                      <option> 669b655dd95942f610872788</option>
+                      <option> 669b655dd95942f610872909</option>
+                      <option> 669b655dd95942f610872934</option>
+                      @for (QuizTest of quizTestListDropDown$ | async ; track
+                      $index) {
+                      <option [value]="QuizTest.id">{{ QuizTest.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="quizChapId" class="col-sm-2 col-form-label">
+                    Quiz chapter
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="quizChp"
+                      id="quizChp"
+                      class="form-control"
+                      formControlName="quizChapId"
+                      (change)="onSelectQuizChapter()"
+                    >
+                      <option value="">Select Quiz Chapter</option>
+                      <option> 669b655dd95942f610872975</option>
+                      <option> 669b655dd95942f610872788</option>
+                      <option> 669b655dd95942f610872909</option>
+                      <option> 669b655dd95942f610872934</option>
+                      @for (QuizChap of quizChapterListDropDown$ | async ; track
+                      $index) {
+                      <option [value]="QuizChap.id">{{ QuizChap.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="groupId" class="col-sm-2 col-form-label">
+                    Group
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="groupId"
+                      id="groupId"
+                      class="form-control"
+                      formControlName="groupId"
+                      (change)="onSelectGroup()"
+
+                    >
+                    <option value="">Select Group </option>
+                      <option> 669b655dd95942f610872975</option>
+                      <option> 669b655dd95942f610872788</option>
+                      <option> 669b655dd95942f610872909</option>
+                      <option> 669b655dd95942f610872934</option>
+                    
+                    @for ( Group of groupListDropDown$ | async ; track $index) {
+                    <option [value]="Group.id">{{ Group.name }}</option>
+                    }
+                </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="image" class="col-sm-2 col-form-label">
+                      Image
+                    </label>
+                    <div class="col-sm-10">
+                      <div class="custom-file">
+                      <input
+                        id="image"
+                        (change)="onShowImage($event)"
+                        formControlName="image"
+                        type="file"
+                        class="custom-file-input"
+                        accept="image/*"
+                      />
+                      <label class="custom-file-label" for="image"> Choose File </label>
+                  </div>
+                  @if(previewImage){
+                      <img [src]="previewImage" width ="200">
+                  }
+                    </div>
+                  </div>
+
+                <div class="form-group row">
+                  <label for="quizImgIcon" class="col-sm-2 col-form-label">
+                    Quiz Image Icon
+                  </label>
+                  <div class="col-sm-10">
+                    <div class="custom-file">
+                      <input
+                        id="quizImgIcon"
+                        (change)="onShowQuizImgIcon($event)"
+                        formControlName="quizImgIcon"
+                        type="file"
+                        class="custom-file-input"
+                        accept="image/*"
+                      />
+                      <label class="custom-file-label" for="quizImgIcon">
+                        Choose File
+                      </label>
+                    </div>
+                    @if (previewQuizImageIcon) {
+                    <img [src]="previewQuizImageIcon" width="200" />
+                    }
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label
+                    for="quizIconBackcolor"
+                    class="col-sm-2 col-form-label"
+                  >
+                    Quiz Icon Back Color
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="quizIconBackcolor"
+                      type="color"
+                      class="form-control"
+                      placeholder="Quiz Icon Back Color"
+                      formControlName="quizIconBackcolor"
+                    />
+                  </div>
+                </div>
+
+
+
+                <div class="form-group row">
+                  <label for="showplace" class="col-sm-2 col-form-label">
+                    Show Place
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="showplace"
+                      type="text"
+                      class="form-control"
+                      placeholder="Show Place"
+                      formControlName="showplace"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="linkurl" class="col-sm-2 col-form-label">
+                    Link URL
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="linkurl"
+                      type="text"
+                      class="form-control"
+                      placeholder="Link url"
+                      formControlName="linkurl"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="actiontype" class="col-sm-2 col-form-label">
+                    Action Type
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="actiontype"
+                      type="text"
+                      class="form-control"
+                      placeholder="Action Type "
+                      formControlName="actiontype"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="plantype" class="col-sm-2 col-form-label">
+                    Plan Type
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="plantype"
+                      type="text"
+                      class="form-control"
+                      placeholder="Plan Type "
+                      formControlName="plantype"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="quizCatName" class="col-sm-2 col-form-label">
+                    Quiz Category Name
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="quizCatName"
+                      type="text"
+                      class="form-control"
+                      placeholder="Quiz Category Name"
+                      formControlName="quizCatName"
+                    />
+                  </div>
+                </div>
+
+                
+                <div class="form-group row">
+                  <label for="quizChapter" class="col-sm-2 col-form-label">
+                    Quiz Chapter
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="quizChapter"
+                      type="text"
+                      class="form-control"
+                      placeholder="Quiz Chapter"
+                      formControlName="quizChapter"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createSlidImg()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updateSlideImg(editSlidImgId)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editSlidImg($event)"
+        (Remove)="deleteSlidImg($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

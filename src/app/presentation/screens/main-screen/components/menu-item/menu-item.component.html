@@ -1,0 +1,33 @@
+@if (menuItem(); as menuItem) {
+    @if (menuItem.children && menuItem.children.length > 0) {
+        <a
+            (click)="handleMainMenuAction()"
+            class="nav-link"
+        >
+            <i class="nav-icon {{ menuItem.icon }}"></i>
+            <p>{{ menuItem.label }}
+                <i
+                    class="right fas fa-angle-right"
+                    [@rotate]="isMainActive()"
+                ></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview" *ngFor="let item of menuItem.children" [@openClose]="isMainActive()">
+            <li class="nav-item">
+                <a
+                    [routerLink]="item.route"
+                    routerLinkActive="active"
+                    class="nav-link"
+                >
+                    <i class="nav-icon {{ item.icon }}"></i>
+                    <p>{{ item.label }}</p>
+                </a>
+            </li>
+        </ul>
+    }@else {
+        <a [routerLink]="menuItem.route" class="nav-link" routerLinkActive="active">
+            <i class="fa-regular fa-circle"></i>&nbsp;
+            <p>Blog (TestZone)</p>
+        </a>
+    }
+}

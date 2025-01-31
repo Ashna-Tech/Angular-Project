@@ -1,0 +1,54 @@
+
+main{
+    width: 100%;
+    min-height: calc(100vh - 58px);
+    max-height: calc(100vh - 58px);
+    overflow-y: auto;
+}
+
+.sidebar{
+  position: fixed; /* Fix the sidebar in place */
+  width: 250px; /* Adjust according to your sidebar width */
+}
+
+
+.nav-link{
+    cursor: pointer;
+}
+
+ul{
+    ul{
+        
+        margin-left: 2px;
+    }
+}
+
+
+.submenu {
+    padding-left: 20px; /* Indent the submenu items */
+  }
+  
+  .submenu .nav-item {
+    list-style: none; /* Remove bullet points */
+  }
+  
+  .fa-angle-down, .fa-angle-up {
+    float: right; /* Align the toggle icon to the right */
+  }
+
+  .btn-sidebar{
+    padding: .27rem .5rem;
+    line-height: 1;
+  }
+
+  .nav{
+    overflow-y: hidden;
+  }
+
+  .nav-sidebar>.nav-item .nav-icon{
+    margin-left: 0 !important;
+  }
+
+  .nav-link{
+    padding-inline: 0.5rem !important;
+  }

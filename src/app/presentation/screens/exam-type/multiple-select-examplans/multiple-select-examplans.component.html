@@ -1,0 +1,23 @@
+<h3> Multiple Selection </h3>
+
+<p>
+
+<mat-form-field>
+
+<mat-select [formControl]="ExamPlanMultiCtrl" placeholder="Choose Exam Plans" [multiple]="true" #multiSelect>
+<mat-option>
+    <ngx-mat-select-search [formControl]="ExamPlanMultiFilterctrl"></ngx-mat-select-search>
+</mat-option>
+
+<mat-option *ngFor="let examPlans of filteredExamPlanMulti | async" [value]="examPlans">
+{{examPlans.name}}
+</mat-option>
+</mat-select>
+</mat-form-field>    
+</p>
+
+<p> Selected Exam Plans : </p>
+
+<ul *ngFor="let exam of  ExamPlanMultiCtrl?.value">
+    <li>{{exam.name}}</li>
+</ul>

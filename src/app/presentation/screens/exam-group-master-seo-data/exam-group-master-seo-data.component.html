@@ -1,0 +1,164 @@
+<p>coupon-affiliate-detail works!</p>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Exam Group Master Seo Data</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Exam Group Master Seo Data</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="examGroupMasterSeodataForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="seotitle" class="col-sm-2 col-form-label">
+                    Seo Title
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="seotitle"
+                      type="text"
+                      class="form-control"
+                      placeholder="Seotitle..."
+                      formControlName="seotitle"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="seoKeywords" class="col-sm-2 col-form-label">
+                    Seo Keywords
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="seoKeywords"
+                      type="text"
+                      class="form-control"
+                      placeholder="Seo Keywords..."
+                      formControlName="seoKeywords"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="seodescription" class="col-sm-2 col-form-label">
+                    Seo Description
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="seodescription"
+                      type="text"
+                      class="form-control"
+                      placeholder="Seo Description..."
+                      formControlName="seodescription"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="jsonschema" class="col-sm-2 col-form-label">
+                    Json Schema
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="jsonschema"
+                      type="text"
+                      class="form-control"
+                      placeholder="Json Schema..."
+                      formControlName="jsonschema"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="otherdata" class="col-sm-2 col-form-label">
+                    Other Data
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="otherdata"
+                      type="text"
+                      class="form-control"
+                      placeholder="Other Data..."
+                      formControlName="otherdata"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createExamGroupMasterSeodata()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="
+                    updateExamGroupMasterSeodata(editExamGroupMasterSeodataId)
+                  "
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editExamGroupMasterSeodata($event)"
+        (Remove)="deleteExamGroupMasterSeodata($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

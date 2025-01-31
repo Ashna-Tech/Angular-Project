@@ -1,0 +1,219 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active">Blog Category Master </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Blog Category</h3>
+                </div>
+                <!-- /.card-header -->
+
+                <!-- form start -->
+                <form [formGroup]="blogCategoryForm">
+                  <div class="card-body">
+                    
+                <div class="form-group row">
+                  <label for="groupId" class="col-sm-2 col-form-label"
+                    >  Group
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="groupId"
+                      id="groupId"
+                      class="form-control"
+
+                      formControlName="groupId"
+                    >
+                      <option value="">Select Group </option>
+                      @for (group of GroupListDropdown$ | async ; track
+                      $index) {
+                      <option [value]="group.id">
+                        {{ group.name }}
+                      </option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                      <label for="Name" class="col-sm-2 col-form-label"> Blog Category </label>
+                      <div class="col-sm-10">
+                        <input id="Name" type="text" class="form-control" placeholder="Blog Category"  formControlName="Name">
+                      </div>
+                  </div>
+                  </div>
+
+                  <!-- /.card-body -->
+                  <div class="card-footer">
+
+                    @if (!isUpdateMode) {
+                        <button type ="submit" class="btn btn-primary" (click)="createBlogCategory()">Submit</button>
+                    }@else{
+                        <button type="submit" class="btn btn-primary" (click)="updateBlogCategory(editBlogCategoryId)">Update</button>
+                    }
+
+                    <button type="submit" class="btn btn-default float-right" (click)="clearForm()">Clear Form</button>
+                  </div>
+                </form>
+
+              </div>
+              <!-- /.card -->
+            </div>
+            <!--/.col (right) -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+
+      
+    <section class="content" style="padding-bottom: 15px;">
+        <div class="container-fluid">
+           
+            <app-data-table (Edit)="editBlogCategory($event)" (Remove)="deleteCategory($event)" [dataObs]="dataObs" [tableCols]="tableCols" #dttable></app-data-table>
+        </div>
+    </section>
+  </div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

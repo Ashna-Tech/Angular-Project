@@ -1,0 +1,27 @@
+.tab-header{
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+
+    .tab-head{
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        
+        
+        &.active{
+            color: #007bff;
+        }
+    }
+}
+
+.tab-container{
+    .tab-content{
+        display: none;
+
+        &.active{
+            display: block;
+        }
+    }
+
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1.5rem;
+}

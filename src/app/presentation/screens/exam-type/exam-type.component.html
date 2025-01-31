@@ -1,0 +1,584 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Exam Type</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Exam Type</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="examTypeForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="mainCatId" class="col-sm-4 col-form-label">
+                    Main Category
+                  </label>
+                  <div class="col-sm-8">
+                    <select name="mainCatId" id="mainCatId" class="form-control" formControlName="mainCatId">
+                      <option value="">Select Main Category</option>
+
+                      @for (mainCat of MainCategoryListDropdown$ | async; track $index) {
+                        <option [value]="mainCat.id"> {{ mainCat.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="examCatId" class="col-sm-4 col-form-label">Exam Category</label>
+                  <div class="col-sm-8">
+                    <select name="examCatId" id="examCatId" class="form-control" formControlName="examCatId" (change)="onCategorySelect()">
+                      <option value="">Select Exam Category</option>
+                      @for (exam of examCategoryDropdown$ | async; track $index){
+                        <option [value]="exam.id">{{ exam.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="examOrder" class="col-sm-4 col-form-label">Exam Order No.</label>
+                  <div class="col-sm-8">
+                    <input id="examOrder" type="number" class="form-control" placeholder=" Order No...." formControlName="examOrder" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="mockType" class="col-sm-4 col-form-label">Mock Type</label>
+                  <div class="col-sm-8">
+                    <select name="mockType" id="mockType" type="text" class="form-control"
+                      placeholder=" Select Mock Type..." formControlName="mockType">
+                      <option value="">Select Mock Type</option>
+                      <option [value]="MockType.Free">Free</option>
+                      <option [value]="MockType.Paid">Paid</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="examType" class="col-sm-4 col-form-label">
+                    Exam Name
+                  </label>
+                  <div class="col-sm-8">
+                    <input id="examType" type="text" class="form-control" placeholder="Exam Name"
+                      formControlName="examType" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="displayName" class="col-sm-4 col-form-label">
+                    Exam Display Name
+                  </label>
+                  <div class="col-sm-8">
+                    <input id="displayName" type="text" class="form-control" placeholder="Display Name"
+                      formControlName="displayName" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="examGroup" class="col-sm-4 col-form-label">
+                    Exam Group
+                  </label>
+                  <div class="col-sm-8">
+                    <mat-form-field style="width: 100%">
+                      <mat-label>Select Group</mat-label>
+                      <mat-select id="examGroup" formControlName="examGroup" multiple>
+                        @for (exam of (examGroupList$ | async); track exam.id) {
+                        <mat-option [value]="exam.id">{{exam.name}}</mat-option>
+                        }
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="examplans" class="col-sm-4 col-form-label">
+                    Exam Plans
+                  </label>
+                  <div class="col-sm-8">
+                    <mat-form-field style="width: 100%">
+                      <mat-label>Select Plans</mat-label>
+                      <mat-select color="warn" formControlName="examplans" multiple>
+                        <mat-option [value]="1">Alabama</mat-option>
+                        <mat-option [value]="2">Alaska</mat-option>
+                        <mat-option [value]="3">California</mat-option>
+                        <mat-option [value]="4">Delaware</mat-option>
+                        <mat-option [value]="5">Tennessee</mat-option>
+                        <mat-option [value]="6">Texas</mat-option>
+                        <mat-option [value]="7">Washington</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="examPreferenceLabelText" class="col-sm-4 col-form-label">
+                    Exam Preference Label Text
+                  </label>
+                  <div class="col-sm-8">
+                    <input id="examPreferenceLabelText" type="text" class="form-control"
+                      placeholder="Exam Preference Label Text" formControlName="examPreferenceLabelText" />
+                  </div>
+                </div>
+                <!-- includeInDurationBasedPlan -->
+
+                <div class="form-group row">
+                  <label for="includeInDurationBasedPlan" class="col-sm-4 col-form-label">
+                    Include In Duration Based Plan ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="includeInDurationBasedPlanYes" value="Yes"
+                        formControlName="includeInDurationBasedPlan" />
+                      <label for="includeInDurationBasedPlanYes" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="includeInDurationBasedPlanNo"
+                        formControlName="includeInDurationBasedPlan" checked="" value="No" />
+                      <label for="includeInDurationBasedPlanNo" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="isShowRadio1" class="col-sm-4 col-form-label">
+                    Show on Website ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="isShowRadio1" value="Yes"
+                        formControlName="isShow" />
+                      <label for="isShowRadio1" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="isShowRadio2" formControlName="isShow"
+                        checked="" value="No" />
+                      <label for="isShowRadio2" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="ShowMobileAppRadio1" class="col-sm-4 col-form-label">
+                    Show on Mobile App ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="ShowMobileAppRadio1" value="Yes"
+                        formControlName="isShowInApp" />
+                      <label for="ShowMobileAppRadio1" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="ShowMobileAppRadio2"
+                        formControlName="isShowInApp" checked="" value="No" />
+                      <label for="ShowMobileAppRadio2" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="enablScrollexamRadio1" class="col-sm-4 col-form-label">
+                    Enable Scroll in Exam?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="enablScrollexamRadio1" value="Yes"
+                        formControlName="isEnableScroll" />
+                      <label for="enablScrollexamRadio1" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="enablScrollexamRadio2"
+                        formControlName="isEnableScroll" checked="" value="No" />
+                      <label for="enablScrollexamRadio2" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="isShowNewPatternRadio1" class="col-sm-4 col-form-label">
+                    Exam New Pattern (Both Language) ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="isShowNewPatternRadio1" value="Yes"
+                        formControlName="isShowNewPattern" />
+                      <label for="isShowNewPatternRadio1" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="isShowNewPatternRadio2"
+                        formControlName="isShowNewPattern" checked="" value="No" />
+                      <label for="isShowNewPatternRadio2" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="trendingExmRadio1" class="col-sm-4 col-form-label">
+                    Trending Exam ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="trendingExmRadio1" value="Yes"
+                        formControlName="isTrendingExam" />
+                      <label for="trendingExmRadio1" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="trendingExmRadio2"
+                        formControlName="isTrendingExam" checked="" value="No" />
+                      <label for="trendingExmRadio2" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="isHighlightedRadio1" class="col-sm-4 col-form-label">
+                    isHighlighted (New Exam) ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="isHighlightedRadio1" value="Yes"
+                        formControlName="isHighlighted" />
+                      <label for="isHighlightedRadio1" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="isHighlightedRadio2"
+                        formControlName="isHighlighted" checked="" value="No" />
+                      <label for="isHighlightedRadio2" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="hasConnectedSecRadio1" class="col-sm-4 col-form-label">
+                    Has Connected Section ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="hasConnectedSecRadio1" value="Yes"
+                        formControlName="hasConnectedSection" />
+                      <label for="hasConnectedSecRadio1" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="hasConnectedSecRadio2"
+                        formControlName="hasConnectedSection" checked="" value="No" />
+                      <label for="hasConnectedSecRadio2" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="generateAutorankRadio1" class="col-sm-4 col-form-label">
+                    Generate Auto Rank
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="generateAutorankRadio1" value="Yes"
+                        formControlName="isGenerateAutoRank" />
+                      <label for="generateAutorankRadio1" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="generateAutorankRadio2"
+                        formControlName="isGenerateAutoRank" checked="" value="No" />
+                      <label for="generateAutorankRadio2" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="searchConsoleindexRadio1" class="col-sm-4 col-form-label">
+                    Search Console Index ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="searchConsoleindexRadio1" value="Yes"
+                        formControlName="isIndex" />
+                      <label for="searchConsoleindexRadio1" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="searchConsoleindexRadio2"
+                        formControlName="isIndex" checked="" value="No" />
+                      <label for="searchConsoleindexRadio2" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="inSubsectionExamRadio1" class="col-sm-4 col-form-label">
+                    In Sub Section Exam (Like IBPS PO mains) ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="inSubsectionExamRadio1" value="Yes"
+                        formControlName="isSubSectionExam" />
+                      <label for="inSubsectionExamRadio1" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="inSubsectionExamRadio2"
+                        formControlName="isSubSectionExam" checked="" value="No" />
+                      <label for="inSubsectionExamRadio2" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="showYearWiseMockRadio1" class="col-sm-4 col-form-label">
+                    Show Year Wise Mock Test ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="showYearWiseMockRadio1" value="Yes"
+                        formControlName="isShowYearWiseMock" />
+                      <label for="showYearWiseMockRadio1" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="showYearWiseMockRadio2"
+                        formControlName="isShowYearWiseMock" checked="" value="No" />
+                      <label for="showYearWiseMockRadio2" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="trendingExmRadio1" class="col-sm-4 col-form-label">
+                    show Topic Test ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="shopTopicTestYes" value="Yes"
+                        formControlName="shopTopicTest" />
+                      <label for="shopTopicTestYes" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="shopTopicTestNo"
+                        formControlName="shopTopicTest" checked="" value="No" />
+                      <label for="shopTopicTestNo" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="trendingExmRadio1" class="col-sm-4 col-form-label">
+                    Is diagnostic test ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="isDiagnosticTestYes" value="Yes"
+                        formControlName="isDiagnosticTest" />
+                      <label for="isDiagnosticTestYes" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="isDiagnosticTestNo"
+                        formControlName="isDiagnosticTest" checked="" value="No" />
+                      <label for="isDiagnosticTestNo" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="trendingExmRadio1" class="col-sm-4 col-form-label">
+                    has SmartRead ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="hasSmartReadYes" value="Yes"
+                        formControlName="hasSmartRead" />
+                      <label for="hasSmartReadYes" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="hasSmartReadNo"
+                        formControlName="hasSmartRead" checked="" value="No" />
+                      <label for="hasSmartReadNo" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="trendingExmRadio1" class="col-sm-4 col-form-label">
+                    Has Optional Category ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="hasOptionalCategoryYes" value="Yes"
+                        formControlName="hasOptionalCategory" />
+                      <label for="hasOptionalCategoryYes" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="hasOptionalCategoryNo"
+                        formControlName="hasOptionalCategory" checked="" value="No" />
+                      <label for="hasOptionalCategoryNo" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="trendingExmRadio1" class="col-sm-4 col-form-label">
+                    Is Challenge ModeExam ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="isChallengeModeExamYes" value="Yes"
+                        formControlName="isChallengeModeExam" />
+                      <label for="isChallengeModeExamYes" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="isChallengeModeExamNo"
+                        formControlName="isChallengeModeExam" checked="" value="No" />
+                      <label for="isChallengeModeExamNo" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="trendingExmRadio1" class="col-sm-4 col-form-label">
+                    Is Descriptive Exam ?
+                  </label>
+                  <div class="col-sm-8 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input class="custom-control-input" type="radio" id="isDescriptiveExamYes" value="Yes"
+                        formControlName="isDescriptiveExam" />
+                      <label for="isDescriptiveExamYes" class="custom-control-label">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="isDescriptiveExamNo"
+                        formControlName="isDescriptiveExam" checked="" value="No" />
+                      <label for="isDescriptiveExamNo" class="custom-control-label">
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button type="submit" class="btn btn-primary" (click)="createExamType()">
+                  Submit
+                </button>
+                }@else{
+                <button type="submit" class="btn btn-primary" (click)="updateExamType(editExamTypeId)">
+                  Update
+                </button>
+                }
+
+                <button type="submit" class="btn btn-default float-right" (click)="clearForm()">
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <div class="col-md-6">
+          <app-data-table (Edit)="editExamType($event)" (Remove)="deleteExamType($event)" [dataObs]="dataObs"
+            [tableCols]="tableCols" #dttable></app-data-table>
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+
+    </div>
+  </section>
+</div>

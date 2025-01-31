@@ -1,0 +1,159 @@
+<p>coupon-affiliate-detail works!</p>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Plan Faculty Master</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Plan Faculty Master</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="PlanFacultyMasterForm">
+              <div class="card-body">
+
+                <div class="form-group row">
+                  <label for="img" class="col-sm-2 col-form-label">
+                    Image
+                  </label>
+                  <div class="col-sm-10">
+                    <div class="custom-file">
+                      <input
+                        id="img"
+                        (change)="onUploadImg($event)"
+                        type="file"
+                        class="custom-file-input"
+                        accept="image/*"
+                      />
+                      <label class="custom-file-label" for="img">
+                        Choose File
+                      </label>
+                    </div>
+                    @if (previewImageUrl) {
+                    <img [src]="previewImageUrl" width="200" />
+                    }
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="name" class="col-sm-2 col-form-label">
+                    Name
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="name"
+                      type="text"
+                      class="form-control"
+                      placeholder=" Enter Name..."
+                      formControlName="name"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="experience" class="col-sm-2 col-form-label">
+                    Experience
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="Experience"
+                      type="text"
+                      class="form-control"
+                      placeholder="Experience"
+                      formControlName="experience"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="description" class="col-sm-2 col-form-label">
+                    Description
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="description"
+                      type="text"
+                      class="form-control"
+                      placeholder="Description..."
+                      formControlName="description"
+                    />
+                  </div>
+                </div>
+
+                
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createPlanFacultyMaster()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updatePlanFacultyMaster(editPlanFacultyMasterId)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editPlanFacultyMaster($event)"
+        (Remove)="deletePlanFacultyMaster($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

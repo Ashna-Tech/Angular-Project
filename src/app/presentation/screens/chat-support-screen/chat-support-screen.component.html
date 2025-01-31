@@ -1,0 +1,48 @@
+<div class="main-container">
+    <div class="list-section" [ngClass]="{'active':openedPageIndex() === 0,'filter':isFilterOpended()}">
+        <div class="head">
+            <div class="title">
+                <h3>Chat</h3>
+                <button mat-icon-button (click)="isFilterOpended.set(!isFilterOpended())"><i class="fa-solid fa-filter"></i></button>
+            </div>
+            <div class="search-container">
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="search...">
+                    <span matPrefix class="icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                </mat-form-field>
+            </div>
+            @if (isFilterOpended()) {
+                <div class="filter-container">
+                    <div class="filter-input">
+                        <label>Message Type: </label>
+                        <mat-radio-group>
+                          <mat-radio-button value="all">All</mat-radio-button>
+                          <mat-radio-button value="unread">Unread</mat-radio-button>
+                          <mat-radio-button value="read">Read</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div class="filter-input">
+                        <label>Support Type: </label>
+                        <mat-radio-group>
+                          <mat-radio-button value="testzone">Testzone</mat-radio-button>
+                          <mat-radio-button value="speedDrill">SpeedDrill</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="body">
+            @for (card of [1,2,3,4,56,78,9,878,41,4,565,4,45,8,2,5]; track $index) {
+                @if ($index == 2) {
+                    <app-profile-card [isOpened]="true"></app-profile-card>
+                }@else {
+                    <app-profile-card (click)="openedPageIndex.set(1)"></app-profile-card>
+                }
+                
+            }
+        </div>
+    </div>
+    <div class="window-section"  [ngClass]="{'active':openedPageIndex() !== 0}">
+        <app-chat-window (onBack)="openedPageIndex.set(0)"></app-chat-window>
+    </div>
+</div>  

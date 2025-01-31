@@ -1,0 +1,97 @@
+
+
+<button class="btn btn-sm btn-danger close" mat-dialog-close aria-label="Close dialog">
+    <mat-icon>close</mat-icon>
+  </button>
+  
+  <div class="card card-primary">
+    
+        <div class="card-header">
+            <h3 class="card-title"> Questions </h3>
+          </div>
+
+        @if (question$ | async; as question) {  
+          <div class="card-body">
+            <div class="row">
+    
+                @if (question.direction) {
+                    <div class="col-sm-12 mb-2" [innerHTML]="question.direction | safeHtml"></div>
+                }
+
+                @if (question.directionHin) {
+                    <div class="col-sm-12 mb-2" [innerHTML]="question.directionHin | safeHtml"></div>
+                }
+    
+                @if (question.summary) {
+                    <div class="col-sm-12 mb-2" [innerHTML]="question.summary | safeHtml"></div>
+                }
+
+                @if (question.summaryHin) {
+                    
+                    <div class="col-sm-12 mb-2" [innerHTML]="question.summaryHin | safeHtml"></div>
+                }
+                
+                @if (question.ques) {
+                    <div class="col-sm-12 mb-2" [innerHTML]="question.ques | safeHtml"></div>
+                }
+
+                @if (question.quesHin) {
+                    <div class="col-sm-12 mb-2" [innerHTML]="question.quesHin | safeHtml"></div>
+                }
+
+                <br>
+    
+                <!-- english options -->
+                @if (question.optAEng) {
+                    <div class="col-sm-6 mb-2 d-flex"><strong>(A.) &nbsp;</strong> <div [innerHTML]="question.optAEng | safeHtml"></div></div>
+                }
+                
+                @if (question.optBEng) {
+                    <div class="col-sm-6 mb-2 d-flex"><strong>(B.) &nbsp;</strong> <div [innerHTML]="question.optBEng | safeHtml"></div></div>    
+                }
+                
+                @if (question.optCEng) {
+                    <div class="col-sm-6 mb-2 d-flex"><strong>(C.) &nbsp;</strong> <div [innerHTML]="question.optCEng | safeHtml"></div></div>    
+                }
+                
+                @if (question.optDEng) {
+                    <div class="col-sm-6 mb-2 d-flex"><strong>(D.) &nbsp;</strong> <div [innerHTML]="question.optDEng | safeHtml"></div></div>    
+                }
+                
+                @if (question.optEEng) {
+                    <div class="col-sm-6 mb-2 d-flex"><strong>(E.) &nbsp;</strong> <div [innerHTML]="question.optEEng | safeHtml"></div></div>    
+                }
+                
+                <div class="col-sm-12 mb-2 d-flex"></div>
+                <br>
+    
+                <!-- hindi options -->
+                 @if (question.optAHin) {
+                    <div class="col-sm-6 mb-2 d-flex"><strong>(A.) &nbsp;</strong> <div [innerHTML]="question.optAHin | safeHtml"></div></div>
+                 }
+                
+                @if (question.optBHin) {
+                    <div class="col-sm-6 mb-2 d-flex"><strong>(B.) &nbsp;</strong> <div [innerHTML]="question.optBHin | safeHtml"></div></div>    
+                }
+                
+                @if (question.optCHin) {
+                    <div class="col-sm-6 mb-2 d-flex"><strong>(C.) &nbsp;</strong> <div [innerHTML]="question.optCHin | safeHtml"></div></div>    
+                }
+                
+                @if (question.optDHin) {
+                    <div class="col-sm-6 mb-2 d-flex"><strong>(D.) &nbsp;</strong> <div [innerHTML]="question.optDHin | safeHtml"></div></div>    
+                }
+                
+                @if (question.optEHin) {
+                    <div class="col-sm-6 mb-2 d-flex"><strong>(E.) &nbsp;</strong> <div [innerHTML]="question.optEHin | safeHtml"></div></div>    
+                }
+                
+    
+                <!-- explanation -->
+                <h5 class="col-sm-12 mt-2">Explanation</h5>
+                <div class="col-sm-12 mb-2" [innerHTML]="question.explanation"></div>
+                <div class="col-sm-12 mb-2" [innerHTML]="question.commonExplanation"></div>
+            </div>
+        </div>
+    }
+</div>

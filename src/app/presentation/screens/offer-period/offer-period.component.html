@@ -1,0 +1,295 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Offer Period</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Offer Period</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="OfferPeriodForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="applicationName" class="col-sm-2 col-form-label">
+                    Application Name
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="applicationName"
+                      type="text"
+                      class="form-control"
+                      placeholder="Application Name..."
+                      formControlName="applicationName"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="startdate" class="col-sm-2 col-form-label">
+                    Offer Start Date
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="startdate"
+                      type="datetime-local"
+                      class="form-control"
+                      placeholder="Choose date Time..."
+                      formControlName="startdate"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="enddate" class="col-sm-2 col-form-label">
+                   Offer End Date
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="enddate"
+                      type="datetime-local"
+                      class="form-control"
+                      placeholder="Choose date Time..."
+                      formControlName="enddate"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="bannerStartdate" class="col-sm-2 col-form-label">
+                    Banner Start Date
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="bannerStartdate"
+                      type="datetime-local"
+                      class="form-control"
+                      placeholder="Choose date Time..."
+                      formControlName="bannerStartdate"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="bannerEnddate" class="col-sm-2 col-form-label">
+                    Banner End Date
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="bannerEnddate"
+                      type="datetime-local"
+                      class="form-control"
+                      placeholder="Choose date Time..."
+                      formControlName="bannerEnddate"
+                    />
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="showtimerRadio1" class="col-sm-2 col-form-label">
+                    Is Show Timer
+                  </label>
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="showtimerRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isShowtimer"
+                      />
+                      <label for="showtimerRadio1" class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="showtimerRadio2"
+                        formControlName="isShowtimer"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="showtimerRadio2" class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="applyOnAllRadio1" class="col-sm-2 col-form-label">
+                    Is Apply On All
+                  </label>
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="applyOnAllRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isApplyonAll"
+                      />
+                      <label for="applyOnAllRadio1" class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="applyOnAllRadio2"
+                        formControlName="isApplyonAll"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="applyOnAllRadio2" class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="isactiveRadio1" class="col-sm-2 col-form-label">
+                    Is Active
+                  </label>
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="isactiveRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isactive"
+                      />
+                      <label for="isactiveRadio1" class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="isactiveRadio2"
+                        formControlName="isactive"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="isactiveRadio2" class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label for="discountrate" class="col-sm-2 col-form-label">
+                    Discount Percentage % 
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="discountrate"
+                      type="number"
+                      class="form-control"
+                      placeholder="Discount Rate..."
+                      formControlName="discountrate"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="offerendingText" class="col-sm-2 col-form-label">
+                    Offer Ending Text
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="offerendingText"
+                      type="text"
+                      class="form-control"
+                      placeholder="Offer Ending Text..."
+                      formControlName="offerendingText"
+                    />
+                  </div>
+                </div>
+
+
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createOfferPeriod()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updateOfferPeriod(editOfferPeriodId)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editOfferPeriod($event)"
+        (Remove)="deleteOfferPeriod($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

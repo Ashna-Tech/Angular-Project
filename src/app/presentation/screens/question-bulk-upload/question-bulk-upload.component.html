@@ -1,0 +1,216 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active">Bulk Upload</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Templates</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row mb-3">
+                  <div class="col-sm-12">
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Summary Ques Template
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <div class="question-template-container">
+                        &#64;MQ&#64; Question Start <br />
+                        &#64;MQN&#64; News Name <br />
+                        &#64;MQS&#64; Summary Start <br />
+                        &#64;MQC&#64; Question Chapter <br />
+                        &#64;MQSE&#64; Summary  End <br />
+                        &#64;QQ&#64; <br />
+                        &#64;QL&#64; Question Level ( Easy/Moderate/Difficult )<br />
+                        &#64;QE&#64; Question Explanation<br />
+                        &#64;QT&#64; Question<br />
+                        &#64;OA&#64; OptionA<br />
+                        &#64;OB&#64; OptionB<br />
+                        &#64;OC&#64; OptionC<br />
+                        &#64;OD&#64; OptionD<br />
+                        &#64;OE&#64; OptionE<br />
+                      </div>
+                    </mat-expansion-panel>
+                  </div>
+                </div>
+
+                <!-- <div class="row mb-3">
+                  <div class="col-sm-12">
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Question Template
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <div class="question-template-container">
+                        &#64;MQ&#64; Question Start <br />
+                        &#64;QC&#64; Question Chapter<br />
+                        &#64;QL&#64; Question Level ( Easy/Moderate/Difficult )<br />
+                        &#64;QT&#64; Question<br />
+                        &#64;OR&#64; Option Right ( OptA / OptB / OptC / OptD / OptE ) <br />
+                        &#64;OA&#64; OptionA<br />
+                        &#64;OB&#64; OptionB<br />
+                        &#64;OC&#64; OptionC<br />
+                        &#64;OD&#64; OptionD<br />
+                        &#64;OE&#64; OptionE<br />
+                        &#64;QE&#64; Question Explanation<br />
+                      </div>
+                    </mat-expansion-panel>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Bulk Upload</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+
+                  <div class="form-group row">
+                    <label for="ChapterId" class="col-sm-2 col-form-label">Select Chapter</label>
+                    <div class="col-sm-10">
+                        <select id="ChapterId" class="custom-select rounded-0" id="ChapterId" (change)="onChapterSelect()" [(ngModel)]="selectedChapter">
+                          <option value="">Select Chapter</option>
+
+                          @for (chapter of chapterDropDown$ | async; track chapter.id) {
+                             <option [value]="chapter.id"> {{chapter.name}}</option>
+                          }
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label for="Select-Test" class="col-sm-2 col-form-label">Select Drill</label>
+                      <div class="col-sm-10">
+                        <select class="custom-select rounded-0" id="Select-Test" (change)="onTestSelect()" [(ngModel)]="selectedTestId">
+                          <option [value]="''">Select Drill</option>
+                          @for (test of testDropdownList$ | async; track $index) {
+                              <option [value]="test.id">{{test.name}}</option>
+                          }
+                      </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label for="subject" class="col-sm-2 col-form-label">Select Ques Subject</label>
+                      <div class="col-sm-10">
+                        <select class="form-control" id="subject" (change)="onSubjectIdChange()" [(ngModel)]="quesSubjectId" >
+                          <option [value]="''">Select Subject</option>
+                          @for (subject of subjectList$ | async; track subject.id) {
+                            <option [value]="subject.id">{{subject.name}}</option>
+                          }
+                        </select>
+                      </div>
+                    </div>
+  
+                    <div class="form-group row">
+                      <label for="subject" class="col-sm-2 col-form-label">Select Ques Chapter</label>
+                      <div class="col-sm-10">
+                        <mat-chip-set>
+                          @for (chapter of ltChapterList; track chapter.id) {
+                            <mat-chip (click)="copyText(chapter.name)">{{chapter.name}}</mat-chip>
+                          }@empty {
+                            No chapter 
+                          }
+                        </mat-chip-set>
+                      </div>
+                    </div>
+
+                    <form [formGroup]="textContentForm">
+                      <div class="form-group row">
+                        <div class="col-md-12">
+                            <label for="textContent">Text File Content</label>
+                            <app-ckeditor id="textContent" elementId="textContent" #textContent formControlName="textContent"></app-ckeditor>
+                        </div>
+                      </div>
+
+                      @if (error) {
+                        <div class="alert" role="alert">
+                          {{error}}
+                        </div>
+                      }
+                      
+                      <div class="row">
+                          <div class="col-md-12">
+                              <input type="submit" value="Preview" type="submit" class="btn btn-primary" (click)="onPreview()"/>
+                              <input type="button" value="Clear Form" class="btn btn-default ml-2"/>
+                          </div>
+                      </div>
+                    </form>
+
+                </div>
+              </div>
+              <!-- /.card -->
+            </div>
+            <!--/.col (right) -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+
+
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="card card-primary">
+                
+                <div class="card-header">
+                  <h3 class="card-title">Questions Preview</h3> 
+                  <button class="btn btn-default" [disabled]="isUploadingAlready" (click)="onSubmit()">Upload</button>
+                </div>
+
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-12">
+                        @for (question of dataToPreview; track MqIndex;let MqIndex = $index) {
+                          <app-preview-question [ltChapterList]="ltChapterList" [questionIndex]="MqIndex" [FullQuestion]="question" (editQuestionEmt)="updateQuestion(MqIndex, $event.subquestionIndex, $event.question)" (editSummaryEmt)="updateSummary(MqIndex, $event.name , $event.summary, $event.chapId)" (deleteMQuestionEmt)="removeMQuestion(MqIndex)" (deleteSubQuestionEmt)="removeSubQuestion(MqIndex, $event)"></app-preview-question>
+                        }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  </div>
+  

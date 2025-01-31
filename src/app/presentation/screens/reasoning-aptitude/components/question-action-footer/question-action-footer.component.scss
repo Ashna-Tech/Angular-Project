@@ -1,0 +1,33 @@
+.container1{
+    width: 100%;
+    background-color: #6e922c;
+    color: white;
+    padding: 1rem;
+}
+
+.container2{
+    width: 100%;
+    background-color: rgb(22, 135, 113);
+    color: white;
+    padding: 1rem;
+}
+
+input{
+    margin-left: 10px;
+    padding: 2px;
+    border-radius: 5px;
+    padding-left: 5px;
+    border: none;
+}
+
+ /* Hide spinner arrows */
+ input[type="number"]::-webkit-inner-spin-button,
+ input[type="number"]::-webkit-outer-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+ }
+
+ input[type="number"] {
+   -moz-appearance: textfield; /* Firefox */
+   appearance: textfield; /* Modern browsers */
+ }

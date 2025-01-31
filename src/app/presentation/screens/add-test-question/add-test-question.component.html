@@ -1,0 +1,116 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active"> Add Test Question</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Add Test Question ({{Exam()}}) Test ID: {{TestId()}} </h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- Form Start -->
+
+            <form [formGroup]="addTestForm">
+
+              <div class="card-body mt-4 mb-4">
+                <div class="row">
+                  <div class="col-sm-6 form-group">
+                    <div class="row">
+                      <label for="catId" class="col-sm-2 col-form-label">Category</label>
+                      <div class="col-sm-10">
+                        <select name="catid" class="form-control" id="catid" formControlName="catId" (change)="onCategorySelect()">
+                          <option value="">Select Category </option>
+                          @for (category of categoryDropdown$ | async ; track $index) {
+                            <option [value]="category.id">{{ category.name }}</option>
+                          }
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col-sm-6 form-group pl-5">
+                    <div class="row">
+                      <label for="subcategory" class="col-sm-2 col-form-label pl-3"> Sub-Category</label>
+                      <div class="col-sm-10">
+                        <select (change)="onSelectSubCategory()" name="subcategory" class="form-control" id="subcategory" formControlName="subcategory">
+                            <option value="">Select SubCategory </option>
+                            @for (category of SubcategoryDropdown$ | async ; track $index) {
+                              <option [value]="category.id">{{ category.name }}</option>
+                            }
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 center">
+                    <button class="btn-sm" style="background-color:rgb(34, 113, 179); color: white; border-radius: 3px;">To be added {{(categoryTotalQuestion$ | async)?.totalQues ?? 0}} </button>
+                    <button class="btn-sm btn-danger rounded" style="border-radius: 3px;"> Added : {{(categoryTotalQuestion$ | async)?.addedQues ?? 0}}</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Start Cards for Statement and Arguments  -->
+           
+          <!-- Card 1 -->
+
+<!-- 
+          <ng-template #DialogContentTemplate let-dialogRef="dialogRef" let-data="data"> -->
+
+            <div style="display: flex;margin-top: 10px;">
+              @for (chapter of AddQuestionListDropdown$ | async; track $index) {
+                <div class="card mini-card">
+                  <h3 class="card-heading">{{chapter.name}}</h3>
+
+                  <div class="inline-content">
+                    <p (click)="openAddQuestionToTest(chapter.chapterId)"> Add <b class="add-count">({{chapter.noofQues}})</b></p>
+                    <p> View <b class="view-count">({{chapter.noofAddQues}})</b></p>
+                  </div>
+
+                  <div class="shadow-container">
+                    <input type="number" class="form-control me-2" id="number" #num>
+                    <button type="submit" class="btn btn-success btn-save" (click)="UpdateAddQuestion(chapter.id, num.value)">Save</button>
+                  </div>
+                </div>
+              }
+            </div>
+          <!-- </ng-template> -->
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+    </div>
+  </section>
+</div>

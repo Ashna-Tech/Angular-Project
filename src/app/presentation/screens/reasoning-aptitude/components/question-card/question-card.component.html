@@ -1,0 +1,49 @@
+
+@if (question(); as question) {  
+    <div class="row">
+        @if (question.direction) {
+            <div class="col-sm-12 mb-2" [innerHTML]="question.direction | safeHtml"></div>
+        }
+
+        @if (question.summary) {
+            <div class="col-sm-12 mb-2" [innerHTML]="question.summary | safeHtml"></div>
+        }
+        
+        @if (question.ques) {
+            <div class="col-sm-12 mb-2" [innerHTML]="question.ques | safeHtml"></div>
+        }
+
+        <br>
+
+        <!-- english options -->
+        @if (question.optAEng) {
+            <div class="col-sm-6 mb-2 d-flex" [ngClass]="{right:question.optRight === OptionType.optionA}"><strong>(A.) &nbsp;</strong> <div [innerHTML]="question.optAEng | safeHtml"></div></div>
+        }
+        
+        @if (question.optBEng) {
+            <div class="col-sm-6 mb-2 d-flex" [ngClass]="{right:question.optRight === OptionType.optionB}"><strong>(B.) &nbsp;</strong> <div [innerHTML]="question.optBEng | safeHtml"></div></div>    
+        }
+        
+        @if (question.optCEng) {
+            <div class="col-sm-6 mb-2 d-flex" [ngClass]="{right:question.optRight === OptionType.optionC}"><strong>(C.) &nbsp;</strong> <div [innerHTML]="question.optCEng | safeHtml"></div></div>    
+        }
+        
+        @if (question.optDEng) {
+            <div class="col-sm-6 mb-2 d-flex" [ngClass]="{right:question.optRight === OptionType.optionD}"><strong>(D.) &nbsp;</strong> <div [innerHTML]="question.optDEng | safeHtml"></div></div>    
+        }
+        
+        @if (question.optEEng) {
+            <div class="col-sm-6 mb-2 d-flex" [ngClass]="{right:question.optRight === OptionType.optionE}"><strong>(E.) &nbsp;</strong> <div [innerHTML]="question.optEEng | safeHtml"></div></div>    
+        }
+        
+        <div class="col-sm-12 mb-2 d-flex"></div>
+        <br>
+
+        <!-- explanation -->
+        <h5 class="col-sm-12 mt-2">Explanation</h5>
+        <div class="col-sm-12 mb-2" [innerHTML]="question.explanation"></div>
+
+        <!-- <h5 class="col-sm-12 mt-2">Common explanation</h5> -->
+        <!-- <div class="col-sm-12 mb-2" [innerHTML]="question."></div> -->
+    </div>
+}

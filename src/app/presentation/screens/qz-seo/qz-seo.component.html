@@ -1,0 +1,116 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active"> QZ SEO </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title"> QZ SEO </h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="QzSeoForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="examtypeID" class="col-sm-2 col-form-label">
+                    Exam Type
+                  </label>
+                  <div class="col-sm-10">
+                    <select name="examtypeID" id="examtypeID" type="text" class="form-control"
+                      formControlName="examtypeID">
+                      <option value="">Select Exam Type</option>
+
+                      @for (exam of examtypeListDropdown$ | async ; track
+                      $index) {
+                      <option [value]="exam.id">{{exam.name}}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="pagetitle" class="col-sm-2 col-form-label">
+                    Page Title
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="pagetitle" type="text" class="form-control" placeholder="Enter Page Title..."
+                      formControlName="pagetitle" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="kwordmeta" class="col-sm-2 col-form-label">
+                    K Word Meta
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="kwordmeta" type="text" class="form-control" placeholder="Kword Meta..."
+                      formControlName="kwordmeta" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="pagedesc" class="col-sm-2 col-form-label">
+                    Page Desc
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="pagedesc" type="text" class="form-control" placeholder=" Enter SEO Title..."
+                      formControlName="pagedesc" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button type="submit" class="btn btn-primary" (click)="createQzSeo()">
+                  Submit
+                </button>
+                }@else{
+                <button type="submit" class="btn btn-primary" (click)="updateQzSeo(editQzSeoId)">
+                  Update
+                </button>
+                }
+
+                <button type="submit" class="btn btn-default float-right" (click)="clearForm()">
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table (Edit)="editQzSeo($event)" (Remove)="deleteQzSeo($event)" [dataObs]="dataObs"
+        [tableCols]="tableCols" #dttable></app-data-table>
+    </div>
+  </section>
+</div>

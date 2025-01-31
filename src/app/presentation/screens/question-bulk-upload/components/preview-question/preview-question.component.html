@@ -1,0 +1,243 @@
+@if (FullQuestion) {
+    <div class="card">
+        <div class="card-body">
+            <div class="summary-container">
+                <div class="actions">
+                    <button style="height: 35px;width: 35px;margin-right: 10px;" class="btn-sm btn-success" (click)="onEditSummary()"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button style="height: 35px;width: 35px;" class="btn-sm btn-danger" (click)="removeMainQuestion()"><i class="fa-solid fa-trash"></i></button>
+                </div>
+                <form [formGroup]="summaryForm">
+                @if (isSummaryEditMode) {
+                        <div class="summary">
+                            <h5>Name</h5>
+                            <input type="text" formControlName="name" class="form-control">
+                        </div>
+                        <div class="summary">
+                            <h5>News</h5>
+                            <app-ckeditor id="summary" [elementId]="'summary' + questionIndex" #summary formControlName="summary"></app-ckeditor>
+                        </div>
+
+                        <div>
+                            <h5>Question Chapter :: {{summaryForm.get('chapter')?.value}}</h5>
+                            <div class="form-group">
+                                <select class="form-control" id="LTChapter" formControlName="chapter">
+                                    <option [value]="''">Select Question Chapter</option>
+                                    @for (chapter of ltChapterList; track chapter.id) {
+                                      <option [value]="chapter.id">{{chapter.name}}</option>
+                                    }
+                                  </select>
+                            </div>
+                        </div>
+                
+                        <div class="save-summary">
+                            <button class="btn btn-default" (click)="updateSummary()">Update News</button>
+                        </div>
+                    
+                }@else {
+                    <div class="summary">
+                        <h5>Name</h5>
+                        <div [innerHTML]="FullQuestion.name"></div>
+                    </div>
+                    <div class="summary">
+                        <h5>News</h5>
+                        <div [innerHTML]="FullQuestion.summary | safeHtml"></div>
+                    </div>
+
+                    <div>
+                        <h5>Question Chapter</h5>
+                        <div class="form-group">{{getChapterName()}}</div>
+                    </div>
+                }
+                
+                </form>
+            </div>
+            <form [formGroup]="updateQuestionForm">
+                
+                @for (Question of FullQuestion.questions; track $index) {
+                    @if (isQuestionEditMode && editQuestionIndex === $index) {
+                        <div class="question">
+                            <div class="sequence-no">
+                            <span class="circle">{{questionIndex + 1}} - {{$index + 1}}</span>
+                            </div>
+                            <div class="text">
+                                <app-ckeditor id="question" [elementId]="'question1' + questionIndex + $index" #question formControlName="question"></app-ckeditor>
+                            </div>
+                            <div class="actions">
+                                <button style="height: 35px;" class="btn-sm btn-success" (click)="isQuestionEditMode = false"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button style="height: 35px;" class="btn-sm btn-danger" (click)="removeSubQuestion($index)"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="option-list row">
+                            @if (Question.optionA) {
+                                <div class="option col-md-6">   
+                                    <div class="sequence">
+                                        <span class="circle">
+                                            A
+                                        </span>
+                                    </div>
+                                    <div class="text">
+                                        <app-ckeditor id="optionA" [elementId]="'optionA' + questionIndex + $index" #optionA formControlName="optionA"></app-ckeditor>
+                                    </div>
+                                </div>       
+                            }
+                
+                            @if (Question.optionB) {
+                                <div class="option  col-md-6">    
+                                    <div class="sequence">
+                                        <span class="circle">
+                                            B
+                                        </span>
+                                    </div>
+                                    <div class="text">
+                                        <app-ckeditor id="optionB" [elementId]="'optionB' + questionIndex + $index" #optionB formControlName="optionB"></app-ckeditor>
+                                    </div>
+                                </div>       
+                            }
+                
+                            @if (Question.optionC) {
+                                <div class="option col-md-6">
+                                    <div class="sequence">
+                                        <span class="circle">
+                                            C
+                                        </span>
+                                    </div>
+                                    <div class="text">
+                                        <app-ckeditor id="optionC" [elementId]="'optionC' + questionIndex + $index" #optionC formControlName="optionC"></app-ckeditor>
+                                    </div>
+                                </div>
+                            }
+            
+                            @if (Question.optionD) {
+                                <div class="option col-md-6">
+                                    <div class="sequence">
+                                        <span class="circle">
+                                            D
+                                        </span>
+                                    </div>
+                                    <div class="text">
+                                        <app-ckeditor id="optionD" [elementId]="'optionD' + questionIndex + $index" #optionD formControlName="optionD"></app-ckeditor>
+                                    </div>
+                                </div>
+                            }
+                            
+                            
+                            @if (Question.optionE) {
+                                <div class="option col-md-6">
+                                    <div class="sequence">
+                                        <span class="circle">
+                                            E
+                                        </span>
+                                    </div>
+                                    <div class="text">
+                                        <app-ckeditor [id]="'optionE' + questionIndex" [elementId]="'optionE' + questionIndex + $index" #optionE formControlName="optionE"></app-ckeditor>
+                                    </div>
+                                </div>
+                            }
+            
+                        </div>
+                        
+                        <div class="row">
+                            
+                            <div class="col-md-6 level">
+                                <h5>Level:</h5>
+                                <select id="Level" class="form-control" formControlName="questionLevel">
+                                    <option [value]="QuestionLevels.Easy">Easy</option>
+                                    <option [value]="QuestionLevels.Moderate">Moderate</option>
+                                    <option [value]="QuestionLevels.Difficult">Difficult</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="explanation">
+                            <h5>Explanation:</h5>
+                            <app-ckeditor id="Explanation" [elementId]="'Explanation' + questionIndex + $index"  #Explanation formControlName="questionExplanation"></app-ckeditor>
+                        </div> 
+                        <div class="question-submit-btn-container">
+                            <button class="btn sbt-btn" (click)="updateQuestion($index)">Update Question</button>
+                        </div>
+                    }@else {
+                        <div class="question">
+                            <div class="sequence-no">
+                            <span class="circle">{{questionIndex + 1}} - {{$index + 1}}</span>
+                            </div>
+                            <div class="text" [innerHTML]="Question.question | safeHtml"></div>
+                            <div class="actions">
+                                <button style="height: 35px;" class="btn-sm btn-success" (click)="onQuestionEdit($index)"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button style="height: 35px;" class="btn-sm btn-danger" (click)="removeSubQuestion($index)"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="option-list">
+                            @if (Question.optionA) {
+                                <div class="option">   
+                                    <div class="sequence">
+                                        <span class="circle">
+                                            A
+                                        </span>
+                                    </div>
+                                    <div class="text" [innerHTML]="Question.optionA | safeHtml"></div>
+                                </div>       
+                            }
+                
+                            @if (Question.optionB) {
+                                <div class="option">    
+                                    <div class="sequence">
+                                        <span class="circle">
+                                            B
+                                        </span>
+                                    </div>
+                                    <div class="text" [innerHTML]="Question.optionB | safeHtml"></div>
+                                </div>       
+                            }
+                
+                            @if (Question.optionC) {
+                                <div class="option">
+                                    <div class="sequence">
+                                        <span class="circle">
+                                            C
+                                        </span>
+                                    </div>
+                                    <div class="text" [innerHTML]="Question.optionC | safeHtml"></div>
+                                </div>
+                            }
+            
+                            @if (Question.optionD) {
+                                <div class="option">
+                                    <div class="sequence">
+                                        <span class="circle">
+                                            D
+                                        </span>
+                                    </div>
+                                    <div class="text" [innerHTML]="Question.optionD | safeHtml"></div>
+                                </div>
+                            }
+        
+                            @if (Question.optionE) {
+                                <div class="option">
+                                    <div class="sequence">
+                                        <span class="circle">
+                                            E
+                                        </span>
+                                    </div>
+                                    <div class="text" [innerHTML]="Question.optionE | safeHtml"></div>
+                                </div>
+                            }
+            
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 level">
+                                <h5>Level:</h5>
+                                <p [class]="Question.questionLevel">{{Question.questionLevel}}</p>
+                            </div>
+                        </div>
+                        <div class="explanation">
+                            <h5>Explanation:</h5>
+                            <div [innerHTML]="Question.questionExplanation | safeHtml"></div>
+                        </div> 
+                    }
+                    
+                    <div class="divider"></div>
+                }
+            </form>
+        </div>
+    </div>
+}

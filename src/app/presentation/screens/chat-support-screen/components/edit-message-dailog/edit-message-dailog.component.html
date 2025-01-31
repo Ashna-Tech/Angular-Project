@@ -1,0 +1,22 @@
+<div class="edit-container">
+    <div class="header">
+        <button class="icon-btn" (click)="close()"><i class="fa-solid fa-xmark"></i></button>
+        <h3>Edit Message</h3>
+    </div>
+    
+    <div class="footer">
+        <div class="input-cotainer">
+            <mat-form-field [style.fontSize]="'16px'" appearance="fill" >
+                <textarea 
+                    matInput
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5" 
+                    placeholder="Type a message"
+                ></textarea>
+            </mat-form-field>
+        </div>
+        <button mat-icon-button><i class="fa-regular fa-paper-plane"></i></button>
+    </div>
+</div>

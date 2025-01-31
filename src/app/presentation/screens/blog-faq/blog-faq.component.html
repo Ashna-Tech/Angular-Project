@@ -1,0 +1,63 @@
+<form [formGroup]="blogFAQform">
+  <div class="card-body">
+    <!-- FAQ List -->
+
+    <div formArrayName="faq">
+      <div
+        *ngFor="let faqGroup of faqArray.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <!-- FAQ Question -->
+
+        <div class="form-group row">
+          <label for="question-{{ i }}" class="col-sm-2 col-form-label">
+            Question
+          </label>
+          <div class="col-sm-10">
+            <input
+              id="question-{{ i }}"
+              type="text"
+              class="form-control"
+              placeholder="Enter Question"
+              formControlName="question"
+            />
+          </div>
+        </div>
+
+        <!-- FAQ Answer -->
+
+        <div class="form-group row">
+          <label for="answer-{{ i }}" class="col-sm-2 col-form-label">
+            Answer
+          </label>
+          <div class="col-sm-8">
+            <input
+              id="answer-{{ i }}"
+              type="text"
+              class="form-control"
+              placeholder="Enter Answer"
+              formControlName="answer"
+            />
+          </div>
+
+          <!-- Remove FAQ Button (aligned to the right) -->
+          <div class="col-sm-2 d-flex align-items-center">
+            <button type="button" class="btn btn-danger" (click)="removeFAQ(i)">
+              Remove FAQ
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add FAQ Button -->
+
+    <div class="form-group row">
+      <div class="col-sm-10 offset-sm-2">
+        <button type="button" class="btn btn-primary" (click)="AddFaq()">
+          Add FAQ
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

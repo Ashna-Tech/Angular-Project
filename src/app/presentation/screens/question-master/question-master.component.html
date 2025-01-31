@@ -1,0 +1,256 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active"> Question Master </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title"> Question Master </h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="QuestionMasterForm">
+              <div class="card-body">
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group row">
+                      <label for="catId" class="col-sm-6 col-form-label">Category</label>
+                      <div class="col-sm-6">
+                        <select name="catId" id="catId" class="form-control" formControlName="catId">
+                          <option value=""> Select Category </option>
+                          @for (category of categoryListDropdown$ | async ; track $index) {
+                          <option [value]="category.id">{{category.name}}</option>
+                          }
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group row">
+                      <label for="sCatId" class="col-sm-4 col-form-label"> Sub Category </label>
+                      <div class="col-sm-8">
+                        <select name="sCatId" id="sCatId" class="form-control" formControlName="sCatId">
+                          <option value=""> Select Subcategory</option>
+                          @for (subcat of subaCategoryListDropdown$ | async ; track $index) {
+                          <option [value]="subcat.id">{{subcat.name}}</option>
+                          }
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <div class="form-group row">
+                      <label for="chapId" class="col-sm-4 col-form-label"> Chapter </label>
+                      <div class="col-sm-8">
+                        <select name="chapId" id="chapId" class="form-control" formControlName="chapId">
+                          <option value=""> Select Chapter </option>
+                          @for (chapter of chapterListDropdown$ | async ; track $index) {
+                          <option [value]="chapter.id">{{chapter.name}}</option>
+                          }
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="type" class="col-sm-2 col-form-label"> Question Type </label>
+                  <div class="col-sm-10">
+                    <select name="type" id="type" class="form-control" formControlName="type">
+                      <option value="" disabled> Select Question Type</option>
+                      <option [value]="QuestionTypeEum.Single"> Single </option>
+                      <option [value]="QuestionTypeEum.Multiple"> Multiple </option>
+                    </select>
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="form-group row">
+                  <label for="keywords" class="col-sm-2 col-form-label"> Question keywords </label>
+                  <div class="col-sm-10">
+                    <mat-selection-list id="keywords" [multiple]="true" disableRipple formControlName="keywords">
+                      @for (keyword of keywordListDropdown$ | async; track keyword.id) {
+                      <mat-list-option [disableRipple]="true" [value]="keyword.id">{{keyword.name}}</mat-list-option>
+                      }
+                    </mat-selection-list>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="exams" class="col-sm-2 col-form-label"> selected Exams </label>
+                  <div class="col-sm-10">
+                    @for (exam of selectedExams(); track $index) {
+                      @if (exam) {
+                        <div class="selected-exam-btn">
+                          <div>{{exam.name}}</div>
+                          <button (click)="removeSelectedExam(exam.id)"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                      }
+                    }
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="form-group row">
+                  <label for="level" class="col-sm-2 col-form-label">Test Question Level</label>
+                  <div class="col-sm-10">
+                    <select name="level" id="level" class="form-control" formControlName="level">
+                      <option value="" disabled> Select Question Level</option>
+                      <option [value]="QuestionLevel.Easy"> Easy </option>
+                      <option [value]="QuestionLevel.Moderate"> Moderate </option>
+                      <option [value]="QuestionLevel.Difficult"> Difficult </option>
+                    </select>
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label for="MasterCategory" class="col-sm-4 col-form-label">Exam Master Category</label>
+                      <div class="col-sm-8">
+                        <select name="catId" id="MasterCategory" class="form-control" formControlName="MasterCategory">
+                          <option value=""> Select Exam MasterCategory </option>
+
+                          @for (category of masterCategoryDropdown$ | async ; track $index) {
+                          <option [value]="category.id">{{category.name}}</option>
+                          }
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label for="ExamCategory" class="col-sm-3 col-form-label">Exam Category</label>
+                      <div class="col-sm-9">
+                        <select name="ExamCategory" id="ExamCategory" class="form-control" formControlName="ExamCategory">
+                          <option value=""> Select Exam Category </option>
+                          @for (category of examCategoryDropdown$ | async ; track $index) {
+                            <option [value]="category.id">{{category.name}}</option>
+                          }
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="exams" class="col-sm-2 col-form-label"> select Exam </label>
+                  <div class="col-sm-10">
+                    <mat-selection-list id="exams" [multiple]="true" disableRipple formControlName="exams">
+                      @for (keyword of examDropdownList$ | async; track keyword.id) {
+                      <mat-list-option [disableRipple]="true" [value]="keyword.id">{{keyword.name}}</mat-list-option>
+                      }
+                    </mat-selection-list>
+                  </div>
+                </div>
+
+                <hr>
+
+                @if (type?.value !== QuestionTypeEum.Single) {
+                <div class="row">
+                  <div class="col-sm-6 form-group">
+                    <label for="direction" class="col-form-label">Direction</label>
+                    <div>
+                      <app-ckeditor #direction id="direction" elementId="direction"
+                        formControlName="direction"></app-ckeditor>
+                    </div>
+                  </div>
+
+
+                  <div class="col-sm-6 form-group">
+                    <label for="directionHin" class="col-form-label"> Direction Text Hindi </label>
+                    <div>
+                      <app-ckeditor #directionHin id="directionHin" elementId="directionHin"
+                        formControlName="directionHin"></app-ckeditor>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 form-group">
+                    <label for="summary" class="col-form-label">Question Summary English </label>
+                    <div>
+                      <app-ckeditor #summary id="summary" elementId="summary" formControlName="summary"></app-ckeditor>
+                    </div>
+                  </div>
+
+
+
+                  <div class="col-sm-6 form-group">
+                    <label for="summaryHin" class="col-form-label">Question Summary Hindi </label>
+                    <div>
+                      <app-ckeditor #summaryHin id="summaryHin" elementId="summaryHin"
+                        formControlName="summaryHin"></app-ckeditor>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-12 form-group">
+                    <label for="explanation" class="col-form-label">Explanation</label>
+                    <div>
+                      <app-ckeditor #explanation id="explanation" elementId="explanation"
+                        formControlName="explanation"></app-ckeditor>
+                    </div>
+                  </div>
+                </div>
+                }
+
+
+              </div>
+              @if (type?.value !== QuestionTypeEum.Single) {
+              <!-- /.card-body -->
+              <div class="card-footer">
+
+                @if (!isUpdateMode) {
+                <button type="submit" class="btn btn-primary" (click)="createQuestionExam()">Submit</button>
+                }@else{
+                <button type="submit" class="btn btn-primary"
+                  (click)="updateQuestionExam(editQuestionMasterId)">Update</button>
+                }
+
+                <button type="submit" class="btn btn-default float-right" (click)="clearForm()">Clear Form</button>
+              </div>
+              }
+            </form>
+
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+
+    <!-- /.container-fluid -->
+  </section>
+
+  <app-details #detailsCom  (onDirectQuesionCreate)="createDirectionQuestion($event)" [questionType]="type?.value" [summaryId]="summaryId()"></app-details>
+  <!-- /.content -->
+<!-- /.content -->
+</div>

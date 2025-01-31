@@ -1,0 +1,464 @@
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a routerLink="/dashboard" class="brand-link">
+      <img src="/assets/img/bulb.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="width: 32px; height: 40px; background-color: #fff" />
+      <span class="brand-text font-weight-light">Admin Panal</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="./../../../../assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{ userName }}</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" />
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!--Blog Master Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          @for (menu of menuItems; track $index) {
+          <li class="nav-item" [ngClass]="{
+              'menu-open': openedMenu === menu.label,
+              'menu-is-opening': openedMenu === menu.label,
+            }">
+            @if (menu.children && menu.children.length > 0) {
+            <a class="nav-link" (click)="toggleMenu(menu.label)">
+              <i class="nav-icon {{ menu.icon }}"></i>
+              <p>
+                {{ menu.label }}
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+            <ul class="nav nav-treeview" *ngIf="openedMenu === menu.label">
+              @for (item of menu.children; track $index) {
+              <li class="nav-item">
+                <a [routerLink]="item.route" class="nav-link" routerLinkActive="active">
+                  <i class="fa-regular  {{ item.icon }}"></i>&nbsp;
+                  <p>{{ item.label }}</p>
+                </a>
+              </li>
+              }
+            </ul>
+            }@else {
+            <a [routerLink]="menu.route" class="nav-link" routerLinkActive="active">
+              <i class="fa-regular {{ menu.icon }}"></i>&nbsp;
+              <p>{{ menu.label }}</p>
+            </a>
+            }
+          </li>
+          }
+        </ul>
+      </nav>
+      <!-- <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          @for (menu of menuItems; track $index) {
+            <app-menu-item [menuItem]="menu" [isMainActive]="openedMenu === menu.label" (onMainMenuClick)="toggleMenu(menu.label)"></app-menu-item>
+          }
+        </ul>
+      </nav> -->
+
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- <li class="nav-item" [ngClass]="{
+              'menu-open': openedMenu === 'QuestionMaster',
+              'menu-is-opening': openedMenu === 'QuestionMaster',
+            }">
+            <a class="nav-link" (click)="toggleMenu('QuestionMaster')">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Blog Master
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+            <ul class="nav nav-treeview" *ngIf="openedMenu === 'QuestionMaster'">
+
+              <li class="nav-item">
+                <a routerLink="Blog" class="nav-link" [ngClass]="{ active: activeUrl === 'Blog' }">
+                  <i class="fa-regular fa-circle"></i>&nbsp;
+                  <p>Blog (TestZone)</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a routerLink="blog-category" class="nav-link" [ngClass]="{ active: activeUrl === 'blog-category' }">
+                  <i class="fa-regular fa-circle"></i>&nbsp;
+                  <p>Blog Category</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a routerLink="blog-Master" class="nav-link" [ngClass]="{ active: activeUrl === 'blog-Master' }">
+                  <i class="fa-regular fa-circle"></i>&nbsp;
+                  <p>Blog Master (New)</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a routerLink="blog-author" class="nav-link" [ngClass]="{ active: activeUrl === 'blog-author' }">
+                  <i class="fa-regular fa-circle"></i>&nbsp;
+                  <p>Blog Author</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a routerLink="blog-left-image" class="nav-link"
+                  [ngClass]="{ active: activeUrl === 'blog-left-image' }">
+                  <i class="fa-regular fa-circle"></i>&nbsp;
+                  <p>Blog Left Image</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a routerLink="cuet-blog" class="nav-link" [ngClass]="{ active: activeUrl === 'cuet-blog' }">
+                  <i class="fa-regular fa-circle"></i>&nbsp;
+                  <p>Blog Cuet</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a routerLink="blog-dtl" class="nav-link" [ngClass]="{ active: activeUrl === 'blog-dtl' }">
+                  <i class="fa-regular fa-circle"></i>&nbsp;
+                  <p>Blog Detail</p>
+                </a>
+              </li>
+            </ul>
+          </li> -->
+
+          <!-- <li class="nav-item" [ngClass]="{
+                        'menu-open': openedMenu === 'manage-question',
+                        'menu-is-opening': openedMenu === 'manage-question',
+                      }">
+            <a class="nav-link" (click)="toggleMenu('manage-question')">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Manage Questions
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+            <ul class="nav nav-treeview" *ngIf="openedMenu === 'manage-question'">
+
+
+
+              <li class="nav-item">
+                <a routerLink="manage-category" class="nav-link"
+                  [ngClass]="{ active: activeUrl === 'manage-category' }">
+                  <i class="fa-regular fa-circle"></i>&nbsp;
+                  <p>Manage Category</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a routerLink="manage-sub-category" class="nav-link"
+                  [ngClass]="{ active: activeUrl === 'manage-sub-category' }">
+                  <i class="fa-regular fa-circle"></i>&nbsp;
+                  <p> Manage Sub-Category </p>
+                </a>
+              </li>
+
+
+              <li class="nav-item">
+                <a routerLink="manage-chapter" class="nav-link" [ngClass]="{ active: activeUrl === 'manage-chapter' }">
+                  <i class="fa-regular fa-circle"></i>&nbsp;
+                  <p> Manage Chapter </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a routerLink="total-chapter-question" class="nav-link"
+                  [ngClass]="{ active: activeUrl === 'total-chapter-question' }">
+                  <i class="fa-regular fa-circle"></i>&nbsp;
+                  <p>Total Chapter Question</p>
+                </a>
+              </li>
+
+
+              <li class="nav-item">
+                <a routerLink="Question-Master" class="nav-link"
+                  [ngClass]="{ active: activeUrl === 'Question-Master' }">
+                  <i class="fa-regular fa-circle"></i>&nbsp;
+                  <p>Question Master</p>
+                </a>
+              </li>
+
+
+
+            </ul> -->
+
+          <!-- <li class="nav-item" [ngClass]="{
+          'menu-open': openedMenu === 'ManageExamGroup',
+          'menu-is-opening': openedMenu === 'ManageExamGroup',
+        }">
+                <a class="nav-link" (click)="toggleMenu('ManageExamGroup')">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>
+                    Manage Exam Group SEO Data
+
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+
+                <ul class="nav nav-treeview" *ngIf="openedMenu === 'ManageExamGroup'">
+
+                  <li class="nav-item">
+                    <a routerLink="exam-group-master-seo-data" class="nav-link" [ngClass]="{
+                      active: activeUrl === 'exam-group-master-seo-data'
+                    }">
+                      <i class="fa-regular fa-circle"></i>&nbsp;
+                      <p>Exam Group Master SEO Data</p>
+                    </a>
+                  </li>
+                </ul>
+              </li> -->
+
+          <!-- <li class="nav-item" [ngClass]="{
+              'menu-open': openedMenu === 'ManageYoutube',
+              'menu-is-opening': openedMenu === 'ManageYoutube',
+            }">
+                <a class="nav-link" (click)="toggleMenu('ManageYoutube')">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>
+                    Manage Youtube
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+
+                <ul class="nav nav-treeview" *ngIf="openedMenu === 'ManageYoutube'">
+
+
+                  <li class="nav-item">
+                    <a routerLink="youtube-Category" class="nav-link"
+                      [ngClass]="{ active: activeUrl === 'youtube-Category' }">
+                      <i class="fa-regular fa-circle"></i>&nbsp;
+                      <p>Youtube Category</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a routerLink="Youtube-Sub-Category" class="nav-link"
+                      [ngClass]="{ active: activeUrl === 'Youtube-Sub-Category' }">
+                      <i class="fa-regular fa-circle"></i>&nbsp;
+                      <p>Youtube Sub Category</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a routerLink="youtube-Feed" class="nav-link" [ngClass]="{ active: activeUrl === 'youtube-Feed' }">
+                      <i class="fa-regular fa-circle"></i>&nbsp;
+                      <p>Youtube Feed</p>
+                    </a>
+                  </li>
+                </ul>
+              </li> -->
+
+          <li class="nav-item">
+            <a routerLink="dashboard-slider" class="nav-link" [ngClass]="{ active: activeUrl === 'dashboard-slider' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>Dashboard Slider</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="test" class="nav-link" [ngClass]="{ active: activeUrl === 'test' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>Test Master</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="add-test-question" class="nav-link"
+              [ngClass]="{ active: activeUrl === 'add-test-question' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>Add Test Question</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="view-edit-question" class="nav-link"
+              [ngClass]="{ active: activeUrl === 'view-edit-question' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>View Edit Question</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="manage-keyword" class="nav-link" [ngClass]="{ active: activeUrl === 'manage-keyword' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>Manage Keyword</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="app-slider" class="nav-link" [ngClass]="{ active: activeUrl === 'app-slider' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>App Slider</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="add-question-to-test" class="nav-link"
+              [ngClass]="{ active: activeUrl === 'add-question-to-test' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>Add Question To Test</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="questions" class="nav-link" [ngClass]="{ active: activeUrl === 'questions' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>Questions</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="reasoning" class="nav-link" [ngClass]="{ active: activeUrl === 'reasoning' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>Reasoning</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="add-pdfs" class="nav-link" [ngClass]="{ active: activeUrl === 'add-pdfs' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>Add Pdf's</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="video-schedule" class="nav-link" [ngClass]="{ active: activeUrl === 'video-schedule' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>Video Schedule</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="update-test-pdf" class="nav-link" [ngClass]="{ active: activeUrl === 'update-test-pdf' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>Update Test PDF</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="update-test-language" class="nav-link"
+              [ngClass]="{ active: activeUrl === 'update-test-language' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>Update Test Language</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="topper-time-exam-level-master" class="nav-link" [ngClass]="{
+                active: activeUrl === 'topper-time-exam-level-master'
+              }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>Topper Time Exam Exam Level Master</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="set-test-topper-time" class="nav-link"
+              [ngClass]="{ active: activeUrl === 'set-test-topper-time' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>Set Test Topper Time (Level Wise)</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="topper-time-master" class="nav-link"
+              [ngClass]="{ active: activeUrl === 'topper-time-master' }">
+          <li class="fa-regular fa-circle"></li>
+          &nbsp;
+          <p>Topper Time Master (Level Wise)</p>
+          </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="search" class="nav-link" [ngClass]="{ active: activeUrl === 'search' }">
+          <li class="fa-regular fa-circle"></li>
+          &nbsp;
+          <p>Search</p>
+          </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="manage-test-result" class="nav-link"
+              [ngClass]="{ active: activeUrl === 'manage-test-result' }">
+          <li class="fa-regular fa-circle"></li>
+          &nbsp;
+          <p>Manage Test Result</p>
+          </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="question-detail" class="nav-link" [ngClass]="{ active: activeUrl === 'question-detail' }">
+          <li class="fa-regular fa-circle"></li>
+          &nbsp;
+          <p>Question Detail</p>
+          </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="review" class="nav-link" [ngClass]="{ active: activeUrl === 'review' }">
+              <i class="fa-regular fa-circle"></i>&nbsp;
+              <p>Review</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout()">
+              <p style="font-weight: 600">Log out</p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  <!-- /.content-wrapper -->
+  <aside class="control-sidebar control-sidebar-dark"></aside>
+</div>

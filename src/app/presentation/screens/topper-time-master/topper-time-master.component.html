@@ -1,0 +1,189 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a routerLink="/dashboard">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item active">Topper Time Master (Level Wise)</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Left column -->
+                <div class="col-md-12">
+                    <!-- General form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Topper Time Master (Level Wise)</h3>
+                        </div>
+                        <!-- /.card-header -->
+
+                        <!-- Form start -->
+                        <form [formGroup]="TopperTimeMasterForm">
+
+                            <div class="card-body mt-2">
+                                <div class="row">
+                                    <!-- Choose Exam Level -->
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="level" class="col-sm-3 col-form-label">Choose Exam Level</label>
+                                            <div class="col-sm-8">
+                                                <select (change)="onSelectChooseExamLevel()" name="level" id="level" class="form-control" formControlName="level">
+                                                    <option value="">Choose Exam Level</option>
+                                                    <option *ngFor="let exam of ExamLevelListDropdown$ | async" [value]="exam.id">{{exam.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Select Category -->
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="category" class="col-sm-3 col-form-label ml-5">Select Category</label>
+                                            <div class="col-sm-8">
+                                                <select name="category" (change)="onSelectCategory()" id="category" class="form-control" formControlName="category">
+                                                    <option value="">Select Category</option>
+                                                    <option *ngFor="let category of CategoryListDropdown$ | async" [value]="category.id">{{category.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Select Sub-category -->
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="subCategory" class="col-sm-3 col-form-label">Select Sub-category</label>
+                                            <div class="col-sm-8">
+                                                <select name="subCategory" (change)="onSelectSubCategory()" id="subCategory" class="form-control" formControlName="subCategory">
+                                                    <option value="">Select Subcategory</option>
+                                                    <option *ngFor="let subCat of SubCategoryListDropdown$ | async" [value]="subCat.id">{{subCat.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Select Chapter -->
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="chapter" class="col-sm-3 col-form-label ml-5">Select Chapter</label>
+                                            <div class="col-sm-8">
+                                                <select name="chapter" id="chapter" class="form-control" formControlName="chapter">
+                                                    <option value="">Select Chapter</option>
+                                                    <option *ngFor="let chapter of ChapterListDropdown$ | async" [value]="chapter.id">{{chapter.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Question Type -->
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="direct" class="col-sm-2 col-form-label">Question Type</label>
+                                            <div class="col-sm-8 d-flex align-items-center radio-margin">
+                                                <div class="custom-control custom-radio mr-3">
+                                                    <input class="custom-control-input" type="radio" id="direct" value="direct" formControlName="questionType" checked />
+                                                    <label for="direct" class="custom-control-label">Direct</label>
+                                                </div>
+                                                <div class="custom-control custom-radio">
+                                                    <input class="custom-control-input" type="radio" id="summaryBased" formControlName="questionType" value="summaryBased" />
+                                                    <label for="summaryBased" class="custom-control-label">Summary Based</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Question Level -->
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="questionLevel" class="col-sm-3 col-form-label ml-5">Question Level</label>
+                                            <div class="col-sm-8">
+                                                <select name="questionLevel" id="questionLevel" class="form-control" formControlName="questionLevel">
+                                                    <option value="">Select Question Level</option>
+                                                    <option [value]="questionLevel.Difficult">Difficult</option>
+                                                    <option [value]="questionLevel.Easy">Easy</option>
+                                                    <option [value]="questionLevel.Moderate">Moderate</option>
+                                                    <option [value]="questionLevel.None">None</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Order Number -->
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="orderNumber" class="col-sm-3 col-form-label">Order No.</label>
+                                            <div class="col-sm-6">
+                                                <input id="orderNumber" type="number" class="form-control" placeholder="Enter Order No.." formControlName="orderNumber" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Number of Questions -->
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="numberofQuest" class="col-sm-3 col-form-label ml-5">No. of Questions</label>
+                                            <div class="col-sm-6">
+                                                <input id="numberofQuest" type="number" class="form-control" placeholder="Enter Number of Questions.." formControlName="numberofQuestion" />
+                                            </div>
+                                            <button class=" btn btn-primary add-btn" type="button" (click)="AddNumberOfQuestion()">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Table to display dynamically created question rows -->
+                                <div class="table-header mt-3">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Question No.</th>
+                                                <th>Topper Min. Time</th>
+                                                <th>Topper Max. Time</th>
+                                                <th>Avg Min. Time</th>
+                                                <th>Avg Max. Time</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody formArrayName="questions">
+                                            <tr *ngFor="let num of Questions.controls; let i = index" formGroupName="i">
+                                                <td><input type="number" formControlName="questionNo"></td>
+                                                <td><input type="number" formControlName="topperMinTime"></td>
+                                                <td><input type="number" formControlName="topperMaxTime"></td>
+                                                <td><input type="number" formControlName="avgMinTime"></td>
+                                                <td><input class="mr-5" type="number" formControlName="avgMaxTime"></td>
+                                                <td><button (click)="RemoveRow(i)" class="remove-btn">Remove</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary" (click)="isUpdateMode ? updateTopperTimeMaster(editTopperTimeMasterId) : createTopperTimeMaster()">
+                                    {{isUpdateMode ? 'Update' : 'Submit'}}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Content Section -->
+    <section class="content" style="padding-bottom: 15px">
+        <div class="container-fluid">
+            <app-data-table (Edit)="editTopperTimeMaster($event)" (Remove)="deleteTopperTimeMaster($event)" [dataObs]="dataObs" [tableCols]="tableCols" #dttable></app-data-table>
+        </div>
+    </section>
+</div>

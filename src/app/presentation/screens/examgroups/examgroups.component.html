@@ -1,0 +1,282 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Manage ExamGroups</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Manage ExamGroups</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+
+            <form [formGroup]="ExamgroupsForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="name" class="col-sm-2 col-form-label">
+                    Name
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="name"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Name..."
+                      formControlName="name"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="shortname" class="col-sm-2 col-form-label">
+                    Short Name
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="shortname"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Short Name ..."
+                      formControlName="shortname"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="url" class="col-sm-2 col-form-label"> Url </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="url"
+                      type="text"
+                      class="form-control"
+                      placeholder="Link Url..."
+                      formControlName="url"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="image" class="col-sm-2 col-form-label">
+                    Image
+                  </label>
+                  <div class="col-sm-10">
+                    <div class="custom-file">
+                      <input
+                        id="image"
+                        (change)="onUploadImage($event)"
+                        type="file"
+                        class="custom-file-input"
+                        formControlName="image"
+                        accept="image/*"
+                      />
+                      <label class="custom-file-label" for="image">
+                        Choose Images
+                      </label>
+                    </div>
+                    @if (ShowImages) {
+                    <img [src]="ShowImages" width="200" />
+                    }
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="icon" class="col-sm-2 col-form-label"
+                    >Icon
+                  </label>
+                  <div class="col-sm-10">
+                    <div class="custom-file">
+                      <input
+                        id="icon"
+                        (change)="onUploadIcon($event)"
+                        formControlName="icon"
+                        type="file"
+                        class="custom-file-input"
+                        accept="image/*"
+                        required
+                      />
+                      <label class="custom-file-label" for="thumbNail">
+                        Choose Icons
+                      </label>
+                    </div>
+                    @if (ShowIcons) {
+                    <img [src]="ShowIcons" width="200" />
+                    }
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="categorySearch" class="col-sm-2 col-form-label">
+                    Category Search
+                  </label>
+                  <div class="col-sm-10">
+                    <mat-form-field class="example-chip-list">
+                      <mat-label>Category Search</mat-label>
+                      <mat-chip-grid
+                        #categoryChipGrid
+                        aria-label="Category Search"
+                      >
+                        <mat-chip-row
+                          *ngFor="let category of categories"
+                          (removed)="removeChip(category, 'category')"
+                        >
+                          {{ category }}
+                          <button
+                            matChipRemove
+                            [attr.aria-label]="'remove ' + category"
+                          >
+                            <mat-icon>cancel</mat-icon>
+                          </button>
+                        </mat-chip-row>
+                        <input
+                          placeholder="Search Category..."
+                          formControlName="categorySearch"
+                          id="categorySearch"
+                          [matChipInputFor]="categoryChipGrid"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur"
+                          (matChipInputTokenEnd)="addChip($event, 'category')"
+                        />
+                      </mat-chip-grid>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="topicSearch" class="col-sm-2 col-form-label">
+                    Topic Search
+                  </label>
+                  <div class="col-sm-10">
+                    <mat-form-field class="example-chip-list">
+                      <mat-label>Topic Search</mat-label>
+                      <mat-chip-grid #topicChipGrid aria-label="Topic Search">
+                        <mat-chip-row
+                          *ngFor="let topic of topics"
+                          (removed)="removeChip(topic, 'topic')"
+                        >
+                          {{ topic }}
+                          <button
+                            matChipRemove
+                            [attr.aria-label]="'remove ' + topic"
+                          >
+                            <mat-icon>cancel</mat-icon>
+                          </button>
+                        </mat-chip-row>
+                        <input
+                          placeholder="Search Topic..."
+                          formControlName="topicSearch"
+                          id="topicSearch"
+                          [matChipInputFor]="topicChipGrid"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur"
+                          (matChipInputTokenEnd)="addChip($event, 'topic')"
+                        />
+                      </mat-chip-grid>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="mockDrillRadio1" class="col-sm-2 col-form-label">
+                    Is Mock Drill
+                  </label>
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="mockDrillRadio1"
+                        type="radio"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="isMockDrll"
+                      />
+                      <label for="mockDrillRadio1" class="custom-control-label"
+                        >Yes
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="mockDrillRadio2"
+                        formControlName="isMockDrll"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="mockDrillRadio2" class="custom-control-label"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createExamgroups()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updateExamgroups(editExamgroupsId)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editExamgroups($event)"
+        (Remove)="deleteExamgroups($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

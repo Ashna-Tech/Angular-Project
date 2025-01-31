@@ -1,0 +1,122 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Blog PDF (New)</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Blog PDF (New)</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="blogPdfNewForm">
+              <div class="card-body">
+                
+                <div class="form-group row">
+                  <label for="pdf" class="col-sm-2 col-form-label">
+                    PDF 
+                  </label>
+                  <div class="col-sm-10">
+                    <div class="custom-file">
+                      <input
+                        id="image"
+                        (change)="onPdfFileUpload($event)"
+                        type="file"
+                        class="custom-file-input"
+                        formControlName="pdffile"
+                        accept="application/pdf"
+                      />
+                      <label class="custom-file-label" for="exampleInputFile"
+                        >Choose file</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="pdf" class="col-sm-2 col-form-label"
+                    >PDF Title
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="pdftitle"
+                      placeholder="Enter PDF Title"
+                    />
+                  </div>
+                </div>
+
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  @if (!isUpdateMode) {
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    (click)="createBlogPdfNew()"
+                  >
+                    Submit
+                  </button>
+                  }@else{
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    (click)="updateBlogPdfNew(editBlogPdfNewId)"
+                  >
+                    Update
+                  </button>
+                  }
+
+                  <button
+                    type="submit"
+                    class="btn btn-default float-right"
+                    (click)="clearForm()"
+                  >
+                    Clear Form
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editBlogPdfNew($event)"
+        (Remove)="deleteBlogPdfNew($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,182 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Seo Keyword Page</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Seo Keyword Page</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="seoKeywordPageForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="testId" class="col-sm-2 col-form-label">
+                    Test
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="testId"
+                      id="testId"
+                      type="text"
+                      class="form-control"
+                      formControlName="testId"
+                    >
+
+
+                      <option value="">Select Test</option>
+                      <option value="66c9c817ae5ca8e6e6b9eb79">
+                        Cybersecurity
+                      </option>
+                      <option value="76b1c66dc84a8c0283e14281">
+                        Digital marketing
+                      </option>
+                      <option value="87b1c66dc84a8c0283e14209">
+                        Computer Science
+                      </option>
+                      <option value="88b1c66dc84a8c0283e14245">
+                        Artificial intelligence
+                      </option> 
+
+                      @for (test of testListDropdown$ | async ; track $index) {
+                      <option [value]="test.id">{{ test.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="pageNumber" class="col-sm-2 col-form-label">
+                    Page Number
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="pageNumber"
+                      type="text"
+                      class="form-control"
+                      placeholder=" Enter Page Number..."
+                      formControlName="pageNumber"
+                    />
+                  </div>
+                </div>
+
+ 
+                <div class="form-group row">
+                  <label for="ctitle" class="col-sm-2 col-form-label">
+                    C Title
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="ctitle"
+                      type="text"
+                      class="form-control"
+                      placeholder=" Enter C Title ..."
+                      formControlName="ctitle"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="cKeyword" class="col-sm-2 col-form-label">
+                    C Keyword
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="cKeyword"
+                      type="text"
+                      class="form-control"
+                      placeholder="C Keyword..."
+                      formControlName="cKeyword"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="cdesc" class="col-sm-2 col-form-label">
+                    C Desc
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="cdesc"
+                      type="text"
+                      class="form-control"
+                      placeholder="C Desc..."
+                      formControlName="cdesc"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createSeokeywordPage()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updateSeokeywordPage(editSeokeywordPageId)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editSeokeywordPage($event)"
+        (Remove)="deleteSeokeywordPage($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>

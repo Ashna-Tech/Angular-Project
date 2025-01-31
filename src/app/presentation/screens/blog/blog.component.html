@@ -1,0 +1,233 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Blog (TestZone)</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Blog (TestZone)</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="blogForm">
+              <div class="card-body">
+
+                <div class="form-group row">
+                  <label for="catId" class="col-sm-2 col-form-label">Category
+                  </label>
+                  <div class="col-sm-10">
+                    <select name="catid" class="form-control" id="catid" formControlName="catId"
+                      (change)="onCategorySelect()">
+                      <option value="">Select Categories</option>
+                      @for (category of categoryDropdown$ | async ; track $index) {
+                        <option [value]="category.id">{{ category.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="subcatId" class="col-sm-2 col-form-label">Sub Category
+                  </label>
+                  <div class="col-sm-10">
+                    <select name="subcatid" id="subcatid" class="form-control" (change)="onSubCategorySelect()" formControlName="subcatId">
+                      <option value="">Select SubCategories</option>
+                      @for (subcategory of SubcategoryDropdown$ | async ; track $index) {
+                        <option [value]="subcategory.id">
+                          {{ subcategory.name }}
+                        </option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="chapId" class="col-sm-2 col-form-label">Chapter
+                  </label>
+                  <div class="col-sm-10">
+                    <select name="chaptId" id="chaptI" class="form-control" formControlName="chapId"
+                      (change)="onSelectChapter()">
+                      <option value="">Select Chapter</option>
+                      @for (chapter of ChapterIdListDropdown$ | async ; track
+                      $index) {
+                      <option [value]="chapter.id">{{ chapter.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="quizid" class="col-sm-2 col-form-label">Quiz
+                  </label>
+                  <div class="col-sm-10">
+                    <select name="quizId" id="quizId" class="form-control" (change)="onSelectQuizId()"
+                      formControlName="quizid">
+                      <option value="">Select Quiz</option>
+                      <option>669b655dd95942f610872975</option>
+                      <option>669b655dd95942f610872788</option>
+                      <option>669b655dd95942f610872909</option>
+                      <option>669b655dd95942f610872934</option>
+                      @for (quiz of QuizIdDropdownList$ | async ; track $index){
+                      <option [value]="quiz.id">{{ quiz.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="thumbNail" class="col-sm-2 col-form-label">Thumbnail</label>
+                  <div class="col-sm-10">
+                    <input id="thumbNail" class="form-control" (change)="onThumbnail($event)" formControlName="thumbNail" type="file" accept="image/*" />
+                    @if (previewThumbnailImg) {
+                      <img [src]="previewThumbnailImg" width="150" />
+                    }
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="bannerImg" class="col-sm-2 col-form-label">Banner Image</label>
+                  <div class="col-sm-10">
+                    <input id="bannerImg" class="form-control" (change)="onBannerImg($event)" formControlName="bannerImg" type="file" accept="image/*" />
+                    @if (previewBannerImg) {
+                      <img [src]="previewBannerImg" width="150" />
+                    }
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="blogtitle" class="col-sm-2 col-form-label">Blog Title</label>
+
+                  <div class="col-sm-10">
+                    <input id="blogtitle" type="text" class="form-control" placeholder=" Enter Blog Title"
+                      formControlName="blogtitle" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="blogheading" class="col-sm-2 col-form-label">Blog Heading
+                  </label>
+
+                  <div class="col-sm-10">
+                    <input id="blogheading" type="text" class="form-control" placeholder="Enter Blog Heading"
+                      formControlName="blogheading" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="seotitle" class="col-sm-2 col-form-label">
+                    Seo Title
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="seotitle" type="text" class="form-control" placeholder="Seo title ..."
+                      formControlName="seotitle" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="seoKeywords" class="col-sm-2 col-form-label">
+                    Seo Keywords
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="seoKeywords" type="text" class="form-control" placeholder=" Seo Keywords ..."
+                      formControlName="seoKeywords" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="seoDescription" class="col-sm-2 col-form-label">
+                    Seo Description
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="seoDescription" type="text" class="form-control" placeholder=" Seo Description ..."
+                      formControlName="seoDescription" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="altText" class="col-sm-2 col-form-label">Alt Text
+                  </label>
+                  <div class="col-sm-10">
+                    <input id="altText" type="text" class="form-control" placeholder=" Alt Text ..."
+                      formControlName="altText" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 form-group">
+                    <label for="blogContent1" class="col-form-label">Blog Content 1</label>
+
+                    <div>
+                      <app-ckeditor #blogcontent1 id="blogContent1" elementId="blogContent1"
+                        formControlName="blogContent1">
+                      </app-ckeditor>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6 form-group">
+                    <label for="blogContent2" class="col-sm-2 col-form-label">Blog Content 2</label>
+                    <div>
+                      <app-ckeditor #blogcontent2 id="blogContent2" elementId="blogContent2"
+                        formControlName="blogContent2"></app-ckeditor>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </div>
+
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button type="submit" class="btn btn-primary" (click)="createBlog()">
+                  Submit
+                </button>
+                }@else{
+                <button type="submit" class="btn btn-primary" (click)="updateBlog(editBlogId)">
+                  Update
+                </button>
+                }
+
+                <button type="submit" class="btn btn-default float-right" (click)="clearForm()">
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table (Edit)="editBlog($event)" (Remove)="deleteBlog($event)" [dataObs]="dataObs"
+        [tableCols]="tableCols" #dttable></app-data-table>
+    </div>
+  </section>
+</div>

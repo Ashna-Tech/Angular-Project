@@ -1,0 +1,69 @@
+.radio-margin {
+  margin-left: 25%;
+  margin-top: -30px;
+}
+
+.add-btn{
+  margin-top: 3px;
+  padding-top: 3px;
+  width: 4rem;
+  height: 3vh; 
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #64b89e;
+}
+
+th,
+td {
+  padding: 10px 90px 15px 0px;
+  text-align: center;
+}
+
+/* Align inputs and buttons properly */
+td input[type="number"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+td .remove-btn {
+  width: 5rem;
+  height: 3vh;
+  padding: 5px;
+  background-color: #f44336;
+  padding-bottom: 2px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+td .remove-btn:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+/* Ensure rows are visually separated */
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Light gray for alternate rows */
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  th,
+  td {
+    font-size: 14px; /* Reduce font size for smaller screens */
+  }
+
+  td input[type="number"],
+  td .remove-btn {
+    width: 100%; /* Inputs and buttons take full width in smaller screens */
+    margin: 5px 0;
+  }
+}

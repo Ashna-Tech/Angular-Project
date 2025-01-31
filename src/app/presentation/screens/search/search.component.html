@@ -1,0 +1,117 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a routerLink="/dashboard">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item active">Search</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Search</h3>
+                        </div>
+                        <!-- /.card-header -->
+
+                        <!-- form start -->
+                        <form [formGroup]="SearchForm">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group row">
+                                            <label for="dateFrom" class="col-sm-3 col-form-label">
+                                                Date From :
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input type="date" id="dateFrom" class="form-control"
+                                                    formControlName="dateFrom" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group row">
+                                            <label for="dateTo" class="col-sm-3 col-form-label">
+                                                Date to :
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input type="date" id="dateTo" class="form-control"
+                                                    formControlName="dateTo" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group row">
+                                            <div class="col-sm-8">
+                                                <select id="name" name="name" class="form-control"
+                                                    formControlName="name">
+                                                    <option value="">Select</option>
+                                                    <option value="request.UserName">UserName</option>
+                                                </select>
+                                            </div>
+                                            <button class="btn btn-success btn-sm">
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <label for="search" class="col-sm-2 col-form-label">
+                                                Search :
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input id="search" type="text" class="form-control" placeholder="Search..." formControlName="search" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary btn-sm" (click)="search()">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary" (click)="search()">
+                                    Submit
+                                </button>
+
+                                <button type="submit" class="btn btn-default float-right" (click)="clearForm()">
+                                    Clear Form
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+    <section class="content" style="padding-bottom: 15px">
+        <div class="container-fluid">
+            <app-data-table (Edit)="editSearch($event)" (View)="onView($event)" [isEditNotNeeded]="true" [isDeleteNotNeeded]="true" (Remove)="deleteSearch($event)" [dataObs]="dataObs" [tableCols]="tableCols" #dttable></app-data-table>
+        </div>
+    </section>
+</div>

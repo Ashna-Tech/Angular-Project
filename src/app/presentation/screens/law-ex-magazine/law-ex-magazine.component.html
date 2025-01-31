@@ -1,0 +1,323 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Law Exam Magazine</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Law Exam Magazine</h3>
+            </div>
+            <!-- /.card-header -->
+
+            <!-- form start -->
+            <form [formGroup]="LawExMagazineForm">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="issue" class="col-sm-2 col-form-label">
+                    Issue
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="issue"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Issue..."
+                      formControlName="issue"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="issuefortnightly" class="col-sm-2 col-form-label">
+                    Issue Fortnightly
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      id="issuefortnightly"
+                      type="text"
+                      class="form-control"
+                      placeholder="Issue Fortnightly..."
+                      formControlName="issuefortnightly"
+                    >
+                      <option value="">First Fortnightly</option>
+                      <option value="">Second Fortnightly</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="issuemonth" class="col-sm-2 col-form-label">
+                    Issue Month
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="issuemonth"
+                      type="datetime-local"
+                      class="form-control"
+                      formControlName="issuemonth"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="testid" class="col-sm-2 col-form-label">
+                    Test
+                  </label>
+                  <div class="col-sm-10">
+                    <select
+                      name="testid"
+                      id="testid"
+                      type="text"
+                      class="form-control"
+                      formControlName="testid"
+                    >
+                      <option value="">Select Test</option>
+                      <option value="87b1c66dc84a8c0283e14209">Testing</option>
+                      @for (test of TestListDropdown$ | async ; track $index) {
+                      <option [value]="test.id">{{ test.name }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="coverstory" class="col-sm-2 col-form-label">
+                    Cover Story
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="coverstory"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Cover Story..."
+                      formControlName="coverstory"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="keyhighlights" class="col-sm-2 col-form-label">
+                    Key Highlights (separate by #)
+                  </label>
+                  <div class="col-sm-10">
+                    <textarea
+                      id="keyhighlights"
+                      rows="5"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Key Highlights (separate by #)"
+                      formControlName="keyhighlights"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="inbrief" class="col-sm-2 col-form-label">
+                    In Brief Story
+                  </label>
+                  <div class="col-sm-10">
+                    <textarea
+                      id="inbrief"
+                      type="text"
+                      rows="5"
+                      class="form-control"
+                      placeholder="Enter In Brief Story..."
+                      formControlName="inbrief"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="status" class="col-sm-2 col-form-label"
+                    >Status ?</label
+                  >
+                  <div class="col-sm-10 d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-3">
+                      <input
+                        id="customRadio1"
+                        type="radio"
+                        id="customRadio1"
+                        value="Yes"
+                        class="custom-control-input"
+                        formControlName="status"
+                      />
+                      <label for="customRadio1" class="custom-control-label">
+                        Active
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input
+                        class="custom-control-input"
+                        type="radio"
+                        id="customRadio2"
+                        formControlName="status"
+                        checked=""
+                        value="No"
+                      />
+                      <label for="customRadio2" class="custom-control-label"
+                        >InActive</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="pdfFilename" class="col-sm-2 col-form-label"
+                    >PDF
+                  </label>
+                  <div class="col-sm-10">
+                    <div class="custom-file">
+                      <input
+                        id="pdfFilename"
+                        (change)="onPdfFileNameUpload($event)"
+                        type="file"
+                        class="custom-file-input"
+                        formControlName="pdfFilename"
+                        accept="application/pdf"
+                        required
+                      />
+                      <label class="custom-file-label" for="image">
+                        Choose PDF Name
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="bannerimage" class="col-sm-2 col-form-label">
+                    Banner Image
+                  </label>
+                  <div class="col-sm-10">
+                    <div class="custom-file">
+                      <input
+                        id="bannerimage"
+                        (change)="onBannerImgUpload($event)"
+                        type="file"
+                        class="custom-file-input"
+                        formControlName="bannerimage"
+                        accept="image/*"
+                      />
+                      <label class="custom-file-label" for="bannerimage">
+                        Choose File
+                      </label>
+                    </div>
+                    @if (previewBannerImg) {
+                    <img [src]="previewBannerImg" width="200" />
+                    }
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="seokeywords" class="col-sm-2 col-form-label">
+                    Seo Keywords
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="seokeywords"
+                      type="text"
+                      class="form-control"
+                      placeholder="Seo Keywords..."
+                      formControlName="seokeywords"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="seodescription" class="col-sm-2 col-form-label">
+                    Seo Description
+                  </label>
+                  <div class="col-sm-10">
+                    <input
+                      id="seodescription"
+                      type="text"
+                      class="form-control"
+                      placeholder="Seo Description..."
+                      formControlName="seodescription"
+                    />
+                  </div>
+                </div>
+            
+                <div class="header">
+                  <button class="faq-btn"> Add FAQ + </button>
+  
+                  <h3 class="faq">FAQ </h3>
+                  
+  
+                </div>
+  
+            
+            
+              </div>
+
+            
+              <!-- /.card-body -->
+              <div class="card-footer">
+                @if (!isUpdateMode) {
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createLawExMagazine()"
+                >
+                  Submit
+                </button>
+                }@else{
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="updateLawExMagazine(editLawExMagazineId)"
+                >
+                  Update
+                </button>
+                }
+
+                <button
+                  type="submit"
+                  class="btn btn-default float-right"
+                  (click)="clearForm()"
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <section class="content" style="padding-bottom: 15px">
+    <div class="container-fluid">
+      <app-data-table
+        (Edit)="editLawExMagazine($event)"
+        (Remove)="deleteLawExMagazine($event)"
+        [dataObs]="dataObs"
+        [tableCols]="tableCols"
+        #dttable
+      ></app-data-table>
+    </div>
+  </section>
+</div>
